@@ -61,3 +61,12 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Visual Studio cache directory
+.vs/
+
+# Jetbrain Rider Cache
+.idea/
+
+# Gradle cache directory
+.gradle/
+
