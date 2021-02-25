@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: Water_sand_7
+  m_Name: Fire
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 1928406507387898811, guid: c9d1f1e186741464abf968c260ca625a, type: 3}
-  - {fileID: 544525345282814384, guid: c9d1f1e186741464abf968c260ca625a, type: 3}
-  - {fileID: -7241047797455070335, guid: c9d1f1e186741464abf968c260ca625a, type: 3}
-  - {fileID: -1626879754295848760, guid: c9d1f1e186741464abf968c260ca625a, type: 3}
-  m_MinSpeed: 1
-  m_MaxSpeed: 1
+  - {fileID: 5698017828174702254, guid: ce90a1dd9a29bfb449c7a6dc1b1f22f8, type: 3}
+  - {fileID: 2497313390202381326, guid: ce90a1dd9a29bfb449c7a6dc1b1f22f8, type: 3}
+  - {fileID: 8965171369056544103, guid: ce90a1dd9a29bfb449c7a6dc1b1f22f8, type: 3}
+  - {fileID: -4346544365704419778, guid: ce90a1dd9a29bfb449c7a6dc1b1f22f8, type: 3}
+  m_MinSpeed: 5
+  m_MaxSpeed: 5
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
   m_TileColliderType: 2

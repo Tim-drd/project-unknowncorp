@@ -1,52 +1,46 @@
 fileFormatVersion: 2
-guid: ce90a1dd9a29bfb449c7a6dc1b1f22f8
+guid: 4aa6407342972a04b96de3a5da9597be
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5698017828174702254
-    second: fireplace_0
+      213: -6785629104336979280
+    second: beach_tileset_14
   - first:
-      213: 3555795224932194294
-    second: fireplace_1
+      213: -3223727578718907123
+    second: beach_tileset_16
   - first:
-      213: 2692201480731268342
-    second: fireplace_2
+      213: 3421528410271269848
+    second: beach_tileset_24
   - first:
-      213: 2497313390202381326
-    second: fireplace_3
+      213: -322851175481759616
+    second: beach_tileset_25
   - first:
-      213: -5130110956873843884
-    second: fireplace_4
+      213: -8265580587888874546
+    second: beach_tileset_27
   - first:
-      213: -8485822813022745045
-    second: fireplace_5
+      213: 3224876423878074693
+    second: beach_tileset_28
   - first:
-      213: 8965171369056544103
-    second: fireplace_6
+      213: 1556974147417242195
+    second: beach_tileset_29
   - first:
-      213: 5879710767371932333
-    second: fireplace_7
+      213: 3813441868536918506
+    second: beach_tileset_30
   - first:
-      213: 1892349469243698225
-    second: fireplace_8
+      213: 4273657814297007828
+    second: beach_tileset_31
   - first:
-      213: -4346544365704419778
-    second: fireplace_9
+      213: -9098223361815209394
+    second: beach_tileset_32
   - first:
-      213: -6304793336463531874
-    second: fireplace_10
+      213: 2390654581710173712
+    second: beach_tileset_0
   - first:
-      213: -2465195626218149513
-    second: fireplace_11
+      213: 1302000718529895404
+    second: beach_tileset_1
   - first:
-      213: -2187792586255243058
-    second: fireplace_12
-  - first:
-      213: 9072536320944293026
-    second: fireplace_13
-  - first:
-      213: -5642592711712354447
-    second: fireplace_14
+      213: 564749503989927479
+    second: beach_tileset_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -132,85 +126,140 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fireplace_0
+      name: beach_tileset_14
       rect:
         serializedVersion: 2
-        x: 0
-        y: 71
-        width: 16
-        height: 9
-      alignment: 9
-      pivot: {x: 0, y: -0.4}
-      border: {x: 0, y: 0, z: 0, w: 0}
+        x: 288
+        y: 161
+        width: 80
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 12}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -26, y: -6}
+        - {x: -26, y: 6}
+        - {x: 20, y: 6}
+        - {x: 20, y: -6}
       tessellationDetail: 0
       bones: []
-      spriteID: ea6223c760d631f40800000000000000
-      internalID: 5698017828174702254
+      spriteID: 0ba317a084a94d1a0800000000000000
+      internalID: -6785629104336979280
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fireplace_3
+      name: beach_tileset_16
       rect:
         serializedVersion: 2
-        x: 0
+        x: 113
+        y: 146
+        width: 46
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -5.5}
+        - {x: -6, y: -5.5}
+        - {x: -6, y: 5.5}
+        - {x: 4, y: 5.5}
+        - {x: 4, y: -5.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0554d1e8d40343d0800000000000000
+      internalID: -3223727578718907123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beach_tileset_27
+      rect:
+        serializedVersion: 2
+        x: 114
         y: 51
-        width: 16
+        width: 44
         height: 9
-      alignment: 9
-      pivot: {x: 0, y: -0.4}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -10, y: -4.5}
+        - {x: -10, y: 4.5}
+        - {x: 1, y: 4.5}
+        - {x: 1, y: -4.5}
       tessellationDetail: 0
       bones: []
-      spriteID: e04e6db0c4d38a220800000000000000
-      internalID: 2497313390202381326
+      spriteID: ecbe48c8f32ca4d80800000000000000
+      internalID: -8265580587888874546
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fireplace_6
+      name: beach_tileset_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 31
-        width: 16
-        height: 9
-      alignment: 9
-      pivot: {x: 0, y: -0.4}
+        x: 114
+        y: 60
+        width: 44
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7652e135cdfaa6c70800000000000000
-      internalID: 8965171369056544103
+      spriteID: 016be730daf4d2120800000000000000
+      internalID: 2390654581710173712
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fireplace_9
+      name: beach_tileset_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 11
-        width: 16
-        height: 9
+        x: 113
+        y: 157
+        width: 46
+        height: 47
       alignment: 9
-      pivot: {x: 0, y: -0.4}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3666b9ade8fda3c0800000000000000
-      internalID: -4346544365704419778
+      spriteID: ceb174551c2a11210800000000000000
+      internalID: 1302000718529895404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beach_tileset_2
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 173
+        width: 80
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73ec5648ea466d700800000000000000
+      internalID: 564749503989927479
       vertices: []
       indices: 
       edges: []
