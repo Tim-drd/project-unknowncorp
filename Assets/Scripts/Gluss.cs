@@ -35,42 +35,45 @@ public class Gluss : Enemy
     // Si la distance est inférieure à "chaseRadius" mais supérieure à "attackRadius", l'ennemi se rapproche du joueur
     // Sinon, l'ennemi se déplace vers une position aléatoire dans le périmètre "initialWalkRadius" autour de son point d'apparition initial "homePosition"
     // La position aléatoire est modifiée toutes les 150 utilisations de CheckDistance
-    // Renvoie un booléen indiquant si l'enemy a target le joueur
-    bool CheckDistance(Transform target)
+    void CheckDistance(Transform target)
     {
         float distance = Vector3.Distance(target.position, transform.position);
-        bool engage = false;
         if (distance <= chaseRadius)
         {
             if (distance > attackRadius)
             {
                 transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
             }
-
-            engage = true;
         }
         else
         {
-            if (_time % 150 == 0)
+            if (_time % 100 == 0 && Random.Range(0,3) == 0)
             {
                 _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
             }
-            engage = false;
             transform.position = Vector3.MoveTowards(transform.position, homePosition + _random, moveSpeed / 2 * Time.fixedDeltaTime);
         }
         _time++;
-        return engage;
+    }
+
+    bool targeted(Transform target) // Renvoie un booléen indiquant si l'enemy a target le joueur
+    {
+        float distance = Vector3.Distance(target.position, transform.position);
+        return (distance <= chaseRadius);
     }
 
     void SetParam() //sert à paramétrer les animations
     {
-        if (CheckDistance(player1)) //le joueur est target
+        if (targeted(player1)) //le joueur est target
         {
-            gluss_anim.SetBool("New Bool", true);
+            gluss_anim.SetInteger("Gluss state", 2);
         }
-        else //gluss passif
+        else
         {
-            gluss_anim.SetBool("New Bool", false);
+            if (transform.position == homePosition + _random) //idle
+                gluss_anim.SetInteger("Gluss state", 0);
+            else
+                gluss_anim.SetInteger("Gluss state", 1); //passif
         }
         if (_random.x > 0) //droite
         {
