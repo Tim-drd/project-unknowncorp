@@ -47,22 +47,22 @@ public class Gluss : Enemy
         {
             if (distance > attackRadius)
             {
+                transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
                 Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
                 rb.MovePosition(temp);
             }
             Flip(target.position.x);
-            engage = true;
         }
         else
         {
-            if (_time % 100 == 0 && Random.Range(0,3) == 0)
+            if (_time % 600 == 0 && Random.Range(0,3) == 0)
             {
                 _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
             }
             Vector3 temp = Vector3.MoveTowards(transform.position, homePosition + _random, moveSpeed / 2 * Time.fixedDeltaTime);
             rb.MovePosition(temp);
             Flip((homePosition + _random).x);
-            engage = false;
+            transform.position = Vector3.MoveTowards(transform.position, homePosition + _random, moveSpeed / 2 * Time.fixedDeltaTime);
         }
         _time++;
     }
@@ -76,6 +76,19 @@ public class Gluss : Enemy
         else
         {
             _spriteRenderer.flipX = true; //droite
+        }
+    }
+
+    bool targeted(Transform target)
+    {
+        float distance = Vector3.Distance(target.position, transform.position);
+        if (distance <= chaseRadius)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
     

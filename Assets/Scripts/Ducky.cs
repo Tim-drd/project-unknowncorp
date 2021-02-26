@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ducky : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 0.3f;
     Animator anim;
 
     private int _time = 0;
@@ -30,9 +30,17 @@ public class Ducky : MonoBehaviour
 
     void move() //se déplace simplement aléatoirement (a une chance de ne pas bouger)
     {
-        if (_time % 300 == 0 && Random.Range(0,2) == 0)
+        if (_time % 600 == 0)
         {
-            _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
+            if (Random.Range(0, 3) == 0)
+            {
+                
+            }
+            else
+            {
+                _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2),
+                    Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
+            }
         }
         transform.position = Vector3.MoveTowards(transform.position, homePosition + _random, speed / 2 * Time.fixedDeltaTime);
         _time++;
