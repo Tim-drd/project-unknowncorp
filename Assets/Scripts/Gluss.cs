@@ -5,11 +5,13 @@ using UnityEngine.UIElements;
 
 public class Gluss : Enemy
 {
+    private Rigidbody2D rb;
     public Transform player1;
     public float chaseRadius;
     public float attackRadius;
     public Vector3 homePosition;
     Animator gluss_anim;
+    private SpriteRenderer _spriteRenderer;
     
     private int _time = 0;
     private Vector3 _random;
@@ -19,9 +21,12 @@ public class Gluss : Enemy
     void Start()
     {
         player1 = GameObject.FindWithTag("Player").transform;
+        rb = GetComponent<Rigidbody2D>();
         homePosition = transform.position;
         _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
+
         gluss_anim = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -44,9 +49,10 @@ public class Gluss : Enemy
         {
             if (distance > attackRadius)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
+                Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
+                rb.MovePosition(temp);
             }
-
+            Flip(target.position.x);
             engage = true;
         }
         else
@@ -55,13 +61,27 @@ public class Gluss : Enemy
             {
                 _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
             }
+            Vector3 temp = Vector3.MoveTowards(transform.position, homePosition + _random, moveSpeed / 2 * Time.fixedDeltaTime);
+            rb.MovePosition(temp);
+            Flip((homePosition + _random).x);
             engage = false;
-            transform.position = Vector3.MoveTowards(transform.position, homePosition + _random, moveSpeed / 2 * Time.fixedDeltaTime);
         }
         _time++;
         return engage;
     }
 
+    void Flip(float destination)
+    {
+        if (transform.position.x > destination)
+        {
+            _spriteRenderer.flipX = false; //gauche
+        }
+        else
+        {
+            _spriteRenderer.flipX = true; //droite
+        }
+    }
+    
     void SetParam() //sert à paramétrer les animations
     {
         if (CheckDistance(player1)) //le joueur est target
@@ -71,14 +91,6 @@ public class Gluss : Enemy
         else //gluss passif
         {
             gluss_anim.SetBool("New Bool", false);
-        }
-        if (_random.x > 0) //droite
-        {
-            GetComponent<SpriteRenderer>().flipX = true;
-        }
-        else //gauche
-        {
-            GetComponent<SpriteRenderer>().flipX = false;
         }
     }
     
