@@ -8032,6 +8032,15 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
+  - first: {x: 25, y: 3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 155
+      m_TileSpriteIndex: 155
+      m_TileMatrixIndex: 1
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   - first: {x: 34, y: 3, z: 0}
     second:
       serializedVersion: 2
@@ -8353,7 +8362,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 00183d62129b13f41910ab7a3d2cb2d8, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 871aec5e0a9fe994aaff0513b545e081, type: 2}
-  - m_RefCount: 1
+  - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 92b5a458276900b449d6480b0177bee2, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 1fbeac6a6a6ef894885e28d2bd957bc2, type: 2}
@@ -10259,7 +10268,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: -6844247605782413242, guid: c08ea2a7e0ffad14faa67d715e4547f1,
       type: 3}
-  - m_RefCount: 1
+  - m_RefCount: 2
     m_Data: {fileID: 4360637352355891649, guid: c08ea2a7e0ffad14faa67d715e4547f1,
       type: 3}
   - m_RefCount: 1
@@ -12407,7 +12416,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
-  - m_RefCount: 3
+  - m_RefCount: 4
     m_Data:
       e00: 0.000000059604645
       e01: 0.99999994
@@ -12463,24 +12472,24 @@ Tilemap:
       e33: 1
   - m_RefCount: 0
     m_Data:
-      e00: 2.6711383e+25
+      e00: -762372600
       e01: NaN
       e02: 0
-      e03: 2.6711347e+25
-      e10: 2.55e-43
+      e03: -762371600
+      e10: 2.02e-43
       e11: NaN
       e12: 7.34684e-40
-      e13: 2.55e-43
+      e13: 2.02e-43
       e20: 0
-      e21: 4.8e-44
-      e22: 3.9947928e-29
+      e21: 3.5e-44
+      e22: 6.6614904e+21
       e23: 0
       e30: 0
       e31: 4e-45
       e32: 4.5904e-41
       e33: 0
   m_TileColorArray:
-  - m_RefCount: 884
+  - m_RefCount: 885
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
