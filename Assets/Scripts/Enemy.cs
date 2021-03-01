@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyState
+{
+    idle,  // au repos
+    chase,  // poursuit le joueur
+    attack  // attaque le joueur
+}
+
 public class Enemy : MonoBehaviour
 {
+    public EnemyState currentState;
     public int health;
     public string enemyName;
     public int baseAttack;
