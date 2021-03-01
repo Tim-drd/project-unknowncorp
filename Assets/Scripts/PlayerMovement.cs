@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Photon.Pun;
 public enum PlayerState
 {
     idle,
     walk,
     attack
 }
-using Photon.Pun;
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
     private int _time = 0; //à termes y faudra un game time générique
     void Start()
     {
-        myRigidbody = GetComponent<Rigidbody2D>();
         myPhotonView = GetComponent<PhotonView>();
         if (!myPhotonView.IsMine)
             camera.enabled = false;
