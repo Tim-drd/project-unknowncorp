@@ -14,7 +14,6 @@ public class SettingsMenu : MonoBehaviour
 	//permet de récuperer toutes les résolutions possible de l'écran du joueur
 	void Start()
 	{
-
 		//permet de récuperer toutes les résolutions possible de l'écran du joueur et d'éviter les doublons
 		resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
 		resolutionDropdown.ClearOptions();
@@ -56,18 +55,9 @@ public class SettingsMenu : MonoBehaviour
 	// appliquer la nouvelle résolution
 	public void SetResolution(int resolutionIndex)
 	{
-		//sauvegarder l index de résolution
-		PlayerPrefs.SetInt("resolutionPref", resolutionIndex);
-
+		Screen.SetResolution(Screen.width, Screen.height, true);
 		Resolution resolution = resolutions[resolutionIndex];
-		Screen.SetResolution(resolution.width, resolution.height, true);
-	}
-
-	public void LoadResolution()
-	{
-		// dernière résolution appliquer
-		int resolutionPref = PlayerPrefs.GetInt("resolutionPref");
-		SetResolution(resolutionPref);
+		Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
 	}
 
 
