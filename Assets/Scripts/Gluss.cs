@@ -25,6 +25,7 @@ public class Gluss : Enemy
         player1 = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         homePosition = transform.position;
+        currentState = EnemyState.idle;
         _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
         gluss_anim = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -32,7 +33,7 @@ public class Gluss : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         CheckDistance(player1);
         SetParam();
@@ -53,6 +54,7 @@ public class Gluss : Enemy
                 transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
                 Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
                 rb.MovePosition(temp);
+                ChangeState(EnemyState.chase);
             }
             Flip(target.position.x);
             targeted = true;
@@ -75,9 +77,21 @@ public class Gluss : Enemy
             rb.MovePosition(temp);
             Flip((homePosition + _random).x);
             transform.position = Vector3.MoveTowards(transform.position, homePosition + _random, moveSpeed / 2 * Time.fixedDeltaTime);
+<<<<<<< HEAD
             targeted = false;
+=======
+            ChangeState(EnemyState.idle);
+>>>>>>> Gui-3
         }
         _time++;
+    }
+
+    private void ChangeState(EnemyState newState)
+    {
+        if (currentState != newState)
+        {
+            currentState = newState;
+        }
     }
 
     void Flip(float destination)
