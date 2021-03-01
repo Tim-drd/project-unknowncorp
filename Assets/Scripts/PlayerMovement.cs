@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public enum PlayerState
 {
+    idle,
     walk,
     attack
 }
@@ -17,14 +18,17 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
+    public AudioClip[] character_sounds;
+    public AudioSource audio_character;
     public PlayerState currentState;
     float horizontalMovement;
     float verticalMovement;
     bool attack;
+    private int _time = 0; //à termes y faudra un game time générique
     
     void Start()
     {
-        currentState = PlayerState.walk;
+        currentState = PlayerState.idle;
         rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
@@ -37,11 +41,17 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         verticalMovement = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
-        if (!attack && currentState == PlayerState.walk)
+        if (!attack && currentState == PlayerState.walk || currentState == PlayerState.idle)
         {
+            if (currentState == PlayerState.idle)
+            {
+                audio_character.Stop();
+            }
             MovePlayer(horizontalMovement, verticalMovement);
             UpdateAnimation(horizontalMovement, verticalMovement);
         }
+        if (!audio_character.isPlaying && currentState != PlayerState.idle) 
+            sound();
     }
     
     // Update is called once per frame
@@ -53,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
             StartCoroutine(AttackCo());
         }
+
+        _time++;
     }
 
     private IEnumerator AttackCo()
@@ -62,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         yield return null;
         _animator.SetBool("attacking", false);
         yield return new WaitForSeconds(.5f);
-        currentState = PlayerState.walk;
+        currentState = PlayerState.idle;
     }
 
     void MovePlayer(float _horizontalMovement, float _verticalMovement)
@@ -78,10 +90,12 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetFloat("moveX", _horizontalMovement);
             _animator.SetFloat("moveY", _verticalMovement);
             _animator.SetBool("moving", true);
+            currentState = PlayerState.walk;
         }
         else
         {
             _animator.SetBool("moving", false);
+            currentState = PlayerState.idle;
         }
         
         if (_horizontalMovement < 0)
@@ -92,5 +106,23 @@ public class PlayerMovement : MonoBehaviour
         {
             _spriteRenderer.flipX = false;
         }
+    }
+
+    void sound()
+    {
+        if (currentState == PlayerState.walk)
+        {
+            audio_character.clip = character_sounds[0]; //bruits de pas
+            audio_character.Play();
+        }
+        else
+        {
+            if (currentState == PlayerState.attack)
+            {
+                audio_character.clip = character_sounds[1];
+                audio_character.Play(); //bruit d'attaque
+            }
+        }
+            
     }
 }

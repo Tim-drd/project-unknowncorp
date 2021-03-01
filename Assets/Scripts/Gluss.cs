@@ -29,6 +29,7 @@ public class Gluss : Enemy
         _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
         gluss_anim = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        moveSpeed = 0.3f;
         AudioManager.instance.PlayClip(gluss_sounds[1], transform.position);
     }
 
@@ -49,21 +50,21 @@ public class Gluss : Enemy
         float distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius)
         {
+            moveSpeed = 0.4f;
             if (distance > attackRadius)
             {
                 transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
                 Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
                 rb.MovePosition(temp);
-                ChangeState(EnemyState.chase);
             }
             Flip(target.position.x);
-            targeted = true;
+            ChangeState(EnemyState.chase);
         }
         else
         {
-            if (_time % 500 == 0)
+            if (_time % 350 == 0)
             {
-                if (Random.Range(0, 5) == 0)
+                if (Random.Range(0, 2) == 0)
                 {
                     
                 }
@@ -73,15 +74,13 @@ public class Gluss : Enemy
                         Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
                 }
             }
+
+            moveSpeed = 0.3f;
             Vector3 temp = Vector3.MoveTowards(transform.position, homePosition + _random, moveSpeed / 2 * Time.fixedDeltaTime);
             rb.MovePosition(temp);
             Flip((homePosition + _random).x);
             transform.position = Vector3.MoveTowards(transform.position, homePosition + _random, moveSpeed / 2 * Time.fixedDeltaTime);
-<<<<<<< HEAD
-            targeted = false;
-=======
             ChangeState(EnemyState.idle);
->>>>>>> Gui-3
         }
         _time++;
     }
@@ -108,7 +107,7 @@ public class Gluss : Enemy
 
     void SetParam() //sert à paramétrer les animations
     {
-        if (targeted) //le joueur est target
+        if (currentState == EnemyState.chase) //le joueur est target
         {
             gluss_anim.SetInteger("Gluss state", 2);
         }
@@ -123,15 +122,15 @@ public class Gluss : Enemy
 
     void sound()
     {
-        if (targeted)
-            if (_time % 150 == 0) 
+        if (currentState == EnemyState.chase)
+            if (_time % 100 == 0) 
                 AudioManager.instance.PlayClip(gluss_sounds[0], transform.position); //correspond au son du gluss qui target qui doit être placé en premier dans "gluss_sounds"
             else
             {
             }
         else
         {
-            if (transform.position != homePosition + _random && _time % 225 == 0)
+            if (transform.position != homePosition + _random && _time % 350 == 0)
                 AudioManager.instance.PlayClip(gluss_sounds[1], transform.position); //son de gluss passif, placé en second
         }
     }
