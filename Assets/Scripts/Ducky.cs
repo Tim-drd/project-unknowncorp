@@ -74,7 +74,7 @@ public class Ducky : MonoBehaviour
 
     void sound()
     {
-        if (_time % 700 == 0 && Random.Range(0,3) == 0)
+        if (_time % 600 == 0 && Random.Range(0,2) == 0)
         {
             AudioManager.instance.PlayClip(couack, transform.position);
         }

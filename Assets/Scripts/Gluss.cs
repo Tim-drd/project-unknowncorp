@@ -61,7 +61,6 @@ public class Gluss : Enemy
             {
                 CheckDistance(player2);
             }
-
             SetParam();
             sound();
         }

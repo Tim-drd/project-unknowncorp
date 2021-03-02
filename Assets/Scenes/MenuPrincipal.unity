@@ -2227,6 +2227,9 @@ MonoBehaviour:
   audiosource: {fileID: 1091926141}
   soundEffectMixer: {fileID: 7595049155078869564, guid: bbdfc8b441dfc5048a703401eb7945d1,
     type: 2}
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  number_of_players: 0
 --- !u!82 &1091926141
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3212,7 +3215,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 365636614}
   m_HandleRect: {fileID: 174385049}
   m_Direction: 0
-  m_MinValue: -60
+  m_MinValue: -80
   m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0
@@ -4473,9 +4476,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1580618448}
   m_Direction: 0
   m_MinValue: -80
-  m_MaxValue: 0
+  m_MaxValue: -5
   m_WholeNumbers: 0
-  m_Value: -0
+  m_Value: -5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
