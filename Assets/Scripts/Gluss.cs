@@ -8,8 +8,6 @@ public class Gluss : Enemy
 {
     private Rigidbody2D rb;
     public Transform player1;
-    public Transform player2;
-    public int numberOfPlayers;
     public float chaseRadius;
     public float attackRadius;
     public Vector3 homePosition;
@@ -24,47 +22,23 @@ public class Gluss : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        numberOfPlayers = 0;
+        player1 = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         homePosition = transform.position;
         currentState = EnemyState.idle;
         _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
         gluss_anim = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        moveSpeed = 0.3f;
         AudioManager.instance.PlayClip(gluss_sounds[1], transform.position);
-    }
-    
-    void LateUpdate()
-    {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
-        numberOfPlayers = players.Length;
-        if (numberOfPlayers > 0)
-        {
-            player1 = players[0].transform;
-            if (numberOfPlayers > 1)
-            {
-                player2 = players[1].transform;
-            }
-        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (numberOfPlayers > 0)
-        {
-            if (numberOfPlayers == 1 || Vector3.Distance(player1.position, transform.position) <= Vector3.Distance(player2.position, transform.position))
-            {
-                CheckDistance(player1);
-            }
-            else
-            {
-                CheckDistance(player2);
-            }
-
-            SetParam();
-            sound();
-        }
+        CheckDistance(player1);
+        SetParam();
+        sound();
     }
 
     // Vérifie la distance avec la cible "target"
@@ -76,6 +50,7 @@ public class Gluss : Enemy
         float distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius)
         {
+            moveSpeed = 0.4f;
             if (distance > attackRadius)
             {
                 transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
@@ -100,6 +75,7 @@ public class Gluss : Enemy
                 }
             }
 
+            moveSpeed = 0.3f;
             Vector3 temp = Vector3.MoveTowards(transform.position, homePosition + _random, moveSpeed / 2 * Time.fixedDeltaTime);
             rb.MovePosition(temp);
             Flip((homePosition + _random).x);
