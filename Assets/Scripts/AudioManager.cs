@@ -82,13 +82,14 @@ public class AudioManager : MonoBehaviour
             if (number_of_players == 1 || Vector3.Distance(player1.position, pos) <= Vector3.Distance(player2.position, pos))
             {
                 float distance = Vector3.Distance(player1.position, pos);
-                if (distance < 30)
+                if (distance < 20)
                 {
                     GameObject tempGO = new GameObject("TempAudio");
                     tempGO.transform.position = pos;
                     AudioSource audioSource = tempGO.AddComponent<AudioSource>();
                     audioSource.clip = clip;
                     audioSource.volume = 0.1f;
+                    audioSource.spatialize = true;
                     audioSource.outputAudioMixerGroup = soundEffectMixer;
                     audioSource.Play();
                     Destroy(tempGO, clip.length);
@@ -98,13 +99,14 @@ public class AudioManager : MonoBehaviour
             else
             {
                 float distance2 = Vector3.Distance(player2.position, pos);
-                if (distance2 < 30)
+                if (distance2 < 20)
                 {
                     GameObject tempGO = new GameObject("TempAudio");
                     tempGO.transform.position = pos;
                     AudioSource audioSource = tempGO.AddComponent<AudioSource>();
                     audioSource.clip = clip;
                     audioSource.volume = 1.5f;
+                    audioSource.spatialize = true;
                     audioSource.outputAudioMixerGroup = soundEffectMixer;
                     audioSource.Play();
                     Destroy(tempGO, clip.length);

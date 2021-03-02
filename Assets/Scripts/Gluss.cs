@@ -146,14 +146,14 @@ public class Gluss : Enemy
     void sound()
     {
         if (currentState == EnemyState.chase)
-            if (_time % 100 == 0) 
+            if (_time % 50 == 0) 
                 AudioManager.instance.PlayClip(gluss_sounds[0], transform.position); //correspond au son du gluss qui target qui doit être placé en premier dans "gluss_sounds"
             else
             {
             }
         else
         {
-            if (transform.position != homePosition + _random && _time % 350 == 0)
+            if (transform.position != homePosition + _random && _time % 100 == 0)
                 AudioManager.instance.PlayClip(gluss_sounds[1], transform.position); //son de gluss passif, placé en second
         }
     }
