@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource audiosource;
     private int MusicIndex = 0;
     public AudioMixerGroup soundEffectMixer;
+    public Transform player1;
 
     public static AudioManager instance;
 
@@ -27,6 +28,7 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player1 = GameObject.FindWithTag("Player").transform;
         audiosource.clip = playlist[0];
         audiosource.Play();
     }
@@ -49,14 +51,20 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource PlayClip(AudioClip clip, Vector3 pos)
     {
-        GameObject tempGO = new GameObject("TempAudio");
-        tempGO.transform.position = pos;
-        AudioSource audioSource = tempGO.AddComponent<AudioSource>();
-        audioSource.clip = clip;
-        audioSource.volume = 0.1f;
-        audioSource.outputAudioMixerGroup = soundEffectMixer;
-        audioSource.Play();
-        Destroy(tempGO, clip.length);
-        return audioSource;
+        float distance = Vector3.Distance(player1.position, pos);
+        if (distance < 50)
+        {
+            GameObject tempGO = new GameObject("TempAudio");
+            tempGO.transform.position = pos;
+            AudioSource audioSource = tempGO.AddComponent<AudioSource>();
+            audioSource.clip = clip;
+            audioSource.volume = 0.1f;
+            audioSource.outputAudioMixerGroup = soundEffectMixer;
+            audioSource.Play();
+            Destroy(tempGO, clip.length);
+            return audioSource;
+        }
+
+        return null;
     }
 }

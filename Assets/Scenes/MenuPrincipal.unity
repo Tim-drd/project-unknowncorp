@@ -811,7 +811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c35f0a1bacffcd409c9d33f253f84da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: GameScene
+  levelToLoad: GameScene5
   settingsWindow: {fileID: 1864044722}
 --- !u!114 &276707876
 MonoBehaviour:
@@ -1185,6 +1185,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7f885c9d45380cd46a358498d137269f, type: 3}
   audiosource: {fileID: 376901693}
   soundEffectMixer: {fileID: 0}
+  player1: {fileID: 0}
 --- !u!82 &376901693
 AudioSource:
   m_ObjectHideFlags: 0
