@@ -73,9 +73,9 @@ public class PlayerMovement : MonoBehaviour
     {
         _animator.SetBool("attacking", true);
         currentState = PlayerState.attack;
-        yield return null;
+        yield return new WaitForSeconds(.1f);
         _animator.SetBool("attacking", false);
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.4f);
         currentState = PlayerState.idle;
     }
     void MovePlayer(float _horizontalMovement, float _verticalMovement)
@@ -97,15 +97,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _animator.SetBool("moving", false);
             currentState = PlayerState.idle;
-        }
-        
-        if (_horizontalMovement < 0)
-        {
-            _spriteRenderer.flipX = true;
-        }
-        else if (_horizontalMovement > 0)
-        {
-            _spriteRenderer.flipX = false;
         }
     }
     void sound()
