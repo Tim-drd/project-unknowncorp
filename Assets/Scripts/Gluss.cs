@@ -9,7 +9,7 @@ public class Gluss : Enemy
     private Rigidbody2D rb;
     public Transform player1;
     public Transform player2;
-    private bool twoPlayers;
+    public int numberOfPlayers;
     public float chaseRadius;
     public float attackRadius;
     public Vector3 homePosition;
@@ -24,6 +24,7 @@ public class Gluss : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        numberOfPlayers = 0;
         rb = GetComponent<Rigidbody2D>();
         homePosition = transform.position;
         currentState = EnemyState.idle;
@@ -36,31 +37,34 @@ public class Gluss : Enemy
     void LateUpdate()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
-        player1 = players[0].transform;
-        if (players.Length > 1)
+        numberOfPlayers = players.Length;
+        if (numberOfPlayers > 0)
         {
-            player2 = players[1].transform;
-            twoPlayers = true;
-        }
-        else
-        {
-            twoPlayers = false;
+            player1 = players[0].transform;
+            if (numberOfPlayers > 1)
+            {
+                player2 = players[1].transform;
+            }
         }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!twoPlayers || Vector3.Distance(player1.position, transform.position) <= Vector3.Distance(player2.position, transform.position))
+        if (numberOfPlayers > 0)
         {
-            CheckDistance(player1);
+            if (numberOfPlayers == 1 || Vector3.Distance(player1.position, transform.position) <= Vector3.Distance(player2.position, transform.position))
+            {
+                CheckDistance(player1);
+            }
+            else
+            {
+                CheckDistance(player2);
+            }
+
+            SetParam();
+            sound();
         }
-        else
-        {
-            CheckDistance(player2);
-        }
-        SetParam();
-        sound();
     }
 
     // Vérifie la distance avec la cible "target"
