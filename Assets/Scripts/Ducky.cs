@@ -22,7 +22,6 @@ public class Ducky : MonoBehaviour
         homePosition = transform.position;
         rb = GetComponent<Rigidbody2D>();
         _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
-        AudioManager.instance.PlayClip(couack, transform.position);
     }
 
     // Update is called once per frame
@@ -74,7 +73,7 @@ public class Ducky : MonoBehaviour
 
     void sound()
     {
-        if (_time % 700 == 0 && Random.Range(0,3) == 0)
+        if (_time % 600 == 0 && Random.Range(0,2) == 0)
         {
             AudioManager.instance.PlayClip(couack, transform.position);
         }

@@ -52,7 +52,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource PlayClip(AudioClip clip, Vector3 pos)
     {
         float distance = Vector3.Distance(player1.position, pos);
-        if (distance < 50)
+        if (distance < 30)
         {
             GameObject tempGO = new GameObject("TempAudio");
             tempGO.transform.position = pos;
