@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 4523568136557573764}
-  moveSpeed: 100
+  speed: 3.5
   rb: {fileID: 0}
   character_sounds:
   - {fileID: 8300000, guid: e66582cbdde1ab44d8107810fb289a21, type: 3}

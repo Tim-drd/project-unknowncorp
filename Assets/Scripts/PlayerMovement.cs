@@ -15,9 +15,9 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private Camera camera;
     private PhotonView myPhotonView;
-    public float moveSpeed;
+    public float speed;
+    private Vector3 change;
     public Rigidbody2D rb;
-    private Vector3 velocity = Vector3.zero;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
     public AudioClip[] character_sounds;
@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontalMovement;
     float verticalMovement;
     bool attack;
+    
     private int _time = 0; //à termes y faudra un game time générique
     void Start()
     {
@@ -40,34 +41,42 @@ public class PlayerMovement : MonoBehaviour
         verticalMovement = 0;
         attack = false;
     }
+    
+    // Update is called once per frame
+    void Update()
+    {
+        change = Vector3.zero;
+        change.x = Input.GetAxisRaw("Horizontal");
+        change.y = Input.GetAxisRaw("Vertical");
+        horizontalMovement = change.x;
+        verticalMovement = change.y;
+        attack = Input.GetButtonDown("attack");
+        if (attack && currentState != PlayerState.attack)
+        {
+            rb.velocity= new Vector3(0, 0);
+            StartCoroutine(AttackCo());
+        }
+
+        _time++;
+    }
     private void FixedUpdate()
     {
-        horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-        verticalMovement = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+        
+        if (change != Vector3.zero)
+        {
+            MoveCharacter();
+     
+        }
         if (!attack && currentState == PlayerState.walk || currentState == PlayerState.idle)
         {
             if (currentState == PlayerState.idle)
             {
                 audio_character.Stop();
             }
-            MovePlayer(horizontalMovement, verticalMovement);
             UpdateAnimation(horizontalMovement, verticalMovement);
         }
         if (!audio_character.isPlaying && currentState != PlayerState.idle) 
             sound();
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        attack = Input.GetButtonDown("attack");
-        if (attack && currentState != PlayerState.attack)
-        {
-            rb.velocity = new Vector2(0, 0);
-            StartCoroutine(AttackCo());
-        }
-
-        _time++;
     }
     private IEnumerator AttackCo()
     {
@@ -78,15 +87,14 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(.4f);
         currentState = PlayerState.idle;
     }
-    void MovePlayer(float _horizontalMovement, float _verticalMovement)
+    void MoveCharacter()
     {
-        Vector3 targetVelocity = new Vector2(_horizontalMovement, _verticalMovement);
-        rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
+        rb.MovePosition(transform.position + change.normalized * speed * Time.fixedDeltaTime);
     }
-
+    
     void UpdateAnimation(float _horizontalMovement, float _verticalMovement)
     {
-        if (new Vector2(_horizontalMovement, _verticalMovement) != Vector2.zero)
+        if (new Vector3(_horizontalMovement, _verticalMovement) != Vector3.zero)
         {
             _animator.SetFloat("moveX", _horizontalMovement);
             _animator.SetFloat("moveY", _verticalMovement);
