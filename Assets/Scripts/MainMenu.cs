@@ -30,7 +30,7 @@ public class  MainMenu: MonoBehaviour
         settingsWindow.SetActive(false);
         mainWindow.SetActive(true);
     }
-    
+
     public void QuitGame()
     {
         Application.Quit();
