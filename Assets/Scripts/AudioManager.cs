@@ -107,6 +107,7 @@ public class AudioManager : MonoBehaviour
                     audioSource.clip = clip;
                     audioSource.volume = 1.5f;
                     audioSource.spatialize = true;
+                    audioSource.spread= 10f;
                     audioSource.outputAudioMixerGroup = soundEffectMixer;
                     audioSource.Play();
                     Destroy(tempGO, clip.length);
