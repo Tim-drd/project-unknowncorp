@@ -82,7 +82,7 @@ public class AudioManager : MonoBehaviour
             if (number_of_players == 1 || Vector3.Distance(player1.position, pos) <= Vector3.Distance(player2.position, pos))
             {
                 float distance = Vector3.Distance(player1.position, pos);
-                if (distance < 20)
+                if (distance < 10)
                 {
                     GameObject tempGO = new GameObject("TempAudio");
                     tempGO.transform.position = pos;
@@ -99,7 +99,7 @@ public class AudioManager : MonoBehaviour
             else
             {
                 float distance2 = Vector3.Distance(player2.position, pos);
-                if (distance2 < 20)
+                if (distance2 < 10)
                 {
                     GameObject tempGO = new GameObject("TempAudio");
                     tempGO.transform.position = pos;
