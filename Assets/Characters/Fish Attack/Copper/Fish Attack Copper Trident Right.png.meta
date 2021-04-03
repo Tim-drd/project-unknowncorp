@@ -1,31 +1,25 @@
 fileFormatVersion: 2
-guid: 34199314d048f304d8d8ea763e5324cc
+guid: 28a026d996143e84a9e912b6e8e83ce3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -401721790234478104
-    second: Fish Walk 2_0
+      213: 2989871854732966533
+    second: Fish Attack Copper Trident Right_0
   - first:
-      213: 8418166076025151653
-    second: Fish Walk 2_1
+      213: 4946320327522602136
+    second: Fish Attack Copper Trident Right_1
   - first:
-      213: -7742095377405803184
-    second: Fish Walk 2_2
+      213: 5729811727156780504
+    second: Fish Attack Copper Trident Right_2
   - first:
-      213: -5274633078393189884
-    second: Fish Walk 2_3
+      213: -1428422125589373696
+    second: Fish Attack Copper Trident Right_3
   - first:
-      213: -5790276774809217004
-    second: Fish Walk_0
+      213: 8930524905549406617
+    second: Fish Attack Copper Trident Right_4
   - first:
-      213: -5814124250740477505
-    second: Fish Walk_1
-  - first:
-      213: 2381342930958889330
-    second: Fish Walk_2
-  - first:
-      213: 277112795882689602
-    second: Fish Walk_3
+      213: -4361493647748054986
+    second: Fish Attack Copper Trident Right_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -111,7 +105,49 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fish Walk_0
+      name: Fish Attack Copper Trident Right_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 24
+        height: 16
+      alignment: 9
+      pivot: {x: 0.34, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58afb416c982e7920800000000000000
+      internalID: 2989871854732966533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fish Attack Copper Trident Right_1
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 32
+        width: 24
+        height: 16
+      alignment: 9
+      pivot: {x: 0.34, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89c4743912cd4a440800000000000000
+      internalID: 4946320327522602136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fish Attack Copper Trident Right_2
       rect:
         serializedVersion: 2
         x: 0
@@ -125,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4185d4693fdc4afa0800000000000000
-      internalID: -5790276774809217004
+      spriteID: 8dd1c037861648f40800000000000000
+      internalID: 5729811727156780504
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fish Walk_1
+      name: Fish Attack Copper Trident Right_3
       rect:
         serializedVersion: 2
         x: 24
@@ -146,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb131aa6cc4105fa0800000000000000
-      internalID: -5814124250740477505
+      spriteID: 00ddfe615a93d2ce0800000000000000
+      internalID: -1428422125589373696
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fish Walk_2
+      name: Fish Attack Copper Trident Right_4
       rect:
         serializedVersion: 2
         x: 0
@@ -167,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 271313067ca3c0120800000000000000
-      internalID: 2381342930958889330
+      spriteID: 9912d0de5199feb70800000000000000
+      internalID: 8930524905549406617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fish Walk_3
+      name: Fish Attack Copper Trident Right_5
       rect:
         serializedVersion: 2
         x: 24
@@ -188,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2449d41ae9088d300800000000000000
-      internalID: 277112795882689602
+      spriteID: 630cad3b2acd873c0800000000000000
+      internalID: -4361493647748054986
       vertices: []
       indices: 
       edges: []

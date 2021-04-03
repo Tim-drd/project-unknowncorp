@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontalMovement;
     float verticalMovement;
     bool attack;
+    int weaponIndex; 
     
     private int _time = 0; //à termes y faudra un game time générique
     void Start()
@@ -40,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalMovement = 0;
         verticalMovement = 0;
         attack = false;
+        weaponIndex = 0;
     }
     
     // Update is called once per frame
@@ -53,22 +55,28 @@ public class PlayerMovement : MonoBehaviour
         attack = Input.GetButtonDown("attack");
         if (attack && currentState != PlayerState.attack)
         {
-            rb.velocity= new Vector3(0, 0);
             StartCoroutine(AttackCo());
         }
 
+        if (Input.GetButtonDown("change weapon"))
+        {
+            if (weaponIndex == 3)
+                weaponIndex = 0;
+            else weaponIndex++;
+        }
+        
         _time++;
+        _animator.SetInteger("weaponIndex", weaponIndex); // test à supprimer
     }
+    
     private void FixedUpdate()
     {
-        
-        if (change != Vector3.zero)
-        {
-            MoveCharacter();
-     
-        }
         if (!attack && currentState == PlayerState.walk || currentState == PlayerState.idle)
         {
+            if (change != Vector3.zero)
+            {
+                MoveCharacter();
+            }
             if (currentState == PlayerState.idle)
             {
                 audio_character.Stop();
@@ -78,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
         if (!audio_character.isPlaying && currentState != PlayerState.idle) 
             sound();
     }
+    
     private IEnumerator AttackCo()
     {
         _animator.SetBool("attacking", true);
