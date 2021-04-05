@@ -92,7 +92,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: Gluss state
+    m_ConditionEvent: Enemy state
     m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7627904038766598753}
@@ -117,7 +117,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: Gluss state
+    m_ConditionEvent: Enemy state
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4841460837267200645}
@@ -193,7 +193,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: Gluss state
+    m_ConditionEvent: Enemy state
     m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -779690453809272123}
@@ -218,7 +218,7 @@ AnimatorController:
   m_Name: Gluss
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Gluss state
+  - m_Name: Enemy state
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0

@@ -28,10 +28,21 @@ public class PauseMenu : MonoBehaviour
 
     void Paused()
     {
-        PlayerMovement.instance.enabled = false; //pour corriger un petit problème
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0;
-        game_paused = true;
+        GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
+        if (players.Length > 1) //le jeu sera mis en pause que si le joueur joue en solo sinon le temps défilera encore
+        {
+            PlayerMovement.instance.enabled = false; //pour corriger un petit problème
+            pauseMenuUI.SetActive(true);
+            Time.timeScale = 1;
+            game_paused = true;
+        }
+        else
+        {
+            PlayerMovement.instance.enabled = false; //pour corriger un petit problème
+            pauseMenuUI.SetActive(true);
+            Time.timeScale = 0;
+            game_paused = true;
+        }
     }
     
     public void Resume()
