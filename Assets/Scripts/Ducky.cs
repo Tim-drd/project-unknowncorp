@@ -8,6 +8,7 @@ public class Ducky : MonoBehaviour
     public float speed = 0.3f;
     Animator anim;
     public AudioClip couack;
+    public int change_dir_time;
 
     private int _time = 0;
     public Vector3 homePosition;
@@ -36,7 +37,7 @@ public class Ducky : MonoBehaviour
 
     void move() //se déplace simplement aléatoirement (a une chance de ne pas bouger)
     {
-        if (_time % 600 == 0)
+        if (_time % change_dir_time == 0)
         {
             if (Random.Range(0, 2) == 0)
             {

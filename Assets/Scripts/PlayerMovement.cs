@@ -29,6 +29,22 @@ public class PlayerMovement : MonoBehaviour
     int weaponIndex; 
     
     private int _time = 0; //à termes y faudra un game time générique
+    
+    
+    public static PlayerMovement instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("Il y a plus d'une instance PlayerMovement dans la scène");
+            return;
+        }
+
+        instance = this;
+    }
+    
+    
     void Start()
     {
         myPhotonView = GetComponent<PhotonView>();

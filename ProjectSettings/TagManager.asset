@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerClone
+  - Ducky
+  - Papillonem
+  - Devorror
+  - Gluss
+  - Scurrious
+  - Terrus
+  - Enemy
   layers:
   - Default
   - TransparentFX

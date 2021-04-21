@@ -132,14 +132,14 @@ public class Gluss : Enemy
     {
         if (currentState == EnemyState.chase) //le joueur est target
         {
-            gluss_anim.SetInteger("Gluss state", 2);
+            gluss_anim.SetInteger("Enemy state", 2);
         }
         else
         {
             if (transform.position == homePosition + _random) //idle
-                gluss_anim.SetInteger("Gluss state", 0);
+                gluss_anim.SetInteger("Enemy state", 0);
             else
-                gluss_anim.SetInteger("Gluss state", 1); //passif
+                gluss_anim.SetInteger("Enemy state", 1); //passif
         }
     }
 
