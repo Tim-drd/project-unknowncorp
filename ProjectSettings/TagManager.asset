@@ -11,6 +11,7 @@ TagManager:
   - Gluss
   - Scurrious
   - Terrus
+  - Enemy
   layers:
   - Default
   - TransparentFX
