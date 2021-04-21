@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class  MainMenu: MonoBehaviour
 {
     public string levelToLoad;
-    public GameObject settingsWindow, mainWindow, multiWindow;
-    
+    public GameObject settingsWindow, mainWindow, multiWindow, keyWindow;
+    public Toggle myToggle;
+
+
+
     void Start()
     {
-        Screen.fullScreen = true;
-        Screen.SetResolution(Screen.width, Screen.height, true);
+        keyWindow.SetActive(false);
+        Screen.SetResolution(Screen.width, Screen.height, myToggle.isOn);
     }
     public void StartGame()
     {
@@ -31,6 +35,18 @@ public class  MainMenu: MonoBehaviour
     {
         settingsWindow.SetActive(false);
         mainWindow.SetActive(true);
+    }
+
+    public void BackToSettingsWindow()
+    {
+        settingsWindow.SetActive(true);
+        keyWindow.SetActive(false);
+    }
+
+    public void GoToKeyWindow()
+    {
+        settingsWindow.SetActive(false);
+        keyWindow.SetActive(true);
     }
 
     public void QuitGame()

@@ -62,11 +62,23 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         change = Vector3.zero;
-        change.x = Input.GetAxisRaw("Horizontal");
-        change.y = Input.GetAxisRaw("Vertical");
+
+        if (KeyBindingManager.GetKey(KeyAction.up))
+            change.y = 0.8f;
+
+        if (KeyBindingManager.GetKey(KeyAction.down))
+            change.y = -0.8f;
+
+        if (KeyBindingManager.GetKey(KeyAction.left))
+            change.x = -0.8f;
+
+
+        if (KeyBindingManager.GetKey(KeyAction.right))
+            change.x = 0.8f;
+        
         horizontalMovement = change.x;
         verticalMovement = change.y;
-        attack = Input.GetButtonDown("attack");
+        attack = KeyBindingManager.GetKeyDown(KeyAction.attack);
         if (attack && currentState != PlayerState.attack)
         {
             rb.velocity= new Vector3(0, 0);
