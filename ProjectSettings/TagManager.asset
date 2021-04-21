@@ -12,6 +12,7 @@ TagManager:
   - Scurrious
   - Terrus
   - Enemy
+  - Canvas
   layers:
   - Default
   - TransparentFX
