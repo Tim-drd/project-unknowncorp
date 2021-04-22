@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class  MainMenu: MonoBehaviour
 {
     public string levelToLoad;
-    public GameObject settingsWindow, mainWindow;
+    public GameObject settingsWindow, mainWindow, multiWindow;
     
     void Start()
     {
@@ -15,8 +15,10 @@ public class  MainMenu: MonoBehaviour
     }
     public void StartGame()
     {
-        Debug.Log("Start Game lancé");
-        SceneManager.LoadScene(levelToLoad);
+        mainWindow.SetActive(false);
+        multiWindow.SetActive(true);
+        /* Debug.Log("Start Game lancé");
+        SceneManager.LoadScene(levelToLoad);*/
     }
     
     public void SettingsButton()

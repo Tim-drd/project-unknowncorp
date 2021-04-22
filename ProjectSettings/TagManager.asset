@@ -11,6 +11,8 @@ TagManager:
   - Gluss
   - Scurrious
   - Terrus
+  - Enemy
+  - Canvas
   - InteractUI
   layers:
   - Default
