@@ -10,10 +10,12 @@ public class SettingsMenu : MonoBehaviour
 
 	Resolution[] resolutions;
 	public Dropdown resolutionDropdown;
+	public Toggle toggle;
 
 	//permet de récuperer toutes les résolutions possible de l'écran du joueur
 	void Start()
 	{
+		toggle.isOn = Screen.fullScreen;
 		//permet de récuperer toutes les résolutions possible de l'écran du joueur et d'éviter les doublons
 		resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
 		resolutionDropdown.ClearOptions();
@@ -39,6 +41,7 @@ public class SettingsMenu : MonoBehaviour
 		resolutionDropdown.value = currentResolutionIndex;
 		resolutionDropdown.RefreshShownValue();
 	}
+
 
 	public AudioMixer audioMixer;
 
