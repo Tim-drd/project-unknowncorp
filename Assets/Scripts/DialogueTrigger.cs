@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class DialogueTrigger : MonoBehaviour
 {
     public Dialogues dialogue;
+    public TypeQuest quest;
     public bool close_enough;
     private Text interactUI;
     public Transform player1;
@@ -33,7 +34,7 @@ public class DialogueTrigger : MonoBehaviour
             {
                 OnTriggerKey(player2);
             }
-            if (close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
+            if (close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact) && !dialogue.triggered_once)
                 BeginDialogue();
         }
     }
@@ -60,6 +61,6 @@ public class DialogueTrigger : MonoBehaviour
 
     public void BeginDialogue()
     {
-        DialogueManager.instance.StartD(dialogue);
+        DialogueManager.instance.StartD(dialogue, quest);
     }
 }

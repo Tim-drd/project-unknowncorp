@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
     public Text dialogueText;
     private Queue<string> sentences;
     public Animator animator;
+    public TypeQuest q;
 
     public static DialogueManager instance;
 
@@ -24,10 +25,12 @@ public class DialogueManager : MonoBehaviour
         sentences = new Queue<string>();
     }
 
-    public void StartD(Dialogues dialogue)
+    public void StartD(Dialogues dialogue, TypeQuest quest)
     {
         PlayerMovement.instance.enabled = false;
         animator.SetBool("IsOpen",true);
+        dialogue.triggered_once = true;
+        q = quest;
         nameText.text = dialogue.name;
         sentences.Clear();
         foreach (var sentence in dialogue.sentences)
@@ -63,5 +66,11 @@ public class DialogueManager : MonoBehaviour
     {
         PlayerMovement.instance.enabled = true;
         animator.SetBool("IsOpen",false);
+        BeginQuest();
+    }
+    
+    public void BeginQuest()
+    {
+        Quest.instance.StartQ(q);
     }
 }
