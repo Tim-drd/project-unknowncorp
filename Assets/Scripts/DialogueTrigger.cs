@@ -25,15 +25,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (numberOfPlayers > 0)
         {
-            if (numberOfPlayers == 1 || Vector3.Distance(player1.position, Pos) <=
-                Vector3.Distance(player2.position, Pos))
-            {
-                OnTriggerKey(player1);
-            }
-            else
-            {
-                OnTriggerKey(player2);
-            }
+            which_player_trigger();
             if (close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact) && !dialogue.triggered_once)
                 BeginDialogue();
         }
@@ -50,6 +42,19 @@ public class DialogueTrigger : MonoBehaviour
             {
                 player2 = players[1].transform;
             }
+        }
+    }
+
+    public void which_player_trigger()
+    {
+        if (numberOfPlayers == 1 || Vector3.Distance(player1.position, Pos) <=
+            Vector3.Distance(player2.position, Pos))
+        {
+            OnTriggerKey(player1);
+        }
+        else
+        { 
+            OnTriggerKey(player2);
         }
     }
     

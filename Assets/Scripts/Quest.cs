@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,11 +8,18 @@ public class Quest : MonoBehaviour
 {
     public Text nameQuestText;
     public Text QuestText;
+    public Text display_counter;
     private string sentence = "";
     public Animator animator;
     private Objectives type;
     private int counter = 0;
     private int counter2 = 0;
+    public AudioClip quest_opening;
+    public Dialogues endQuestText;
+    private Transform pnj;
+    public Transform player1;
+    public Transform player2;
+    public int numberOfPlayers;
 
     public static Quest instance;
 
@@ -38,14 +46,13 @@ public class Quest : MonoBehaviour
     // Start is called before the first frame update
     public void StartQ(TypeQuest quest)
     {
+        AudioManager.instance.PlayClip(quest_opening, transform.position);
         type = quest.Obj;
-        if (type != Objectives.NONE)
-        {
-            nameQuestText.text = quest.Quest_name;
-            QuestText.text = quest.sentence;
-            animator.SetBool("BeginQ", true);
-        }
-        else endQuest();
+        nameQuestText.text = quest.Quest_name;
+        QuestText.text = quest.sentence;
+        endQuestText = quest.end_sentences;
+        animator.SetBool("BeginQ", true);
+        pnj = quest.pnj;
     }
 
     // Update is called once per frame
@@ -57,14 +64,21 @@ public class Quest : MonoBehaviour
                 return;
             case Objectives.QUEST1: //quête de Roger, le marin; 
             {
-                if (counter2 == 10)
+                if (counter2 == 10 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    display_counter.text = "Finished : 10 / 10";
+                    TypeQuest t = new TypeQuest();
+                    t.Obj = Objectives.NONE;
+                    DialogueManager.instance.StartD(endQuestText, t);
                     endQuest();
+                }
                 GameObject[] gluss = GameObject.FindGameObjectsWithTag("Gluss");
-                if (gluss.Length < counter)
+                if (gluss.Length < counter && counter2 < 10)
                 {
                     counter2++;
                 }
                 counter = gluss.Length;
+                display_counter.text = counter2 + " / 10";
                 type = Objectives.NONE;
                 return;
             }
@@ -79,10 +93,33 @@ public class Quest : MonoBehaviour
         }
     }
 
+    
+    public bool isTalking(Transform charac)
+    {
+        if (numberOfPlayers == 1 || Vector3.Distance(player1.position, charac.position) <=
+            Vector3.Distance(player2.position, charac.position))
+        {
+            return OnTriggerKey(player1, charac);
+        }
+        else
+        {
+            return OnTriggerKey(player2, charac);
+        }
+    }
+    
+    private bool OnTriggerKey(Transform target, Transform character)
+    {
+        if (numberOfPlayers > 0)
+            return Vector3.Distance(target.position, character.position) < 2;
+        else
+        {
+            return false;
+        }
+    }
+    
+
     public void endQuest()
     {
         animator.SetBool("BeginQ", false);
     }
-    
-    
 }

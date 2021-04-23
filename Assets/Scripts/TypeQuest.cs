@@ -9,5 +9,9 @@ public class TypeQuest
     [TextArea(3, 10)]
     public string sentence;
 
+    public Dialogues end_sentences;
+
+    public Transform pnj;
+
     public Quest.Objectives Obj;
 }
