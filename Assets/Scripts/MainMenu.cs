@@ -15,6 +15,7 @@ public class  MainMenu: MonoBehaviour
     void Start()
     {
         keyWindow.SetActive(false);
+        myToggle.isOn = Screen.fullScreen;
         Screen.SetResolution(Screen.width, Screen.height, myToggle.isOn);
     }
     public void StartGame()
