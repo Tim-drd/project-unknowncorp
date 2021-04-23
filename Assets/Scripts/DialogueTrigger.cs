@@ -11,6 +11,7 @@ public class DialogueTrigger : MonoBehaviour
     public Transform player2;
     public int numberOfPlayers;
     public Vector3 Pos;
+    
 
     private void Awake()
     {
@@ -32,7 +33,7 @@ public class DialogueTrigger : MonoBehaviour
             {
                 OnTriggerKey(player2);
             }
-            if (close_enough && Input.GetKeyDown(KeyCode.I))
+            if (close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
                 BeginDialogue();
         }
     }
@@ -53,15 +54,7 @@ public class DialogueTrigger : MonoBehaviour
     
     private void OnTriggerKey(Transform target)
     {
-        if (Vector3.Distance(target.position, Pos) < 1)
-        { 
-            close_enough = true;
-        }
-        else
-        {
-            close_enough = false;
-        }
-
+        close_enough = Vector3.Distance(target.position, Pos) < 2;
         interactUI.enabled = close_enough;
     }
 

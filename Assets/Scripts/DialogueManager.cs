@@ -9,8 +9,8 @@ public class DialogueManager : MonoBehaviour
     public Text nameText;
     public Text dialogueText;
     private Queue<string> sentences;
-    public Animator anim;
-    
+    public Animator animator;
+
     public static DialogueManager instance;
 
     private void Awake()
@@ -27,14 +27,13 @@ public class DialogueManager : MonoBehaviour
     public void StartD(Dialogues dialogue)
     {
         PlayerMovement.instance.enabled = false;
-        anim.SetBool("IsOpen", true);
+        animator.SetBool("IsOpen",true);
         nameText.text = dialogue.name;
         sentences.Clear();
         foreach (var sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
         }
-
         DisplayNextSentence();
     }
 
@@ -63,6 +62,6 @@ public class DialogueManager : MonoBehaviour
     void endDialogue()
     {
         PlayerMovement.instance.enabled = true;
-        anim.SetBool("IsOpen", false);
+        animator.SetBool("IsOpen",false);
     }
 }
