@@ -371,7 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e9ef378784eaf42b8ea4ce5ad86f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyAction: 4
+  keyAction: 3
   keyCode: 100
   keyDisplay: {fileID: 1834206351}
   button: {fileID: 1839529276}
@@ -2903,7 +2903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11414902, guid: 97bad3d27bd292c4aac284388b06eba9, type: 3}
       propertyPath: keyAction
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11414902, guid: 97bad3d27bd292c4aac284388b06eba9, type: 3}
       propertyPath: toggleColor.a
@@ -3291,7 +3291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e9ef378784eaf42b8ea4ce5ad86f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyAction: 7
+  keyAction: 4
   keyCode: 32
   keyDisplay: {fileID: 777234094}
   button: {fileID: 1447255682}
@@ -4393,7 +4393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e9ef378784eaf42b8ea4ce5ad86f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyAction: 9
+  keyAction: 6
   keyCode: 101
   keyDisplay: {fileID: 1979737781}
   button: {fileID: 1959018696}
@@ -6869,7 +6869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11414902, guid: 97bad3d27bd292c4aac284388b06eba9, type: 3}
       propertyPath: keyAction
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11465808, guid: 97bad3d27bd292c4aac284388b06eba9, type: 3}
       propertyPath: m_FontData.m_BestFit
@@ -7347,6 +7347,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resolutionDropdown: {fileID: 302222757}
   toggle: {fileID: 1835487857}
+  soundSlider: {fileID: 2120354824}
+  musicSlider: {fileID: 1562938626}
   audioMixer: {fileID: 24100000, guid: bbdfc8b441dfc5048a703401eb7945d1, type: 2}
 --- !u!1 &1866554961
 GameObject:
@@ -8005,7 +8007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e9ef378784eaf42b8ea4ce5ad86f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyAction: 8
+  keyAction: 5
   keyCode: 27
   keyDisplay: {fileID: 1984851118}
   button: {fileID: 1984851119}
@@ -8400,7 +8402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11414902, guid: 97bad3d27bd292c4aac284388b06eba9, type: 3}
       propertyPath: keyAction
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11414902, guid: 97bad3d27bd292c4aac284388b06eba9, type: 3}
       propertyPath: toggleColor.a

@@ -11,6 +11,9 @@ public class SettingsMenu : MonoBehaviour
 	Resolution[] resolutions;
 	public Dropdown resolutionDropdown;
 	public Toggle toggle;
+	public Slider soundSlider;
+	public Slider musicSlider;
+	public AudioMixer audioMixer;
 
 	//permet de récuperer toutes les résolutions possible de l'écran du joueur
 	void Start()
@@ -20,6 +23,14 @@ public class SettingsMenu : MonoBehaviour
 		resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
 		resolutionDropdown.ClearOptions();
 
+		// mettre les sliders au bon niveau
+		float valueSound;
+		bool result = audioMixer.GetFloat("sound", out valueSound);
+		soundSlider.value = valueSound;
+
+		float valueMusic;
+		bool result2 = audioMixer.GetFloat("music", out valueMusic);
+		musicSlider.value = valueMusic;
 
 		//ajoute des résolutions à la dropdown
 		List<string> options = new List<string>();
@@ -42,8 +53,6 @@ public class SettingsMenu : MonoBehaviour
 		resolutionDropdown.RefreshShownValue();
 	}
 
-
-	public AudioMixer audioMixer;
 
 	public void setMusic(float volume)
 	{
