@@ -16,11 +16,14 @@ public class Quest : MonoBehaviour
     private int counter2 = 0;
     public AudioClip quest_opening;
     public Dialogues endQuestText;
+    public Dialogues neutral;
     private Transform pnj;
     public Transform player1;
     public Transform player2;
     public int numberOfPlayers;
     private MobSpawners mobspawner;
+    private TypeQuest q;
+    public bool quest_over;
 
     public static Quest instance;
 
@@ -48,11 +51,15 @@ public class Quest : MonoBehaviour
     public void StartQ(TypeQuest quest)
     {
         AudioManager.instance.PlayClip(quest_opening, transform.position);
+        q = quest;
         type = quest.Obj;
+        if (type == Objectives.NONE)
+            quest.quest_over = true;
         nameQuestText.text = quest.Quest_name;
         QuestText.text = quest.sentence;
         endQuestText = quest.end_sentences;
         mobspawner = quest.spawners;
+        neutral = quest.neutral_dialogue;
         animator.SetBool("BeginQ", true);
         pnj = quest.pnj;
     }
@@ -66,12 +73,19 @@ public class Quest : MonoBehaviour
                 return;
             case Objectives.QUEST1: //quête de Roger, le marin; 
             {
-                if (counter2 == 10 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                TypeQuest t = new TypeQuest();
+                t.Obj = Objectives.NONE;
+                if (counter2 == 10 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact)) //conditions necessaires a la fin de la quete 1;
                 {
-                    TypeQuest t = new TypeQuest();
-                    t.Obj = Objectives.NONE;
                     DialogueManager.instance.StartD(endQuestText, t);
                     endQuest();
+                }
+                else
+                {
+                    if (counter != 10 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact) && q.Obj != Objectives.NONE)
+                    {
+                        DialogueManager.instance.StartD(neutral, t);
+                    }
                 }
 
                 int gluss = mobspawner.enemyCounter;
@@ -94,6 +108,20 @@ public class Quest : MonoBehaviour
                 return;
             case Objectives.QUEST5:
                 return;
+        }
+    }
+    
+    void LateUpdate()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
+        numberOfPlayers = players.Length;
+        if (numberOfPlayers > 0)
+        {
+            player1 = players[0].transform;
+            if (numberOfPlayers > 1)
+            {
+                player2 = players[1].transform;
+            }
         }
     }
 
@@ -124,6 +152,10 @@ public class Quest : MonoBehaviour
 
     public void endQuest()
     {
+        counter = 0;
+        counter2 = 0;
         animator.SetBool("BeginQ", false);
+        q.Obj = Objectives.NONE;
+        q.quest_over = true;
     }
 }
