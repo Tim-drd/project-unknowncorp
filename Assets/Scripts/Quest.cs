@@ -23,7 +23,7 @@ public class Quest : MonoBehaviour
     public int numberOfPlayers;
     private MobSpawners mobspawner;
     private TypeQuest q;
-    public bool quest_over;
+    public bool quest_over = false;
 
     public static Quest instance;
 
@@ -75,10 +75,16 @@ public class Quest : MonoBehaviour
             {
                 TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
-                if (counter2 == 10 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact)) //conditions necessaires a la fin de la quete 1;
+                if (counter2 == 10 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact)
+                ) //conditions necessaires a la fin de la quete 1;
                 {
                     DialogueManager.instance.StartD(endQuestText, t);
                     endQuest();
+                    GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
+                    players[0].GetComponent<Animator>().SetInteger("weaponIndex", 3); //ne marche pas pour l'instant;
+                    players[1].GetComponent<Animator>().SetInteger("weaponIndex", 3);
+                    players[0].GetComponent<PlayerHealth>().HealPlayer(10);
+                    players[1].GetComponent<PlayerHealth>().HealPlayer(10);
                 }
                 else
                 {
@@ -149,7 +155,6 @@ public class Quest : MonoBehaviour
         }
     }
     
-
     public void endQuest()
     {
         counter = 0;
