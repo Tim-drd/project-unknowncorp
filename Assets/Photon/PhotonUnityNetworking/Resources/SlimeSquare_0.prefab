@@ -251,7 +251,7 @@ MonoBehaviour:
   player2: {fileID: 0}
   numberOfPlayers: 0
   chaseRadius: 5
-  attackRadius: 1.5
+  attackRadius: 2
   homePosition: {x: 0, y: 0, z: 0}
   gluss_sounds:
   - {fileID: 8300000, guid: 2c29226d94a62d9468a1c07bd65d8184, type: 3}

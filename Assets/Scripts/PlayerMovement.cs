@@ -43,8 +43,6 @@ public class PlayerMovement : MonoBehaviour
 
         instance = this;
     }
-    
-    
     void Start()
     {
         myPhotonView = GetComponent<PhotonView>();
