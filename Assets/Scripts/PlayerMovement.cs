@@ -64,17 +64,17 @@ public class PlayerMovement : MonoBehaviour
         change = Vector3.zero;
 
         if (KeyBindingManager.GetKey(KeyAction.up))
-            change.y = 0.8f;
+            change.y = 1f;
 
         if (KeyBindingManager.GetKey(KeyAction.down))
-            change.y = -0.8f;
+            change.y = -1f;
 
         if (KeyBindingManager.GetKey(KeyAction.left))
-            change.x = -0.8f;
+            change.x = -1f;
 
 
         if (KeyBindingManager.GetKey(KeyAction.right))
-            change.x = 0.8f;
+            change.x = 1f;
         
         horizontalMovement = change.x;
         verticalMovement = change.y;

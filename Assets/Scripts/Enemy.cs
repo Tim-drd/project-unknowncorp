@@ -11,8 +11,9 @@ public enum EnemyState
 
 public class Enemy : MonoBehaviour
 {
+    public Rigidbody2D rb;
     public EnemyState currentState;
-    public int health;
+    public float health;
     public string enemyName;
     public int baseAttack;
     public float moveSpeed;
