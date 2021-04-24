@@ -18,6 +18,7 @@ public class DialogueTrigger : MonoBehaviour
     private void Awake()
     {
         interactUI = GameObject.FindWithTag("InteractUI").GetComponent<Text>();
+        interactUI.text = "Appuyer sur " + KeyBindingManager.GetKeyCode(KeyAction.interact);
         Pos = transform.position;
     }
 

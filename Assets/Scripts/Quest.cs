@@ -87,7 +87,6 @@ public class Quest : MonoBehaviour
                         DialogueManager.instance.StartD(neutral, t);
                     }
                 }
-
                 int gluss = mobspawner.enemyCounter;
                 if (gluss < counter && counter2 < 10)
                 {
@@ -101,6 +100,7 @@ public class Quest : MonoBehaviour
                 return;
             }
             case Objectives.QUEST2:
+                
                 return;
             case Objectives.QUEST3:
                 return;
@@ -155,6 +155,7 @@ public class Quest : MonoBehaviour
         counter = 0;
         counter2 = 0;
         animator.SetBool("BeginQ", false);
+        q.bc.enabled = false;
         q.Obj = Objectives.NONE;
         q.quest_over = true;
     }
