@@ -23,7 +23,7 @@ public class MobSpawners : MonoBehaviour
     void Update()
     {
         GameObject[] N_mobs = GameObject.FindGameObjectsWithTag(mob.tag);
-        enemyCounter = N_mobs.Length - 1;
+        enemyCounter = N_mobs.Length;
         if (enemyCounter < enemyMaxCount && _time % Random.Range(650, 1100) == 0)
         {
             StartCoroutine(enemySpawn());

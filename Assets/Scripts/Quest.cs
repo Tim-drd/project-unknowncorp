@@ -20,6 +20,7 @@ public class Quest : MonoBehaviour
     public Transform player1;
     public Transform player2;
     public int numberOfPlayers;
+    private MobSpawners mobspawner;
 
     public static Quest instance;
 
@@ -51,6 +52,7 @@ public class Quest : MonoBehaviour
         nameQuestText.text = quest.Quest_name;
         QuestText.text = quest.sentence;
         endQuestText = quest.end_sentences;
+        mobspawner = quest.spawners;
         animator.SetBool("BeginQ", true);
         pnj = quest.pnj;
     }
@@ -72,14 +74,14 @@ public class Quest : MonoBehaviour
                     DialogueManager.instance.StartD(endQuestText, t);
                     endQuest();
                 }
-                GameObject[] gluss = GameObject.FindGameObjectsWithTag("Gluss");
-                if (gluss.Length < counter && counter2 < 10)
+
+                int gluss = mobspawner.enemyCounter;
+                if (gluss < counter && counter2 < 10)
                 {
                     counter2++;
                 }
-                counter = gluss.Length;
+                counter = gluss;
                 display_counter.text = counter2 + " / 10";
-                type = Objectives.NONE;
                 return;
             }
             case Objectives.QUEST2:

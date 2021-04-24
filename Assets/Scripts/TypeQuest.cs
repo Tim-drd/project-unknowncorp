@@ -9,6 +9,8 @@ public class TypeQuest
     [TextArea(3, 10)]
     public string sentence;
 
+    public MobSpawners spawners; //éventuellement
+
     public Dialogues end_sentences;
 
     public Transform pnj;
