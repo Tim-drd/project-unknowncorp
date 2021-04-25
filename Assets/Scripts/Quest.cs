@@ -14,6 +14,10 @@ public class Quest : MonoBehaviour
     private Objectives type;
     private int counter = 0;
     private int counter2 = 0;
+    private int counter3 = 0;
+    private int counter4 = 0;
+    private int counter5 = 0;
+    private int counter6 = 0;
     public AudioClip quest_opening;
     public Dialogues endQuestText;
     public Dialogues neutral;
@@ -22,6 +26,7 @@ public class Quest : MonoBehaviour
     public Transform player2;
     public int numberOfPlayers;
     private MobSpawners mobspawner;
+    private MobSpawners mobspawner2;
     private TypeQuest q;
     public bool quest_over = false;
 
@@ -59,6 +64,7 @@ public class Quest : MonoBehaviour
         QuestText.text = quest.sentence;
         endQuestText = quest.end_sentences;
         mobspawner = quest.spawners;
+        mobspawner2 = quest.spawners2;
         neutral = quest.neutral_dialogue;
         animator.SetBool("BeginQ", true);
         pnj = quest.pnj;
@@ -89,7 +95,7 @@ public class Quest : MonoBehaviour
                 }
                 else
                 {
-                    if (counter != 10 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact) && q.Obj != Objectives.NONE)
+                    if (counter2 != 10 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact) && q.Obj != Objectives.NONE)
                     {
                         DialogueManager.instance.StartD(neutral, t);
                     }
@@ -107,8 +113,47 @@ public class Quest : MonoBehaviour
                 return;
             }
             case Objectives.QUEST2:
-                
-                return;
+                {
+                    TypeQuest t = new TypeQuest();
+                    t.Obj = Objectives.NONE;
+                    if (counter4 == 3 && counter6 == 4 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact)) //conditions necessaires a la fin de la quete 1;
+                    {
+                        DialogueManager.instance.StartD(endQuestText, t);
+                        endQuest();
+                        GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
+                        foreach (var player in players)
+                        {
+                            player.GetComponent<Animator>().SetInteger("weaponIndex", 2);
+                            player.GetComponent<PlayerHealth>().HealPlayer(10);
+                        }
+                    }
+                    else
+                    {
+                        if ((counter4 != 3 || counter6 != 4) && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact) && q.Obj != Objectives.NONE)
+                        {
+                            DialogueManager.instance.StartD(neutral, t);
+                        }
+                    }
+                    int devorror = mobspawner.enemyCounter;
+                    if (devorror < counter3 && counter4 < 3)
+                    {
+                        counter4++;
+                    }
+                    counter3 = devorror;
+
+                    int terrus = mobspawner2.enemyCounter;
+                    if (terrus < counter5 && counter6 < 4)
+                    {
+                        counter6++;
+                    }
+                    counter5 = terrus;
+
+                    if (counter4 == 3 && counter6 == 4)
+                        display_counter.text = "Finished";
+                    else
+                        display_counter.text = "Devorror: " + counter4 + " / 3" + "Terrus: " + counter6 + " / 4";
+                    return;
+                }
             case Objectives.QUEST3:
                 return;
             case Objectives.QUEST4:
