@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun.UtilityScripts;
 using UnityEngine;
@@ -20,7 +21,6 @@ public class DialogueManager : MonoBehaviour
         {
             Debug.LogWarning("Plus de DialogueManager dans la scène");
         }
-
         instance = this;
         sentences = new Queue<string>();
     }

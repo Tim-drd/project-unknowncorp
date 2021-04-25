@@ -18,13 +18,13 @@ public class DialogueTrigger : MonoBehaviour
     private void Awake()
     {
         interactUI = GameObject.FindWithTag("InteractUI").GetComponent<Text>();
-        interactUI.text = "Appuyer sur " + KeyBindingManager.GetKeyCode(KeyAction.interact);
         Pos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        interactUI.text = "Appuyer sur " + KeyBindingManager.GetKeyCode(KeyAction.interact);
         if (numberOfPlayers > 0)
         {
             which_player_trigger();

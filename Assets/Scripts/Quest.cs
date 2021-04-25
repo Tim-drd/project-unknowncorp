@@ -81,8 +81,8 @@ public class Quest : MonoBehaviour
                     DialogueManager.instance.StartD(endQuestText, t);
                     endQuest();
                     GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
-                    players[0].GetComponent<Animator>().SetInteger("weaponIndex", 3); //ne marche pas pour l'instant;
-                    players[1].GetComponent<Animator>().SetInteger("weaponIndex", 3);
+                    players[0].GetComponent<Animator>().SetInteger("weaponIndex", 2); //ne marche pas pour l'instant;
+                    players[1].GetComponent<Animator>().SetInteger("weaponIndex", 2);
                     players[0].GetComponent<PlayerHealth>().HealPlayer(10);
                     players[1].GetComponent<PlayerHealth>().HealPlayer(10);
                 }
