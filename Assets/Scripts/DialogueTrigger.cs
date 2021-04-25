@@ -28,6 +28,10 @@ public class DialogueTrigger : MonoBehaviour
         if (numberOfPlayers > 0)
         {
             which_player_trigger();
+            if (close_enough)
+                interactUI.enabled = true;
+            else
+                interactUI.enabled = false;
             if (close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact) && !dialogue.triggered_once)
             {
                 BeginDialogue();
@@ -78,7 +82,6 @@ public class DialogueTrigger : MonoBehaviour
     private void OnTriggerKey(Transform target)
     {
         close_enough = Vector3.Distance(target.position, Pos) < 2;
-        interactUI.enabled = close_enough;
     }
 
     public void BeginDialogue()

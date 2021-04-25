@@ -85,6 +85,7 @@ public class Quest : MonoBehaviour
                 ) //conditions necessaires a la fin de la quete 1;
                 {
                     DialogueManager.instance.StartD(endQuestText, t);
+                    mobspawner.enemyMaxCount = 2;
                     endQuest();
                     GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
                     foreach (var player in players)
@@ -103,7 +104,7 @@ public class Quest : MonoBehaviour
                 int gluss = mobspawner.enemyCounter;
                 if (gluss < counter && counter2 < 10)
                 {
-                    counter2++;
+                    counter2 += counter - gluss;
                 }
                 counter = gluss;
                 if (counter2 == 10)
@@ -117,9 +118,11 @@ public class Quest : MonoBehaviour
                     TypeQuest t = new TypeQuest();
                     t.Obj = Objectives.NONE;
                     if (counter4 == 3 && counter6 == 4 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact)) //conditions necessaires a la fin de la quete 1;
-                    {
+                    { //conditions necessaires à la fin de la quete 2;
                         DialogueManager.instance.StartD(endQuestText, t);
                         endQuest();
+                        mobspawner.enemyMaxCount = 2;
+                        mobspawner2.enemyMaxCount = 2;
                         GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
                         foreach (var player in players)
                         {
@@ -137,21 +140,21 @@ public class Quest : MonoBehaviour
                     int devorror = mobspawner.enemyCounter;
                     if (devorror < counter3 && counter4 < 3)
                     {
-                        counter4++;
+                        counter4 += counter3 - devorror;
                     }
                     counter3 = devorror;
 
                     int terrus = mobspawner2.enemyCounter;
                     if (terrus < counter5 && counter6 < 4)
                     {
-                        counter6++;
+                        counter6+= counter5 - terrus;
                     }
                     counter5 = terrus;
 
                     if (counter4 == 3 && counter6 == 4)
                         display_counter.text = "Finished";
                     else
-                        display_counter.text = "Devorror: " + counter4 + " / 3" + "Terrus: " + counter6 + " / 4";
+                        display_counter.text = "Devorror: " + counter4 + " / 3" + " Terrus: " + counter6 + " / 4";
                     return;
                 }
             case Objectives.QUEST3:
@@ -203,9 +206,9 @@ public class Quest : MonoBehaviour
     
     public void endQuest()
     {
+        animator.SetBool("BeginQ", false);
         counter = 0;
         counter2 = 0;
-        animator.SetBool("BeginQ", false);
         q.bc.enabled = false;
         q.Obj = Objectives.NONE;
         q.quest_over = true;
