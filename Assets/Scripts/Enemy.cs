@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     public EnemyState currentState;
     public float health;
     public string enemyName;
-    public int baseAttack;
+    public float baseAttack;
     public float moveSpeed;
 
     // Start is called before the first frame update

@@ -15,6 +15,8 @@ TagManager:
   - Canvas
   - InteractUI
   - DialogueBox
+  - MyWeapon
+  - Hurting
   layers:
   - Default
   - TransparentFX
