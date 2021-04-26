@@ -12,7 +12,8 @@ public class DialogueTrigger : MonoBehaviour
     public Transform player2;
     public int numberOfPlayers;
     public Vector3 Pos;
-    
+    private bool finished = false;
+
 
     private void Awake()
     {
@@ -23,11 +24,31 @@ public class DialogueTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        interactUI.text = "Appuyer sur " + KeyBindingManager.GetKeyCode(KeyAction.interact);
         if (numberOfPlayers > 0)
         {
             which_player_trigger();
+            if (close_enough)
+                interactUI.enabled = true;
+            else
+                interactUI.enabled = false;
             if (close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact) && !dialogue.triggered_once)
+            {
                 BeginDialogue();
+            }
+            else
+            {
+                if (quest.quest_over)
+                {
+                    if (close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact) && finished)
+                    {
+                        dialogue = quest.neutral_dialogue;
+                        BeginDialogue();
+                    }
+
+                    finished = true;
+                }
+            }
         }
     }
 
@@ -61,7 +82,6 @@ public class DialogueTrigger : MonoBehaviour
     private void OnTriggerKey(Transform target)
     {
         close_enough = Vector3.Distance(target.position, Pos) < 2;
-        interactUI.enabled = close_enough;
     }
 
     public void BeginDialogue()

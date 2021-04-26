@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
     float horizontalMovement;
     float verticalMovement;
     bool attack;
-    int weaponIndex; 
     
     private int _time = 0; //à termes y faudra un game time générique
     
@@ -55,7 +54,6 @@ public class PlayerMovement : MonoBehaviour
         horizontalMovement = 0;
         verticalMovement = 0;
         attack = false;
-        weaponIndex = 0;
     }
     
     // Update is called once per frame
@@ -84,15 +82,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(AttackCo());
         }
 
-        if (Input.GetButtonDown("change weapon"))
-        {
-            if (weaponIndex == 3)
-                weaponIndex = 0;
-            else weaponIndex++;
-        }
-        
         _time++;
-        _animator.SetInteger("weaponIndex", weaponIndex); // test à supprimer
     }
     
     private void FixedUpdate()

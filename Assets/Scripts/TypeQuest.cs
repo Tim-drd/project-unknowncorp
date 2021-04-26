@@ -9,11 +9,18 @@ public class TypeQuest
     [TextArea(3, 10)]
     public string sentence;
 
-    public MobSpawners spawners; //éventuellement
+    public MobSpawners spawners;
+    public MobSpawners spawners2; //éventuellement
 
     public Dialogues end_sentences;
+
+    public Dialogues neutral_dialogue; 
 
     public Transform pnj;
 
     public Quest.Objectives Obj;
+
+    public bool quest_over = false;
+
+    public BoxCollider2D bc;
 }

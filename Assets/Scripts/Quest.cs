@@ -14,13 +14,21 @@ public class Quest : MonoBehaviour
     private Objectives type;
     private int counter = 0;
     private int counter2 = 0;
+    private int counter3 = 0;
+    private int counter4 = 0;
+    private int counter5 = 0;
+    private int counter6 = 0;
     public AudioClip quest_opening;
     public Dialogues endQuestText;
+    public Dialogues neutral;
     private Transform pnj;
     public Transform player1;
     public Transform player2;
     public int numberOfPlayers;
     private MobSpawners mobspawner;
+    private MobSpawners mobspawner2;
+    private TypeQuest q;
+    public bool quest_over = false;
 
     public static Quest instance;
 
@@ -48,11 +56,16 @@ public class Quest : MonoBehaviour
     public void StartQ(TypeQuest quest)
     {
         AudioManager.instance.PlayClip(quest_opening, transform.position);
+        q = quest;
         type = quest.Obj;
+        if (type == Objectives.NONE)
+            quest.quest_over = true;
         nameQuestText.text = quest.Quest_name;
         QuestText.text = quest.sentence;
         endQuestText = quest.end_sentences;
         mobspawner = quest.spawners;
+        mobspawner2 = quest.spawners2;
+        neutral = quest.neutral_dialogue;
         animator.SetBool("BeginQ", true);
         pnj = quest.pnj;
     }
@@ -66,18 +79,32 @@ public class Quest : MonoBehaviour
                 return;
             case Objectives.QUEST1: //quête de Roger, le marin; 
             {
-                if (counter2 == 10 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                TypeQuest t = new TypeQuest();
+                t.Obj = Objectives.NONE;
+                if (counter2 == 10 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact)
+                ) //conditions necessaires a la fin de la quete 1;
                 {
-                    TypeQuest t = new TypeQuest();
-                    t.Obj = Objectives.NONE;
                     DialogueManager.instance.StartD(endQuestText, t);
+                    mobspawner.enemyMaxCount = 2;
                     endQuest();
+                    GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
+                    foreach (var player in players)
+                    {
+                        player.GetComponent<Animator>().SetInteger("weaponIndex", 1);
+                        player.GetComponent<PlayerHealth>().HealPlayer(10);
+                    }
                 }
-
+                else
+                {
+                    if (counter2 != 10 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact) && q.Obj != Objectives.NONE)
+                    {
+                        DialogueManager.instance.StartD(neutral, t);
+                    }
+                }
                 int gluss = mobspawner.enemyCounter;
                 if (gluss < counter && counter2 < 10)
                 {
-                    counter2++;
+                    counter2 += counter - gluss;
                 }
                 counter = gluss;
                 if (counter2 == 10)
@@ -87,13 +114,69 @@ public class Quest : MonoBehaviour
                 return;
             }
             case Objectives.QUEST2:
-                return;
+                {
+                    TypeQuest t = new TypeQuest();
+                    t.Obj = Objectives.NONE;
+                    if (counter4 == 3 && counter6 == 4 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact)) //conditions necessaires a la fin de la quete 1;
+                    { //conditions necessaires à la fin de la quete 2;
+                        DialogueManager.instance.StartD(endQuestText, t);
+                        endQuest();
+                        mobspawner.enemyMaxCount = 2;
+                        mobspawner2.enemyMaxCount = 2;
+                        GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
+                        foreach (var player in players)
+                        {
+                            player.GetComponent<Animator>().SetInteger("weaponIndex", 2);
+                            player.GetComponent<PlayerHealth>().HealPlayer(10);
+                        }
+                    }
+                    else
+                    {
+                        if ((counter4 != 3 || counter6 != 4) && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact) && q.Obj != Objectives.NONE)
+                        {
+                            DialogueManager.instance.StartD(neutral, t);
+                        }
+                    }
+                    int devorror = mobspawner.enemyCounter;
+                    if (devorror < counter3 && counter4 < 3)
+                    {
+                        counter4 += counter3 - devorror;
+                    }
+                    counter3 = devorror;
+
+                    int terrus = mobspawner2.enemyCounter;
+                    if (terrus < counter5 && counter6 < 4)
+                    {
+                        counter6+= counter5 - terrus;
+                    }
+                    counter5 = terrus;
+
+                    if (counter4 == 3 && counter6 == 4)
+                        display_counter.text = "Finished";
+                    else
+                        display_counter.text = "Devorror: " + counter4 + " / 3" + " Terrus: " + counter6 + " / 4";
+                    return;
+                }
             case Objectives.QUEST3:
                 return;
             case Objectives.QUEST4:
                 return;
             case Objectives.QUEST5:
                 return;
+        }
+    }
+    
+    void LateUpdate()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
+        numberOfPlayers = players.Length;
+        if (numberOfPlayers > 0)
+        {
+            player1 = players[0].transform;
+            if (numberOfPlayers > 1)
+            {
+                player2 = players[1].transform;
+            }
         }
     }
 
@@ -121,9 +204,13 @@ public class Quest : MonoBehaviour
         }
     }
     
-
     public void endQuest()
     {
         animator.SetBool("BeginQ", false);
+        counter = 0;
+        counter2 = 0;
+        q.bc.enabled = false;
+        q.Obj = Objectives.NONE;
+        q.quest_over = true;
     }
 }
