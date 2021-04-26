@@ -73,7 +73,7 @@ public class Gluss : Enemy
     void CheckDistance(Transform target)
     {
         float distance = Vector3.Distance(target.position, transform.position);
-        if (distance <= chaseRadius)
+        if (distance <= chaseRadius && currentState != EnemyState.knocked)
         {
             if (distance > attackRadius)
             {
@@ -84,7 +84,7 @@ public class Gluss : Enemy
             Flip(target.position.x);
             ChangeState(EnemyState.chase);
         }
-        else
+        else if (currentState != EnemyState.knocked)
         {
             if (_time % 350 == 0)
             {

@@ -6,7 +6,8 @@ public enum EnemyState
 {
     idle,  // au repos
     chase,  // poursuit le joueur
-    attack  // attaque le joueur
+    attack,  // attaque le joueur
+    knocked // poussé par le joueur
 }
 
 public class Enemy : MonoBehaviour

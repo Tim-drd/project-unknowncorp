@@ -27,11 +27,9 @@ public class Knockback : MonoBehaviour
         {
             Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();
             Rigidbody2D player = this.GetComponent<Rigidbody2D>();
-            //EnemyHealtManager eHealthMan;
-            //eHealthMan = enemy.gameObject.GetComponent<EnemyHealtManager>();
-            if (enemy != null)
+            if (enemy != null && enemy.GetComponent<Enemy>().currentState != EnemyState.knocked)
             {
-                //eHealthMan.HurtEnemy(damage);
+                enemy.GetComponent<Enemy>().currentState = EnemyState.knocked;
                 enemy.isKinematic = false;
                 enemy.constraints = RigidbodyConstraints2D.FreezeRotation;
                 Vector2 difference = enemy.transform.position - transform.position;
@@ -53,6 +51,7 @@ public class Knockback : MonoBehaviour
             enemy.velocity = Vector2.zero;
             enemy.isKinematic = true;
             enemy.constraints = RigidbodyConstraints2D.FreezeAll;
+            enemy.GetComponent<Enemy>().currentState = EnemyState.idle;
         }
     }
 }
