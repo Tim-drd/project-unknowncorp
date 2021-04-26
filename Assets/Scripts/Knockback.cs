@@ -26,12 +26,11 @@ public class Knockback : MonoBehaviour
         if (other.gameObject.CompareTag("Gluss"))
         {
             Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();
-            Rigidbody2D player = this.GetComponent<Rigidbody2D>();
-            if (enemy != null)
+            Collider2D player = this.GetComponent<Collider2D>();
+            if (enemy != null && player.isTrigger)
             {
                 enemy.GetComponent<Enemy>().currentState = EnemyState.knocked;
                 enemy.isKinematic = false;
-                enemy.constraints = RigidbodyConstraints2D.FreezeRotation;
                 Vector2 difference = enemy.transform.position - transform.position;
                 difference = difference.normalized * thrust;
                 enemy.AddForce(difference, ForceMode2D.Impulse);
@@ -50,7 +49,8 @@ public class Knockback : MonoBehaviour
             yield return new WaitForSeconds(knockbacktime);
             enemy.velocity = Vector2.zero;
             enemy.isKinematic = true;
-            enemy.constraints = RigidbodyConstraints2D.FreezeAll;
+            enemy.velocity = Vector2.zero;
+            //enemy.constraints = RigidbodyConstraints2D.FreezeRotation;
             enemy.GetComponent<Enemy>().currentState = EnemyState.idle;
         }
     }
