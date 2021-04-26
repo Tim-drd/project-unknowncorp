@@ -19,6 +19,7 @@ public class Quest : MonoBehaviour
     private int counter5 = 0;
     private int counter6 = 0;
     public AudioClip quest_opening;
+    public AudioClip upgrade_trident;
     public Dialogues endQuestText;
     public Dialogues neutral;
     private Transform pnj;
@@ -93,6 +94,7 @@ public class Quest : MonoBehaviour
                         player.GetComponent<Animator>().SetInteger("weaponIndex", 1);
                         player.GetComponent<PlayerHealth>().HealPlayer(10);
                     }
+                    AudioManager.instance.PlayClip(upgrade_trident, transform.position);
                 }
                 else
                 {
@@ -129,6 +131,7 @@ public class Quest : MonoBehaviour
                             player.GetComponent<Animator>().SetInteger("weaponIndex", 2);
                             player.GetComponent<PlayerHealth>().HealPlayer(10);
                         }
+                        AudioManager.instance.PlayClip(upgrade_trident, transform.position);
                     }
                     else
                     {
