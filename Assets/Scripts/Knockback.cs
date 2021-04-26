@@ -27,7 +27,7 @@ public class Knockback : MonoBehaviour
         {
             Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();
             Rigidbody2D player = this.GetComponent<Rigidbody2D>();
-            if (enemy != null && enemy.GetComponent<Enemy>().currentState != EnemyState.knocked)
+            if (enemy != null)
             {
                 enemy.GetComponent<Enemy>().currentState = EnemyState.knocked;
                 enemy.isKinematic = false;
@@ -36,7 +36,7 @@ public class Knockback : MonoBehaviour
                 difference = difference.normalized * thrust;
                 enemy.AddForce(difference, ForceMode2D.Impulse);
                 StartCoroutine(KnockCo(enemy, other));
-                
+
             }
         }
     }
