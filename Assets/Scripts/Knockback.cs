@@ -26,14 +26,19 @@ public class Knockback : MonoBehaviour
         if (other.gameObject.CompareTag("Gluss"))
         {
             Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();
+            Rigidbody2D player = this.GetComponent<Rigidbody2D>();
+            //EnemyHealtManager eHealthMan;
+            //eHealthMan = enemy.gameObject.GetComponent<EnemyHealtManager>();
             if (enemy != null)
             {
+                //eHealthMan.HurtEnemy(damage);
                 enemy.isKinematic = false;
                 enemy.constraints = RigidbodyConstraints2D.FreezeRotation;
                 Vector2 difference = enemy.transform.position - transform.position;
                 difference = difference.normalized * thrust;
                 enemy.AddForce(difference, ForceMode2D.Impulse);
                 StartCoroutine(KnockCo(enemy, other));
+                
             }
         }
     }
@@ -41,6 +46,9 @@ public class Knockback : MonoBehaviour
     {
         if (enemy != null)
         {
+            EnemyHealtManager eHealthMan;
+            eHealthMan = enemy.gameObject.GetComponent<EnemyHealtManager>();
+            eHealthMan.HurtEnemy(damage);
             yield return new WaitForSeconds(knockbacktime);
             enemy.velocity = Vector2.zero;
             enemy.isKinematic = true;
