@@ -107,7 +107,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 7
 --- !u!61 &2954410123454547152
@@ -252,7 +252,7 @@ MonoBehaviour:
   player2: {fileID: 0}
   numberOfPlayers: 0
   chaseRadius: 5
-  attackRadius: 2
+  attackRadius: 1.5
   homePosition: {x: 0, y: 0, z: 0}
   gluss_sounds:
   - {fileID: 8300000, guid: 2c29226d94a62d9468a1c07bd65d8184, type: 3}
