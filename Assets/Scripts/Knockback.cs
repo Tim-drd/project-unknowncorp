@@ -32,7 +32,7 @@ public class Knockback : MonoBehaviour
             {
                 enemy.GetComponent<Enemy>().currentState = EnemyState.knocked;
                 Debug.Log("knocked");
-                enemy.isKinematic = false;
+                //enemy.isKinematic = false;
                 Vector2 difference = enemy.transform.position - transform.position;
                 difference = difference.normalized * thrust;
                 enemy.AddForce(difference, ForceMode2D.Impulse);
@@ -50,7 +50,7 @@ public class Knockback : MonoBehaviour
         eHealthMan.HurtEnemy(damage);
         yield return new WaitForSeconds(knockbacktime);
         enemy.velocity = Vector2.zero;
-        enemy.isKinematic = true;
+        //enemy.isKinematic = true;
         enemy.velocity = Vector2.zero;
         //enemy.constraints = RigidbodyConstraints2D.FreezeRotation;
         enemy.GetComponent<Enemy>().currentState = EnemyState.idle;
