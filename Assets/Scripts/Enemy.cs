@@ -6,7 +6,8 @@ public enum EnemyState
 {
     idle,  // au repos
     chase,  // poursuit le joueur
-    attack  // attaque le joueur
+    attack,  // attaque le joueur
+    knocked // poussé par le joueur
 }
 
 public class Enemy : MonoBehaviour
@@ -15,7 +16,7 @@ public class Enemy : MonoBehaviour
     public EnemyState currentState;
     public float health;
     public string enemyName;
-    public int baseAttack;
+    public float baseAttack;
     public float moveSpeed;
 
     // Start is called before the first frame update

@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 205703798}
   - component: {fileID: 205703799}
+  - component: {fileID: 7210276445239407748}
   m_Layer: 0
   m_Name: Up Hitbox
-  m_TagString: Untagged
+  m_TagString: MyWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,6 +64,21 @@ PolygonCollider2D:
       - {x: -0.09002733, y: 0.35561097}
       - {x: -0.013217151, y: 0.35820538}
       - {x: 0.07726474, y: 0.3609655}
+--- !u!114 &7210276445239407748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205703797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf5c50767d62414786fba624e8ae025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrust: 3
+  knockbacktime: 0.3
+  damage: 2
 --- !u!1 &1260214555
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,9 +89,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1260214556}
   - component: {fileID: 1260214557}
+  - component: {fileID: 6098068244920478199}
   m_Layer: 0
   m_Name: Down Hitbox
-  m_TagString: Untagged
+  m_TagString: MyWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,6 +141,21 @@ PolygonCollider2D:
       - {x: 0.016415223, y: -0.5033141}
       - {x: 0.111556515, y: -0.50044024}
       - {x: 0.107342854, y: -0.29677957}
+--- !u!114 &6098068244920478199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260214555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf5c50767d62414786fba624e8ae025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrust: 3
+  knockbacktime: 0.3
+  damage: 2
 --- !u!1 &1998863729
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,9 +166,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1998863730}
   - component: {fileID: 1998863731}
+  - component: {fileID: 7351717752106101832}
   m_Layer: 0
   m_Name: Left Hitbox
-  m_TagString: Untagged
+  m_TagString: MyWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,6 +222,21 @@ PolygonCollider2D:
       - {x: -0.4851479, y: -0.2091702}
       - {x: -0.31742203, y: -0.18289551}
       - {x: -0.1949238, y: -0.101268224}
+--- !u!114 &7351717752106101832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998863729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf5c50767d62414786fba624e8ae025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrust: 3
+  knockbacktime: 0.3
+  damage: 2
 --- !u!1 &2063960337
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,9 +247,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2063960338}
   - component: {fileID: 2063960339}
+  - component: {fileID: 9133352601369673074}
   m_Layer: 0
   m_Name: Right Hitbox
-  m_TagString: Untagged
+  m_TagString: MyWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,6 +301,21 @@ PolygonCollider2D:
       - {x: 0.54021585, y: -0.20499617}
       - {x: 0.62815994, y: -0.07898288}
       - {x: 0.5524847, y: 0.2440007}
+--- !u!114 &9133352601369673074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063960337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf5c50767d62414786fba624e8ae025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrust: 3
+  knockbacktime: 0.3
+  damage: 2
 --- !u!1 &247620960526670589
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +336,6 @@ GameObject:
   - component: {fileID: 8382735751355427474}
   - component: {fileID: -3137449553079367958}
   - component: {fileID: -2312067370442729974}
-  - component: {fileID: -1376420687851645230}
   - component: {fileID: -432328210320310866}
   m_Layer: 0
   m_Name: Player
@@ -641,21 +704,6 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &-1376420687851645230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 247620960526670589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebf5c50767d62414786fba624e8ae025, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thrust: 3
-  knockbacktime: 1
-  damage: 0
 --- !u!114 &-432328210320310866
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,9 +18,11 @@ GameObject:
   - component: {fileID: 2954410123454547156}
   - component: {fileID: 2954410123454547157}
   - component: {fileID: 2954410123454547158}
+  - component: {fileID: 741462937901735599}
+  - component: {fileID: 3778402781199967152}
   m_Layer: 0
   m_Name: Gluss
-  m_TagString: Gluss
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +111,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 0
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 4
 --- !u!61 &2954410123454547152
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -123,7 +125,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.05600848}
+  m_Offset: {x: 0, y: -0.013950465}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -134,7 +136,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.23466872}
+  m_Size: {x: 0.16, y: 0.15055266}
   m_EdgeRadius: 0
 --- !u!95 &2954410123454547153
 Animator:
@@ -246,15 +248,43 @@ MonoBehaviour:
   currentState: 0
   health: 0
   enemyName: 
-  baseAttack: 0
+  baseAttack: 2
   moveSpeed: 2
   player1: {fileID: 0}
   player2: {fileID: 0}
   numberOfPlayers: 0
   chaseRadius: 5
-  attackRadius: 1.5
+  attackRadius: 2
   homePosition: {x: 0, y: 0, z: 0}
   gluss_sounds:
   - {fileID: 8300000, guid: 2c29226d94a62d9468a1c07bd65d8184, type: 3}
   - {fileID: 8300000, guid: 75c0ba046cb439b40bf4f7ac086be762, type: 3}
   initialWalkRadius: 10
+--- !u!114 &741462937901735599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2954410123454547159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2155b9080b423b943a1102264dfbbf46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currenthealth: 10
+  maxhealth: 10
+--- !u!114 &3778402781199967152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2954410123454547159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cdbdd3c205f66741aebe4651325e951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTouching: 0
+  waitToHurt: 1
