@@ -8,8 +8,9 @@ using UnityEngine.PlayerLoop;
 public class Knockback : MonoBehaviour
 {
     public float thrust;
-    public float knockbacktime;
+    //public float knockbacktime;
     public float damage;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -38,22 +39,28 @@ public class Knockback : MonoBehaviour
                 enemy.AddForce(difference, ForceMode2D.Impulse);
                 //Vector2 difference = enemy.transform.position - transform.position;
                 //enemy.transform.position = new Vector2(enemy.transform.position.x + difference.x, enemy.transform.position.y + difference.y);
-                StartCoroutine(KnockCo(enemy, other));
+                
+                EnemyHealtManager eHealthMan;
+                eHealthMan = enemy.gameObject.GetComponent<EnemyHealtManager>();
+                eHealthMan.HurtEnemy(damage);
             }
         }
     }
-    
-    private IEnumerator KnockCo(Rigidbody2D enemy, Collider2D other)
+
+    /*private IEnumerator KnockCo(Rigidbody2D enemy, Collider2D other)
     {
         EnemyHealtManager eHealthMan;
         eHealthMan = enemy.gameObject.GetComponent<EnemyHealtManager>();
         eHealthMan.HurtEnemy(damage);
         yield return new WaitForSeconds(knockbacktime);
-        enemy.velocity = Vector2.zero;
-        //enemy.isKinematic = true;
-        enemy.velocity = Vector2.zero;
-        //enemy.constraints = RigidbodyConstraints2D.FreezeRotation;
-        enemy.GetComponent<Enemy>().currentState = EnemyState.idle;
-        Debug.Log("idled");
-    }
+        if (enemy != null)
+        {
+            enemy.velocity = Vector2.zero;
+            //enemy.isKinematic = true;
+            enemy.velocity = Vector2.zero;
+            //enemy.constraints = RigidbodyConstraints2D.FreezeRotation;
+            enemy.GetComponent<Enemy>().currentState = EnemyState.idle;
+            Debug.Log("idled");
+        }
+    }*/
 }

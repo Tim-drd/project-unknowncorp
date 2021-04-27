@@ -21,7 +21,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.13333334
+        time: 0.15
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -30,7 +30,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.45
+        time: 0.33333334
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -48,15 +48,12 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -5815634110995122865, guid: b67dd503131da6840a2211cb87bd1fe1,
-        type: 3}
-    - time: 0.06666667
       value: {fileID: -3003377594948514291, guid: 34bb004ce909fbf468afe8271c3e9b94,
         type: 3}
-    - time: 0.13333334
+    - time: 0.083333336
       value: {fileID: -8869737455596372328, guid: 34bb004ce909fbf468afe8271c3e9b94,
         type: 3}
-    - time: 0.2
+    - time: 0.15
       value: {fileID: -8049554808645194585, guid: 34bb004ce909fbf468afe8271c3e9b94,
         type: 3}
     - time: 0.26666668
@@ -100,7 +97,6 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -5815634110995122865, guid: b67dd503131da6840a2211cb87bd1fe1, type: 3}
     - {fileID: -3003377594948514291, guid: 34bb004ce909fbf468afe8271c3e9b94, type: 3}
     - {fileID: -8869737455596372328, guid: 34bb004ce909fbf468afe8271c3e9b94, type: 3}
     - {fileID: -8049554808645194585, guid: 34bb004ce909fbf468afe8271c3e9b94, type: 3}
@@ -134,7 +130,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.13333334
+        time: 0.15
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -143,7 +139,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.45
+        time: 0.33333334
         value: 0
         inSlope: Infinity
         outSlope: Infinity
