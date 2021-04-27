@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "GameScene")
         {
-            hs = Instantiate(heartSystemPrefab, new Vector3(533, -50, 0), Quaternion.identity);
+            hs = Instantiate(heartSystemPrefab, new Vector3(510, -10, 0), Quaternion.identity);
             hs.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false);
             hs.DrawHeart(health, maxHearts);
         }

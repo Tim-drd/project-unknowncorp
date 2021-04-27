@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 public class Gluss : Enemy
 {
-    private Rigidbody2D rb;
     public Transform player1;
     public Transform player2;
     public int numberOfPlayers;
@@ -16,10 +16,26 @@ public class Gluss : Enemy
     Animator gluss_anim;
     private SpriteRenderer _spriteRenderer;
     public AudioClip[] gluss_sounds;
-    
+
     private int _time = 0;
     private Vector3 _random;
     public float initialWalkRadius;
+
+    private float knockedTimer;
+    
+    /*void OnCollisionStay2D(Collision2D other) 
+    { 
+        if (other.gameObject.CompareTag("PlayerClone") && currentState != EnemyState.knocked) 
+            rb.constraints = RigidbodyConstraints2D.FreezeAll; 
+        else if (other.gameObject.CompareTag("MyWeapon"))
+            rb.constraints = RigidbodyConstraints2D.None; 
+    } 
+ 
+    private void OnCollisionExit(Collision other) 
+    { 
+        if (other.gameObject.CompareTag("PlayerClone")) 
+            rb.constraints = RigidbodyConstraints2D.None; 
+    }*/
     
     // Start is called before the first frame update
     void Start()
@@ -32,6 +48,7 @@ public class Gluss : Enemy
         gluss_anim = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         AudioManager.instance.PlayClip(gluss_sounds[1], transform.position);
+        knockedTimer = 0;
     }
     
     void LateUpdate()
@@ -63,6 +80,20 @@ public class Gluss : Enemy
             }
             SetParam();
             sound();
+        }
+
+        if (currentState == EnemyState.knocked)
+        {
+            if (knockedTimer > .4f)
+            {
+                rb.velocity = Vector2.zero;
+                currentState = EnemyState.idle;
+                knockedTimer = 0f;
+            }
+            else
+            {
+                knockedTimer += Time.deltaTime;
+            }
         }
     }
 
