@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class HurtPlayer : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class HurtPlayer : MonoBehaviour
             waitToHurt -= Time.deltaTime;
             if (waitToHurt <= 0)
             {
-                healtMan.DamagePlayer(GetComponent<Enemy>().baseAttack);
+                healtMan.DamagePlayer(UnityEngine.Random.Range(1,Convert.ToInt32(GetComponent<Enemy>().baseAttack)+1));
                 waitToHurt = 2f;
             }
         }
@@ -36,7 +37,7 @@ public class HurtPlayer : MonoBehaviour
             //PlayerHealth ph = this.gameObject.GetComponent<PlayerHealth>();
             //ph.DamagePlayer(2);
             //other.gameObject.GetComponent<PlayerHealth>().DamagePlayer(GetComponent<Gluss>().baseAttack);
-            healtMan.DamagePlayer(GetComponent<Enemy>().baseAttack);
+            healtMan.DamagePlayer(UnityEngine.Random.Range(1,Convert.ToInt32(GetComponent<Enemy>().baseAttack)+1));
         }
     }
 

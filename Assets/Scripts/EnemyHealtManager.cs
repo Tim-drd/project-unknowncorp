@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
@@ -28,7 +29,7 @@ public class EnemyHealtManager : MonoBehaviour
 
     public void HurtEnemy(float damageToGive)
     {
-        currenthealth -= damageToGive;
+        currenthealth -= UnityEngine.Random.Range(1, Convert.ToInt32(damageToGive)+1);
         if (currenthealth <= 0)
         {
             GeneratePotion(transform.position);
