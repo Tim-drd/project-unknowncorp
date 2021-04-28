@@ -275,8 +275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2155b9080b423b943a1102264dfbbf46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currenthealth: 10
-  maxhealth: 10
+  currenthealth: 8
+  maxhealth: 8
   greenPotionPrefab: {fileID: 3815723816892398060, guid: dc7d40594a5c8dc42948b7d279f0ef90,
     type: 3}
   bluePotionPrefab: {fileID: 9130489703068465798, guid: 6882939f7dae6b64b9e080eca720d2ad,
