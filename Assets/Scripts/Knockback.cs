@@ -25,7 +25,7 @@ public class Knockback : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy") && this.gameObject.CompareTag("MyWeapon"))//enemy est le tag de la hitbox des armes
+        if ((other.gameObject.CompareTag("Gluss")||other.gameObject.CompareTag("Terrus") || other.gameObject.CompareTag("Devorror")) && this.gameObject.CompareTag("MyWeapon"))//enemy est le tag de la hitbox des armes
         {
             Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();
             Collider2D player = this.GetComponent<Collider2D>();
@@ -46,21 +46,4 @@ public class Knockback : MonoBehaviour
             }
         }
     }
-
-    /*private IEnumerator KnockCo(Rigidbody2D enemy, Collider2D other)
-    {
-        EnemyHealtManager eHealthMan;
-        eHealthMan = enemy.gameObject.GetComponent<EnemyHealtManager>();
-        eHealthMan.HurtEnemy(damage);
-        yield return new WaitForSeconds(knockbacktime);
-        if (enemy != null)
-        {
-            enemy.velocity = Vector2.zero;
-            //enemy.isKinematic = true;
-            enemy.velocity = Vector2.zero;
-            //enemy.constraints = RigidbodyConstraints2D.FreezeRotation;
-            enemy.GetComponent<Enemy>().currentState = EnemyState.idle;
-            Debug.Log("idled");
-        }
-    }*/
 }

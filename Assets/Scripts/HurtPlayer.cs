@@ -32,7 +32,7 @@ public class HurtPlayer : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("PlayerClone") && this.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("PlayerClone") && (this.gameObject.CompareTag("Gluss")||this.gameObject.CompareTag("Terrus") || this.gameObject.CompareTag("Devorror")))
         {
             //PlayerHealth ph = this.gameObject.GetComponent<PlayerHealth>();
             //ph.DamagePlayer(2);
