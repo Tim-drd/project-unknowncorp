@@ -231,9 +231,6 @@ MonoBehaviour:
   enemyName: Devorror
   baseAttack: 2
   moveSpeed: 2.5
-  player1: {fileID: 0}
-  player2: {fileID: 0}
-  numberOfPlayers: 0
   chaseRadius: 5
   attackRadius: 2
   homePosition: {x: 0, y: 0, z: 0}
@@ -274,16 +271,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currenthealth: 8
   maxhealth: 8
-  greenPotionPrefab: {fileID: 3815723816892398060, guid: dc7d40594a5c8dc42948b7d279f0ef90,
-    type: 3}
-  bluePotionPrefab: {fileID: 9130489703068465798, guid: 6882939f7dae6b64b9e080eca720d2ad,
-    type: 3}
-  yellowPotionPrefab: {fileID: 3591936542576492989, guid: 357be910f45b8044cac62ed622a255b6,
-    type: 3}
-  redPotionPrefab: {fileID: 3154105379047117420, guid: 6123b8c61af0a0546beb60973205aed7,
-    type: 3}
-  purplePotionPrefab: {fileID: 6655921798043511229, guid: 1e1c4ece58c3c7642b4531cd6f862ea5,
-    type: 3}
 --- !u!114 &-2055224966387171022
 MonoBehaviour:
   m_ObjectHideFlags: 0
