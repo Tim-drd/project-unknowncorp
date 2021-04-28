@@ -18,9 +18,11 @@ GameObject:
   - component: {fileID: 1482630777970981909}
   - component: {fileID: 1482630777970981908}
   - component: {fileID: 1482630777970981899}
+  - component: {fileID: -1167790117339424080}
+  - component: {fileID: -320368184040513111}
   m_Layer: 0
   m_Name: Terrus
-  m_TagString: Terrus
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,7 +135,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!114 &1482630777970981904
@@ -228,15 +230,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   currentState: 0
-  health: 1
+  health: 3
   enemyName: 
   baseAttack: 1
-  moveSpeed: 2
+  moveSpeed: 1.5
   player1: {fileID: 0}
   player2: {fileID: 0}
   numberOfPlayers: 0
   chaseRadius: 15
-  attackRadius: 1
+  attackRadius: 1.1
   homePosition: {x: 0, y: 0, z: 0}
   gluss_sounds:
   - {fileID: 8300000, guid: 2d56db261c30c194482dc92307508f6c, type: 3}
@@ -261,3 +263,41 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-1167790117339424080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482630777970981898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2155b9080b423b943a1102264dfbbf46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currenthealth: 3
+  maxhealth: 3
+  greenPotionPrefab: {fileID: 3815723816892398060, guid: dc7d40594a5c8dc42948b7d279f0ef90,
+    type: 3}
+  bluePotionPrefab: {fileID: 9130489703068465798, guid: 6882939f7dae6b64b9e080eca720d2ad,
+    type: 3}
+  yellowPotionPrefab: {fileID: 3591936542576492989, guid: 357be910f45b8044cac62ed622a255b6,
+    type: 3}
+  redPotionPrefab: {fileID: 3154105379047117420, guid: 6123b8c61af0a0546beb60973205aed7,
+    type: 3}
+  purplePotionPrefab: {fileID: 6655921798043511229, guid: 1e1c4ece58c3c7642b4531cd6f862ea5,
+    type: 3}
+--- !u!114 &-320368184040513111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482630777970981898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cdbdd3c205f66741aebe4651325e951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTouching: 0
+  waitToHurt: 1
