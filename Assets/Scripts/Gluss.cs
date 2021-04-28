@@ -7,9 +7,6 @@ using UnityEngine.UIElements;
 
 public class Gluss : Enemy
 {
-    public Transform player1;
-    public Transform player2;
-    public int numberOfPlayers;
     public float chaseRadius;
     public float attackRadius;
     public Vector3 homePosition;
@@ -22,6 +19,7 @@ public class Gluss : Enemy
     public float initialWalkRadius;
 
     private float knockedTimer;
+    private GameObject[] players;
     
     /*void OnCollisionStay2D(Collision2D other) 
     { 
@@ -40,7 +38,7 @@ public class Gluss : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        numberOfPlayers = 0;
+        players = GameObject.FindGameObjectsWithTag("PlayerClone");
         rb = GetComponent<Rigidbody2D>();
         homePosition = transform.position;
         currentState = EnemyState.idle;
@@ -53,34 +51,26 @@ public class Gluss : Enemy
     
     void LateUpdate()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
-        numberOfPlayers = players.Length;
-        if (numberOfPlayers > 0)
-        {
-            player1 = players[0].transform;
-            if (numberOfPlayers > 1)
-            {
-                player2 = players[1].transform;
-            }
-        }
+        players = GameObject.FindGameObjectsWithTag("PlayerClone");
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (numberOfPlayers > 0)
+        float minDistance = Vector3.Distance(players[0].transform.position, transform.position);
+        GameObject closestPlayer = players[0];
+        foreach (var player in players)
         {
-            if (numberOfPlayers == 1 || Vector3.Distance(player1.position, transform.position) <= Vector3.Distance(player2.position, transform.position))
+            if (Vector3.Distance(player.transform.position, transform.position) < minDistance)
             {
-                CheckDistance(player1);
+                minDistance = Vector3.Distance(player.transform.position, transform.position);
+                closestPlayer = player;
             }
-            else
-            {
-                CheckDistance(player2);
-            }
-            SetParam();
-            sound();
         }
+        
+        CheckDistance(closestPlayer.transform);
+        SetParam();
+        sound();
 
         if (currentState == EnemyState.knocked)
         {
