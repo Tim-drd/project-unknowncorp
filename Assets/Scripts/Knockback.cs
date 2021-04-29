@@ -32,14 +32,9 @@ public class Knockback : MonoBehaviour
             if (enemy != null && enemy.GetComponent<Enemy>().currentState != EnemyState.knocked )
             {
                 enemy.GetComponent<Enemy>().currentState = EnemyState.knocked;
-                Debug.Log("knocked");
-                //enemy.isKinematic = false;
                 Vector2 difference = enemy.transform.position - transform.position;
                 difference = difference.normalized * thrust;
                 enemy.AddForce(difference, ForceMode2D.Impulse);
-                //Vector2 difference = enemy.transform.position - transform.position;
-                //enemy.transform.position = new Vector2(enemy.transform.position.x + difference.x, enemy.transform.position.y + difference.y);
-                
                 EnemyHealtManager eHealthMan;
                 eHealthMan = enemy.gameObject.GetComponent<EnemyHealtManager>();
                 eHealthMan.HurtEnemy(damage);
