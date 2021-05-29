@@ -17,6 +17,8 @@ TagManager:
   - DialogueBox
   - MyWeapon
   - Hurting
+  - Petram
+  - Petros
   layers:
   - Default
   - TransparentFX
