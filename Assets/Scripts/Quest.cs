@@ -23,12 +23,15 @@ public class Quest : MonoBehaviour
     public Dialogues endQuestText;
     public Dialogues neutral;
     private Transform pnj;
+    private Transform pnj2;
     public Transform player1;
     public Transform player2;
     public int numberOfPlayers;
     private MobSpawners mobspawner;
     private MobSpawners mobspawner2;
     private TypeQuest q;
+    private bool spoken = false;
+    private bool first = true;
     public bool quest_over = false;
 
     public static Quest instance;
@@ -69,6 +72,7 @@ public class Quest : MonoBehaviour
         neutral = quest.neutral_dialogue;
         animator.SetBool("BeginQ", true);
         pnj = quest.pnj;
+        pnj2 = quest.pnj2;
     }
 
     // Update is called once per frame
@@ -161,7 +165,39 @@ public class Quest : MonoBehaviour
                     return;
                 }
             case Objectives.QUEST3:
+            {
+                TypeQuest t = new TypeQuest();
+                t.Obj = Objectives.NONE;
+                if (spoken && isTalking(pnj))
+                {
+                    DialogueManager.instance.StartD(endQuestText, t);
+                    endQuest();
+                    GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
+                    foreach (var player in players)
+                    {
+                        player.GetComponent<Animator>().SetInteger("weaponIndex", 3);
+                        player.GetComponent<PlayerHealth>().HealPlayer(10);
+                    }
+                    AudioManager.instance.PlayClip(upgrade_trident, transform.position); 
+                }
+                else
+                {
+                    if (first && spoken)
+                    {
+                        //supprimer le spéléo de la grotte et le foutre au village;
+                        first = false;
+                    }
+                    if (!spoken)
+                        spoken = isTalking(pnj2);
+                    if (!spoken && isTalking(pnj))
+                    {
+                        DialogueManager.instance.StartD(neutral, t);
+                    }
+                }
+                if (spoken)
+                    QuestText.text = "Retournez au village";
                 return;
+            }
             case Objectives.QUEST4:
                 return;
             case Objectives.QUEST5:

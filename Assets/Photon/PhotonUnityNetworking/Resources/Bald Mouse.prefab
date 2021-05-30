@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa303a6601c0354594068c4ee074db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.3
+  speed: 0.6
   couack: {fileID: 8300000, guid: 7ff71ef837a580e468bcfbfd55441a09, type: 3}
   change_dir_time: 800
   homePosition: {x: 0, y: 0, z: 0}
