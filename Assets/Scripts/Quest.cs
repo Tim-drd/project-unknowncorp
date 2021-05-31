@@ -24,6 +24,7 @@ public class Quest : MonoBehaviour
     public Dialogues neutral;
     private Transform pnj;
     private Transform pnj2;
+    private GameObject boss;
     public Transform player1;
     public Transform player2;
     public int numberOfPlayers;
@@ -73,6 +74,7 @@ public class Quest : MonoBehaviour
         animator.SetBool("BeginQ", true);
         pnj = quest.pnj;
         pnj2 = quest.pnj2;
+        boss = GameObject.FindWithTag("Boss");
     }
 
     // Update is called once per frame
@@ -199,7 +201,25 @@ public class Quest : MonoBehaviour
                 return;
             }
             case Objectives.QUEST4:
+            {
+                TypeQuest t = new TypeQuest();
+                t.Obj = Objectives.NONE;
+                if (boss.GetComponent<EnemyHealtManager>().GetCurrentHealth() <= 0) ;
+                {
+                    endQuest();
+                    GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
+                    foreach (var player in players)
+                    {
+                        player.GetComponent<PlayerHealth>().HealPlayer(10);
+                    }
+                    //y faudra faire d'autre choses ici comme lancer des crédits etc;
+                }
+                if (isTalking(pnj))
+                { 
+                    DialogueManager.instance.StartD(neutral, t); 
+                }
                 return;
+            }
             case Objectives.QUEST5:
                 return;
         }
@@ -248,6 +268,10 @@ public class Quest : MonoBehaviour
         animator.SetBool("BeginQ", false);
         counter = 0;
         counter2 = 0;
+        counter3 = 0;
+        counter4 = 0;
+        counter5 = 0;
+        counter6 = 0;
         q.bc.enabled = false;
         q.Obj = Objectives.NONE;
         q.quest_over = true;

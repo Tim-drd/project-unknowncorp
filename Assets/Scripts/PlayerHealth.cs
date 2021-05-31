@@ -10,6 +10,9 @@ public class PlayerHealth : MonoBehaviour
     public int maxHearts = 10;
     [SerializeField] HeartSystem heartSystemPrefab;
     [SerializeField] private HeartSystem hs;
+    public AudioClip lowHealth;
+    private bool first = true;
+    private int recup_time;
 
     private void Start()
     {
@@ -18,6 +21,25 @@ public class PlayerHealth : MonoBehaviour
             hs = Instantiate(heartSystemPrefab, new Vector3(510, -10, 0), Quaternion.identity);
             hs.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false);
             hs.DrawHeart(health, maxHearts);
+        }
+    }
+
+    void LateUpdate()
+    { 
+        if (health < 2.5 && first)
+        {
+            first = false;
+            AudioManager.instance.PlayClip(lowHealth, this.transform.position);
+        }
+        else
+        {
+            if (recup_time % 10000 == 0)
+            {
+                recup_time %= 10000;
+                first = true;
+            }
+
+            recup_time++;
         }
     }
 

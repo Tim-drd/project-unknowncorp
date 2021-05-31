@@ -552,7 +552,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
@@ -717,6 +717,7 @@ MonoBehaviour:
   heartSystemPrefab: {fileID: 7841571003735286493, guid: ebdb08c720b8dca47b4e52b092e74d66,
     type: 3}
   hs: {fileID: 0}
+  lowHealth: {fileID: 8300000, guid: 8e5e493be8a9bc94fa50d6a537db894d, type: 3}
 --- !u!1 &3647609124381497910
 GameObject:
   m_ObjectHideFlags: 0

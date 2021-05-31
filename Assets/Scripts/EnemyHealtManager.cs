@@ -22,6 +22,11 @@ public class EnemyHealtManager : MonoBehaviour
         
     }
 
+    public float GetCurrentHealth()
+    {
+        return this.currenthealth;
+    }
+    
     public void HurtEnemy(float damageToGive)
     {
         currenthealth -= UnityEngine.Random.Range(1, Convert.ToInt32(damageToGive)+1);
