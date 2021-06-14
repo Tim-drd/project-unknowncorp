@@ -67,7 +67,7 @@ public class Quest : MonoBehaviour
             GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
             foreach (var player in players)
             {
-                player.GetComponent<PlayerHealth>().checkpoint_number++;
+                player.GetComponent<PlayerHealth>().checkpoint_number = 2;
             } 
         }
         type = quest.Obj;
@@ -105,7 +105,7 @@ public class Quest : MonoBehaviour
                     GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
                     foreach (var player in players)
                     {
-                        player.GetComponent<PlayerHealth>().checkpoint_number++;
+                        player.GetComponent<PlayerHealth>().checkpoint_number = 1;
                         player.GetComponent<Animator>().SetInteger("weaponIndex", 1);
                         player.GetComponent<PlayerHealth>().HealPlayer(10);
                     }
