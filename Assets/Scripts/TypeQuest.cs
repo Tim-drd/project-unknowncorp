@@ -18,6 +18,8 @@ public class TypeQuest
 
     public Transform pnj;
 
+    public Transform pnj2;
+
     public Quest.Objectives Obj;
 
     public bool quest_over = false;

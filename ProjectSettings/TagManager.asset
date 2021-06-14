@@ -17,6 +17,10 @@ TagManager:
   - DialogueBox
   - MyWeapon
   - Hurting
+  - Petram
+  - Petros
+  - Bald Mouse
+  - Boss
   layers:
   - Default
   - TransparentFX

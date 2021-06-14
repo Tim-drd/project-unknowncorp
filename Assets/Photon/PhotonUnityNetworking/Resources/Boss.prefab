@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 7993473344854681707}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1f0df8893d3c74782dfb84b3d58e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   currentState: 0
   health: 0
   enemyName: 
