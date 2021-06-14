@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
+
+    public static PlayerHealth playerHealth;
     public float health = 10;
     public int maxHearts = 10;
     [SerializeField] HeartSystem heartSystemPrefab;
@@ -13,7 +15,13 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip lowHealth;
     private bool first = true;
     private int recup_time;
-    public int checkpoint_number;
+    public int checkpoint_number = 0;
+
+    private void Awake()
+    {
+        playerHealth = this;
+    }
+
     private void Start()
     {
         if (SceneManager.GetActiveScene().name == "GameScene")
@@ -22,10 +30,14 @@ public class PlayerHealth : MonoBehaviour
             hs.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false);
             hs.DrawHeart(health, maxHearts);
         }
+
+        checkpoint_number = photonButtons.photonbutton.level;
+        Checkpoint.instance.spawnTo(checkpoint_number, this.gameObject);
     }
 
     void LateUpdate()
     {
+        Debug.Log("Checkpoint " + checkpoint_number);
         if (health <= 0)
         {
             respawn();
@@ -65,6 +77,8 @@ public class PlayerHealth : MonoBehaviour
 
     public void respawn()
     {
-        Checkpoint.instance.spawnTo(this.checkpoint_number, this.gameObject);
+        Checkpoint.instance.spawnTo(checkpoint_number, this.gameObject);
+        health = 10;
+        hs.DrawHeart(10, maxHearts);
     }
 }

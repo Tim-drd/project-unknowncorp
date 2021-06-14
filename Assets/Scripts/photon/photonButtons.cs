@@ -10,6 +10,15 @@ public class photonButtons : MonoBehaviourPunCallbacks
 {
     public InputField createRoomInput, joinRoomInput;
     public GameObject mainMenu, multiMenu;
+    public int level = 0;
+    public string roomName = "";
+
+    public static photonButtons photonbutton;
+
+    private void Awake()
+    {
+        photonbutton = this;
+    }
 
     public void onClickCreateRoom()
     {
@@ -27,11 +36,20 @@ public class photonButtons : MonoBehaviourPunCallbacks
 
         PhotonNetwork.JoinOrCreateRoom(createRoomInput.text, options, TypedLobby.Default);
         Debug.Log("onclickcreateroom bien appellé: " + createRoomInput.text);
+        PlayerPrefs.SetInt(createRoomInput.text, 0);
+        roomName = createRoomInput.text;
+
     }
+
 
     public void onClickJoinRoom()
     {
-        PhotonNetwork.JoinRoom(joinRoomInput.text);
+        RoomOptions options = new RoomOptions();
+        options.MaxPlayers = 2;
+
+        PhotonNetwork.JoinOrCreateRoom(joinRoomInput.text, options, TypedLobby.Default);
+        level = PlayerPrefs.GetInt(joinRoomInput.text,0);
+        roomName = joinRoomInput.text;
     }
 
     public override void OnJoinedRoom()
@@ -43,7 +61,7 @@ public class photonButtons : MonoBehaviourPunCallbacks
     }
 
     public override void OnCreatedRoom()
-    {
+    { 
         Debug.Log("created room successfully");
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -53,6 +71,8 @@ public class photonButtons : MonoBehaviourPunCallbacks
 
     public void LeaveMutliMenu()
     {
+        level = PlayerHealth.playerHealth.checkpoint_number;
+        PlayerPrefs.SetInt(roomName, level);
         mainMenu.SetActive(true);
         multiMenu.SetActive(false);
     }
