@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip lowHealth;
     private bool first = true;
     private int recup_time;
-
+    public int checkpoint_number;
     private void Start()
     {
         if (SceneManager.GetActiveScene().name == "GameScene")
@@ -25,7 +25,11 @@ public class PlayerHealth : MonoBehaviour
     }
 
     void LateUpdate()
-    { 
+    {
+        if (health <= 0)
+        {
+            respawn();
+        }
         if (health < 2.5 && first)
         {
             first = false;
@@ -57,5 +61,10 @@ public class PlayerHealth : MonoBehaviour
         if (health > maxHearts)
             health = maxHearts;
         hs.DrawHeart(health, maxHearts);
+    }
+
+    public void respawn()
+    {
+        Checkpoint.instance.spawnTo(this.checkpoint_number, this.gameObject);
     }
 }

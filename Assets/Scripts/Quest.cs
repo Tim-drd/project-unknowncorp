@@ -62,6 +62,14 @@ public class Quest : MonoBehaviour
     {
         AudioManager.instance.PlayClip(quest_opening, transform.position);
         q = quest;
+        if (q.Obj == Objectives.QUEST2)
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
+            foreach (var player in players)
+            {
+                player.GetComponent<PlayerHealth>().checkpoint_number++;
+            } 
+        }
         type = quest.Obj;
         if (type == Objectives.NONE)
             quest.quest_over = true;
@@ -97,6 +105,7 @@ public class Quest : MonoBehaviour
                     GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
                     foreach (var player in players)
                     {
+                        player.GetComponent<PlayerHealth>().checkpoint_number++;
                         player.GetComponent<Animator>().SetInteger("weaponIndex", 1);
                         player.GetComponent<PlayerHealth>().HealPlayer(10);
                     }

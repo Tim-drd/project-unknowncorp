@@ -718,6 +718,7 @@ MonoBehaviour:
     type: 3}
   hs: {fileID: 0}
   lowHealth: {fileID: 8300000, guid: 8e5e493be8a9bc94fa50d6a537db894d, type: 3}
+  checkpoint_number: 0
 --- !u!1 &3647609124381497910
 GameObject:
   m_ObjectHideFlags: 0
