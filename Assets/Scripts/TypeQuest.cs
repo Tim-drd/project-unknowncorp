@@ -16,13 +16,17 @@ public class TypeQuest
 
     public Dialogues neutral_dialogue; 
 
-    public Transform pnj;
+    public GameObject pnj;
 
-    public Transform pnj2;
+    public GameObject pnj2;
+
+    public GameObject pnj3;
 
     public Quest.Objectives Obj;
 
     public bool quest_over = false;
 
     public BoxCollider2D bc;
+
+    public BoxCollider2D bc2;
 }

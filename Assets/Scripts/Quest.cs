@@ -11,6 +11,7 @@ public class Quest : MonoBehaviour
     public Text display_counter;
     private string sentence = "";
     public Animator animator;
+    public Animator animator2;
     private Objectives type;
     private int counter = 0;
     private int counter2 = 0;
@@ -22,8 +23,9 @@ public class Quest : MonoBehaviour
     public AudioClip upgrade_trident;
     public Dialogues endQuestText;
     public Dialogues neutral;
-    private Transform pnj;
-    private Transform pnj2;
+    private GameObject pnj;
+    private GameObject pnj2;
+    private GameObject pnj3;
     private GameObject boss;
     public Transform player1;
     public Transform player2;
@@ -58,17 +60,22 @@ public class Quest : MonoBehaviour
 
 
     // Start is called before the first frame update
-    public void StartQ(TypeQuest quest)
+    public void StartQ(TypeQuest quest, Animator anim2)
     {
         AudioManager.instance.PlayClip(quest_opening, transform.position);
         q = quest;
         if (q.Obj == Objectives.QUEST2)
         {
+            q.bc.enabled = false;
             GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
             foreach (var player in players)
             {
                 player.GetComponent<PlayerHealth>().checkpoint_number = 2;
             } 
+        }
+        if (q.Obj == Objectives.QUEST3)
+        {
+            q.bc.enabled = false;
         }
         type = quest.Obj;
         if (type == Objectives.NONE)
@@ -80,8 +87,10 @@ public class Quest : MonoBehaviour
         mobspawner2 = quest.spawners2;
         neutral = quest.neutral_dialogue;
         animator.SetBool("BeginQ", true);
+        animator2 = anim2;
         pnj = quest.pnj;
         pnj2 = quest.pnj2;
+        pnj3 = quest.pnj3;
         boss = GameObject.FindWithTag("Boss");
     }
 
@@ -96,9 +105,10 @@ public class Quest : MonoBehaviour
             {
                 TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
-                if (counter2 == 10 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact)
+                if (counter2 == 10 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact)
                 ) //conditions necessaires a la fin de la quete 1;
                 {
+                    q.bc.enabled = false;
                     DialogueManager.instance.StartD(endQuestText, t);
                     mobspawner.enemyMaxCount = 2;
                     endQuest();
@@ -113,7 +123,7 @@ public class Quest : MonoBehaviour
                 }
                 else
                 {
-                    if (counter2 != 10 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact) && q.Obj != Objectives.NONE)
+                    if (counter2 != 10 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact) && q.Obj != Objectives.NONE)
                     {
                         DialogueManager.instance.StartD(neutral, t);
                     }
@@ -134,7 +144,7 @@ public class Quest : MonoBehaviour
                 {
                     TypeQuest t = new TypeQuest();
                     t.Obj = Objectives.NONE;
-                    if (counter4 == 3 && counter6 == 4 && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact)) //conditions necessaires a la fin de la quete 1;
+                    if (counter4 == 3 && counter6 == 4 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact)) //conditions necessaires a la fin de la quete 1;
                     { //conditions necessaires à la fin de la quete 2;
                         DialogueManager.instance.StartD(endQuestText, t);
                         endQuest();
@@ -150,7 +160,7 @@ public class Quest : MonoBehaviour
                     }
                     else
                     {
-                        if ((counter4 != 3 || counter6 != 4) && isTalking(pnj) && KeyBindingManager.GetKeyDown(KeyAction.interact) && q.Obj != Objectives.NONE)
+                        if ((counter4 != 3 || counter6 != 4) && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact) && q.Obj != Objectives.NONE)
                         {
                             DialogueManager.instance.StartD(neutral, t);
                         }
@@ -179,8 +189,9 @@ public class Quest : MonoBehaviour
             {
                 TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
-                if (spoken && isTalking(pnj))
+                if (spoken && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
                 {
+                    q.bc2.enabled = false;
                     DialogueManager.instance.StartD(endQuestText, t);
                     endQuest();
                     GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
@@ -193,14 +204,15 @@ public class Quest : MonoBehaviour
                 }
                 else
                 {
-                    if (first && spoken)
+                    if (first && spoken && !animator2.GetBool("IsOpen"))
                     {
-                        //supprimer le spéléo de la grotte et le foutre au village;
+                        pnj2.SetActive(false);
+                        pnj3.SetActive(true);
                         first = false;
                     }
                     if (!spoken)
-                        spoken = isTalking(pnj2);
-                    if (!spoken && isTalking(pnj))
+                        spoken = isTalking(pnj2.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact);
+                    if (!spoken && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact) && q.Obj != Objectives.NONE)
                     {
                         DialogueManager.instance.StartD(neutral, t);
                     }
@@ -223,7 +235,7 @@ public class Quest : MonoBehaviour
                     }
                     //y faudra faire d'autre choses ici comme lancer des crédits etc;
                 }
-                if (isTalking(pnj))
+                if (isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
                 { 
                     DialogueManager.instance.StartD(neutral, t); 
                 }
@@ -281,7 +293,6 @@ public class Quest : MonoBehaviour
         counter4 = 0;
         counter5 = 0;
         counter6 = 0;
-        q.bc.enabled = false;
         q.Obj = Objectives.NONE;
         q.quest_over = true;
     }

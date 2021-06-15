@@ -72,6 +72,6 @@ public class DialogueManager : MonoBehaviour
     
     public void BeginQuest()
     {
-        Quest.instance.StartQ(q);
+        Quest.instance.StartQ(q, animator);
     }
 }
