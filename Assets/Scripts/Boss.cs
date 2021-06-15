@@ -6,8 +6,14 @@ using Random = UnityEngine.Random;
 
 public class Boss : Enemy
 {
-    private bool sleeping;
+    public bool sleeping;
     private bool wakingUp;
+    private bool attacking;
+    public bool specialAttack;
+
+    private EnemyHealtManager _healthManager;
+
+    private int phase;
     
     private Rigidbody2D rb;
     public GameObject[] players;
@@ -20,6 +26,8 @@ public class Boss : Enemy
     private int _time = 0;
     private Vector3 _random;
     public float initialWalkRadius;
+
+    private float knockedTimer;
     
     // Start is called before the first frame update
     void Start()
@@ -32,18 +40,27 @@ public class Boss : Enemy
         _animator = GetComponent<Animator>();
         sleeping = true;
         wakingUp = false;
+        specialAttack = false;
+        attacking = false;
+        phase = 1;
+        _healthManager = GetComponent<EnemyHealtManager>();
+        knockedTimer = 0;
 /*        AudioManager.instance.PlayClip(gluss_sounds[1], transform.position);*/
     }
 
-    void OnCollisionStay2D(Collision2D other)
+    private void OnTriggerStay(Collider other)
+    {
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("PlayerClone"))
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
-    private void OnCollisionExit(Collision other)
+    private void OnCollisionExit2D(Collision2D other)
     {
-        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     void LateUpdate()
@@ -70,18 +87,46 @@ public class Boss : Enemy
         else
         {
             float minDistance = Vector3.Distance(players[0].transform.position, transform.position);
-            Transform target = players[0].transform;
+            GameObject target = players[0];
             foreach (var player in players)
             {
                 if (Vector3.Distance(player.transform.position, transform.position) < minDistance)
                 {
                     minDistance = Vector3.Distance(player.transform.position, transform.position);
-                    target = player.transform;
+                    target = player;
                 }
             }
             CheckDistance(target);
 
             /*sound();*/
+        }
+
+        if (_healthManager.currenthealth < (int) (0.66f * _healthManager.maxhealth))
+        {
+            if (_healthManager.currenthealth > (int) (0.33f * _healthManager.maxhealth))
+            {
+                phase = 2;
+                _animator.SetInteger("phase", 2);
+            }
+            else
+            {
+                phase = 3;
+                _animator.SetInteger("phase", 3);
+            }
+        }
+        
+        if (currentState == EnemyState.knocked)
+        {
+            if (knockedTimer > .4f)
+            {
+                rb.velocity = Vector2.zero;
+                currentState = EnemyState.idle;
+                knockedTimer = 0f;
+            }
+            else
+            {
+                knockedTimer += Time.deltaTime;
+            }
         }
     }
     
@@ -97,57 +142,73 @@ public class Boss : Enemy
     // Si la distance est inférieure à "chaseRadius" mais supérieure à "attackRadius", l'ennemi se rapproche du joueur
     // Sinon, l'ennemi se déplace vers une position aléatoire dans le périmètre "initialWalkRadius" autour de son point d'apparition initial "homePosition"
     // La position aléatoire est modifiée toutes les 150 utilisations de CheckDistance
-    void CheckDistance(Transform target)
+    void CheckDistance(GameObject target)
     {
-        float distance = Vector3.Distance(target.position, transform.position);
-        if (distance <= chaseRadius)
+        bool inAttackRange = (target.transform.position.x - transform.position.x) > -1.35
+                             && (target.transform.position.x - transform.position.x) < 1.35
+                             && (target.transform.position.y - transform.position.y) > -1.65
+                             && (target.transform.position.y - transform.position.y) < 0.9;
+        
+        float distance = Vector3.Distance(target.transform.position, transform.position);
+        
+        if (!sleeping && !specialAttack)
         {
-            ChangeState(EnemyState.chase);
-            if (distance > attackRadius)
+            if (distance <= chaseRadius && currentState != EnemyState.knocked)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
-                Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
-                rb.MovePosition(temp);
-                _animator.SetBool("moving",true);
-            }
-            else
-            {
-                _animator.SetBool("moving",false);
-            }
-
-            SetParam(target.position.x - transform.position.x, target.position.y - transform.position.y);
-        }
-        else
-        {
-            if (_time % 350 == 0)
-            {
-                if (Random.Range(0, 2) == 0)
+                if (currentState != EnemyState.attack)
                 {
-                    
+                    //if (distance > attackRadius)
+                    if (!inAttackRange)
+                    {
+                        ChangeState(EnemyState.chase);
+                        transform.position = Vector3.MoveTowards(transform.position, target.transform.position,
+                            moveSpeed * Time.fixedDeltaTime);
+                        Vector3 temp = Vector3.MoveTowards(transform.position, target.transform.position,
+                            moveSpeed * Time.fixedDeltaTime);
+                        rb.MovePosition(temp);
+                        _animator.SetBool("moving", true);
+                    }
+                    else
+                    {
+                        _animator.SetBool("moving", false);
+                        StartCoroutine(Attack(target));
+                    }
+
+                    SetParam(target.transform.position.x - transform.position.x,
+                        target.transform.position.y - transform.position.y);
+                }
+            }
+            else if (currentState != EnemyState.knocked)
+            {
+                if (_time % 350 == 0)
+                {
+                    if (Random.Range(0, 2) != 0)
+                    {
+                        _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2),
+                            Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
+                    }
+                }
+
+                Vector3 temp = Vector3.MoveTowards(transform.position, homePosition + _random,
+                    moveSpeed / 2 * Time.fixedDeltaTime);
+                rb.MovePosition(temp);
+                transform.position = Vector3.MoveTowards(transform.position, homePosition + _random,
+                    moveSpeed / 2 * Time.fixedDeltaTime);
+
+                if (transform.position == homePosition)
+                {
+                    _animator.SetBool("moving", false);
+                    _animator.SetFloat("moveX", 0);
+                    _animator.SetFloat("moveY", 0);
                 }
                 else
                 {
-                    _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2),
-                        Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
+                    _animator.SetBool("moving", true);
+                    SetParam(homePosition.x - transform.position.x, homePosition.y - transform.position.y);
                 }
             }
-
-            Vector3 temp = Vector3.MoveTowards(transform.position, homePosition + _random, moveSpeed / 2 * Time.fixedDeltaTime);
-            rb.MovePosition(temp);
-            transform.position = Vector3.MoveTowards(transform.position, homePosition + _random, moveSpeed / 2 * Time.fixedDeltaTime);
-            
-            if (transform.position == homePosition)
-            {
-                _animator.SetBool("moving",false);
-                _animator.SetFloat("moveX", 0);
-                _animator.SetFloat("moveY", 0);
-            }
-            else
-            {
-                _animator.SetBool("moving",true);
-                SetParam(homePosition.x - transform.position.x, homePosition.y - transform.position.y);
-            }
         }
+
         _time++;
     }
 
@@ -203,6 +264,79 @@ public class Boss : Enemy
                 }
             }
         }
+    }
+    
+    IEnumerator Attack(GameObject target)
+    {
+        ChangeState(EnemyState.attack);
+
+        if (phase == 2 && Random.Range(0, 15) == 0)
+        {
+            specialAttack = true;
+            
+            _animator.SetBool("specialAttack", true);
+
+            yield return new WaitForSeconds(0.1f);
+            
+            _animator.SetBool("specialAttack", false);
+            
+            yield return new WaitForSeconds(1.2f);
+
+            foreach (var player in players)
+            {
+                if (Vector3.Distance(transform.position, player.transform.position) < 2)
+                {
+                    player.GetComponent<PlayerHealth>().DamagePlayer(2f);
+                }
+            }
+            
+            yield return new WaitForSeconds(1.2f);
+
+            specialAttack = false;
+        }
+        else if (phase == 3 && Random.Range(0, 8) == 0)
+        {
+            specialAttack = true;
+
+            _animator.SetBool("specialAttack", true);
+
+            yield return new WaitForSeconds(0.1f);
+            
+            _animator.SetBool("specialAttack", false);
+            
+            yield return new WaitForSeconds(1.2f);
+
+            foreach (var player in players)
+            {
+                if (Vector3.Distance(transform.position, player.transform.position) < 3)
+                {
+                    player.GetComponent<PlayerHealth>().DamagePlayer(3f);
+                }
+            }
+            
+            yield return new WaitForSeconds(1.2f);
+            
+            specialAttack = false;
+        }
+        else
+        {
+            _animator.SetBool("attacking", true);
+
+            yield return new WaitForSeconds(0.1f);
+
+            _animator.SetBool("attacking", false);
+
+            int damage = Random.Range(0, 100);
+            if (damage > 60)
+                target.GetComponent<PlayerHealth>().DamagePlayer(1f);
+            else if (damage > 20)
+                target.GetComponent<PlayerHealth>().DamagePlayer(.5f);
+            
+            yield return new WaitForSeconds(1.5f);
+        }
+        
+        if (currentState != EnemyState.knocked)
+            ChangeState(EnemyState.idle);
     }
 
     /*void sound()
