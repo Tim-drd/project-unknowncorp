@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 7292817749985065687}
   - component: {fileID: 7292817749985065686}
   m_Layer: 0
-  m_Name: EarthSmall_0
+  m_Name: Petram
   m_TagString: Petram
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: 0c16bec785244394d974e9dd899bfdf8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

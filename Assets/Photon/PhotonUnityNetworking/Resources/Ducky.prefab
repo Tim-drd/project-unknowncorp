@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 8886335463558626903}
   - component: {fileID: 8886335463558626902}
   m_Layer: 0
-  m_Name: Duck_0
+  m_Name: Ducky
   m_TagString: Ducky
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: da329953066dea74e95706ddf316b573, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
