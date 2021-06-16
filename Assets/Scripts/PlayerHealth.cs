@@ -77,8 +77,10 @@ public class PlayerHealth : MonoBehaviour
 
     public void respawn()
     {
+        VisualEffects.fadeOut = true;
         Checkpoint.instance.spawnTo(checkpoint_number, this.gameObject);
         health = 10;
         hs.DrawHeart(10, maxHearts);
     }
+
 }
