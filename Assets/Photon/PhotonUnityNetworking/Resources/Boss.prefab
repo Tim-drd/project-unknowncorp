@@ -213,13 +213,13 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: moveY
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: attacking
   - Type: 3
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: phase
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: specialAttack
   m_SynchronizeLayers:
   - SynchronizeType: 0
@@ -294,4 +294,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currenthealth: 50
-  maxhealth: 50
+  maxhealth: 500

@@ -81,7 +81,10 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(AttackCo());
         }
-
+        
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        
         _time++;
     }
     

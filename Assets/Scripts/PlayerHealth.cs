@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
+using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,13 +16,23 @@ public class PlayerHealth : MonoBehaviour
     private bool first = true;
     private int recup_time;
 
+    public PhotonView photonView;
+
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "GameScene")
+        if (SceneManager.GetActiveScene().name == "GameScene" && photonView.IsMine)
         {
-            hs = Instantiate(heartSystemPrefab, new Vector3(510, -10, 0), Quaternion.identity);
-            hs.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false);
+            transform.GetChild(0).gameObject.SetActive(true);
+            
+            /* hs = Instantiate(heartSystemPrefab, new Vector3(510, -10, 0), Quaternion.identity);
+            hs.tag = "HeartContainer" + i;
+            hs.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false);*/
+            hs = transform.Find("Canvas").Find("HeartContainer").GetComponent<HeartSystem>();
             hs.DrawHeart(health, maxHearts);
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 
@@ -48,7 +60,8 @@ public class PlayerHealth : MonoBehaviour
         health -= damage;
         if (health < 0)
             health = 0;
-        hs.DrawHeart(health, maxHearts);
+        if (photonView.IsMine)
+            hs.DrawHeart(health, maxHearts);
     }
     
     public void HealPlayer(float heal)
@@ -56,6 +69,7 @@ public class PlayerHealth : MonoBehaviour
         health += heal;
         if (health > maxHearts)
             health = maxHearts;
-        hs.DrawHeart(health, maxHearts);
+        if (photonView.IsMine)
+            hs.DrawHeart(health, maxHearts);
     }
 }

@@ -283,5 +283,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cdbdd3c205f66741aebe4651325e951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTouching: 0
+  isTouching: {fileID: 0}
   waitToHurt: 1
