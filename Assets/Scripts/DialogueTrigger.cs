@@ -13,25 +13,20 @@ public class DialogueTrigger : MonoBehaviour
     public int numberOfPlayers;
     public Vector3 Pos;
     private bool finished = false;
+    private GameObject[] pnj;
 
 
     private void Awake()
     {
-        interactUI = GameObject.FindWithTag("InteractUI").GetComponent<Text>();
         Pos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        interactUI.text = "Appuyer sur " + KeyBindingManager.GetKeyCode(KeyAction.interact);
         if (numberOfPlayers > 0)
         {
             which_player_trigger();
-            if (close_enough)
-                interactUI.enabled = true;
-            else
-                interactUI.enabled = false;
             if (close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact) && !dialogue.triggered_once)
             {
                 BeginDialogue();
