@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Lava_edge_bottomright
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: -3146725705613436842, guid: 00efb54f3b68cce4eae852fdff03b5af, type: 3}
+  - {fileID: -7459229996960112050, guid: 00efb54f3b68cce4eae852fdff03b5af, type: 3}
+  - {fileID: 3044424587723848567, guid: 00efb54f3b68cce4eae852fdff03b5af, type: 3}
+  - {fileID: -7459229996960112050, guid: 00efb54f3b68cce4eae852fdff03b5af, type: 3}
   m_MinSpeed: 1
   m_MaxSpeed: 1
   m_AnimationStartTime: 0
