@@ -30,9 +30,7 @@ public class PlayerHealth : MonoBehaviour
             hs.transform.SetParent(GameObject.FindObjectOfType<Canvas>().transform, false);
             hs.DrawHeart(health, maxHearts);
         }
-
-        checkpoint_number = photonButtons.photonbutton.level;
-        Checkpoint.instance.spawnTo(checkpoint_number, this.gameObject);
+        checkpoint_number = LoadCheckpointSpawn.checkpointSpawn.checkpoint_number;
     }
 
     void LateUpdate()
