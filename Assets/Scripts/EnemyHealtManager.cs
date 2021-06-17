@@ -32,8 +32,11 @@ public class EnemyHealtManager : MonoBehaviour
         currenthealth -= UnityEngine.Random.Range(1, Convert.ToInt32(damageToGive)+1);
         if (currenthealth <= 0)
         {
-            GeneratePotion(transform.position);
-            Destroy(gameObject);
+            if (GetComponent<PhotonView>().IsMine)
+            {
+                GeneratePotion(transform.position);
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
     }
 

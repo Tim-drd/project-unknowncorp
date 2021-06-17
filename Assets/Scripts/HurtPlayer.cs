@@ -7,7 +7,7 @@ using Random = System.Random;
 public class HurtPlayer : MonoBehaviour
 {
     private PlayerHealth healtMan;
-    public bool isTouching;
+    public GameObject isTouching;
     public float waitToHurt = 1f;
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class HurtPlayer : MonoBehaviour
             waitToHurt -= Time.deltaTime;
             if (waitToHurt <= 0)
             {
-                healtMan.DamagePlayer(UnityEngine.Random.Range(1,Convert.ToInt32(GetComponent<Enemy>().baseAttack)+1));
+                isTouching.GetComponent<PlayerHealth>().DamagePlayer(UnityEngine.Random.Range(1,Convert.ToInt32(GetComponent<Enemy>().baseAttack)+1));
                 waitToHurt = 2f;
             }
         }
@@ -37,7 +37,7 @@ public class HurtPlayer : MonoBehaviour
             //PlayerHealth ph = this.gameObject.GetComponent<PlayerHealth>();
             //ph.DamagePlayer(2);
             //other.gameObject.GetComponent<PlayerHealth>().DamagePlayer(GetComponent<Gluss>().baseAttack);
-            healtMan.DamagePlayer(UnityEngine.Random.Range(1,Convert.ToInt32(GetComponent<Enemy>().baseAttack)+1));
+            other.gameObject.GetComponent<PlayerHealth>().DamagePlayer(UnityEngine.Random.Range(1,Convert.ToInt32(GetComponent<Enemy>().baseAttack)+1));
         }
     }
 
@@ -45,7 +45,7 @@ public class HurtPlayer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerClone"))
         {
-            isTouching = true;
+            isTouching = other.gameObject;
         }
     }
 
@@ -53,7 +53,7 @@ public class HurtPlayer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerClone"))
         {
-            isTouching = false;
+            isTouching = null;
             waitToHurt = 2f;
         };
     }

@@ -25,19 +25,41 @@ public class Knockback : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if ((other.gameObject.CompareTag("Gluss")||other.gameObject.CompareTag("Terrus") || other.gameObject.CompareTag("Devorror")) && this.gameObject.CompareTag("MyWeapon"))//enemy est le tag de la hitbox des armes
+        if (this.gameObject.CompareTag("MyWeapon"))
         {
-            Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();
-            Collider2D player = this.GetComponent<Collider2D>();
-            if (enemy != null && enemy.GetComponent<Enemy>().currentState != EnemyState.knocked )
+            if ((other.gameObject.CompareTag("Gluss") || other.gameObject.CompareTag("Terrus") ||
+                 other.gameObject.CompareTag("Devorror"))) //enemy est le tag de la hitbox des armes
             {
-                enemy.GetComponent<Enemy>().currentState = EnemyState.knocked;
-                Vector2 difference = enemy.transform.position - transform.position;
-                difference = difference.normalized * thrust;
-                enemy.AddForce(difference, ForceMode2D.Impulse);
-                EnemyHealtManager eHealthMan;
-                eHealthMan = enemy.gameObject.GetComponent<EnemyHealtManager>();
-                eHealthMan.HurtEnemy(damage);
+                Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();
+                Collider2D player = this.GetComponent<Collider2D>();
+                
+                if (enemy != null && enemy.GetComponent<Enemy>().currentState != EnemyState.knocked)
+                {
+                    enemy.GetComponent<Enemy>().currentState = EnemyState.knocked;
+                    Vector2 difference = enemy.transform.position - transform.position;
+                    difference = difference.normalized * thrust;
+                    enemy.AddForce(difference, ForceMode2D.Impulse);
+                    EnemyHealtManager eHealthMan;
+                    eHealthMan = enemy.gameObject.GetComponent<EnemyHealtManager>();
+                    eHealthMan.HurtEnemy(damage);
+                }
+            }
+            else if (other.gameObject.CompareTag("Boss"))
+            {
+                Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();
+                
+                if (enemy != null && enemy.GetComponent<Enemy>().currentState != EnemyState.knocked &&
+                    enemy.GetComponent<PhotonBossView>().specialAttack == false && enemy.GetComponent<Boss>().sleeping == false)
+                {
+                    enemy.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    enemy.GetComponent<Enemy>().currentState = EnemyState.knocked;
+                    Vector2 difference = enemy.transform.position - transform.position;
+                    difference = difference.normalized * thrust;
+                    enemy.AddForce(difference, ForceMode2D.Impulse);
+                    EnemyHealtManager eHealthMan;
+                    eHealthMan = enemy.gameObject.GetComponent<EnemyHealtManager>();
+                    eHealthMan.HurtEnemy(damage);
+                }
             }
         }
     }
