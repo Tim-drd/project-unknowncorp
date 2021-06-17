@@ -46,6 +46,11 @@ public class Boss : Enemy
         bossPhoton = GetComponent<PhotonBossView>();
 /*        AudioManager.instance.PlayClip(gluss_sounds[1], transform.position);*/
     }
+
+    public bool is_dead()
+    {
+        return this._healthManager.currenthealth <= 0;
+    }
     
     void OnCollisionEnter2D(Collision2D other)
     {

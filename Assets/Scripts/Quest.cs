@@ -25,7 +25,6 @@ public class Quest : MonoBehaviour
     private GameObject pnj;
     private GameObject pnj2;
     private GameObject pnj3;
-    private GameObject boss;
     public Transform player1;
     public Transform player2;
     public int numberOfPlayers;
@@ -81,7 +80,6 @@ public class Quest : MonoBehaviour
         pnj = quest.pnj;
         pnj2 = quest.pnj2;
         pnj3 = quest.pnj3;
-        boss = GameObject.FindWithTag("Boss");
     }
 
     // Update is called once per frame
@@ -220,13 +218,14 @@ public class Quest : MonoBehaviour
             {
                 TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
-                if (boss.GetComponent<EnemyHealtManager>().GetCurrentHealth() <= 0) ;
+                bool over = pnj2.GetComponent<Boss>().is_dead();
+                if (over) ;
                 {
                     endQuest();
                     GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
                     foreach (var player in players)
                     {
-                        player.GetComponent<PlayerHealth>().checkpoint_number = 3;
+                        player.GetComponent<PlayerHealth>().checkpoint_number = 4;
                         player.GetComponent<PlayerHealth>().HealPlayer(10);
                     }
                     //y faudra faire d'autre choses ici comme lancer des crédits etc;
