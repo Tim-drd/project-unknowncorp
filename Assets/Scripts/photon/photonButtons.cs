@@ -71,8 +71,6 @@ public class photonButtons : MonoBehaviourPunCallbacks
 
     public void LeaveMutliMenu()
     {
-        level = PlayerHealth.playerHealth.checkpoint_number;
-        PlayerPrefs.SetInt(roomName, level);
         mainMenu.SetActive(true);
         multiMenu.SetActive(false);
     }
