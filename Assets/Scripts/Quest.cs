@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -144,8 +143,9 @@ public class Quest : MonoBehaviour
                 {
                     TypeQuest t = new TypeQuest();
                     t.Obj = Objectives.NONE;
-                    if (counter4 == 3 && counter6 == 4 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact)) //conditions necessaires a la fin de la quete 1;
+                    if (counter4 >= 3 && counter6 >= 4 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact)) //conditions necessaires a la fin de la quete 1;
                     { //conditions necessaires à la fin de la quete 2;
+                        display_counter.text = "";
                         DialogueManager.instance.StartD(endQuestText, t);
                         endQuest();
                         mobspawner.enemyMaxCount = 2;
@@ -179,7 +179,7 @@ public class Quest : MonoBehaviour
                     }
                     counter5 = terrus;
 
-                    if (counter4 == 3 && counter6 == 4)
+                    if (counter4 >= 3 && counter6 >= 4)
                         display_counter.text = "Finished";
                     else
                         display_counter.text = "Devorror: " + counter4 + " / 3" + " Terrus: " + counter6 + " / 4";
@@ -206,6 +206,7 @@ public class Quest : MonoBehaviour
                 {
                     if (first && spoken && !animator2.GetBool("IsOpen"))
                     {
+                        VisualEffects.fadeOut = true;
                         pnj2.SetActive(false);
                         pnj3.SetActive(true);
                         first = false;

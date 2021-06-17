@@ -8,10 +8,12 @@ public class Teleportation : MonoBehaviour
     public Vector3 position;
     private PhotonView myPhotonView;
     private Rigidbody2D rb;
+    public AudioClip son;
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("PlayerClone") && !other.isTrigger)
         {
+            AudioManager.instance.PlayClip(son, position);
             myPhotonView = other.GetComponent<PhotonView>();
             rb = other.GetComponent<Rigidbody2D>();
             rb.transform.position = position;
