@@ -45,6 +45,7 @@ public class PlayerHealth : MonoBehaviour
 
         checkpoint_number = photonButtons.photonbutton.level;
         Checkpoint.instance.spawnTo(checkpoint_number, this.gameObject);
+        checkpoint_number = LoadCheckpointSpawn.checkpointSpawn.checkpoint_number;
     }
 
     void LateUpdate()
