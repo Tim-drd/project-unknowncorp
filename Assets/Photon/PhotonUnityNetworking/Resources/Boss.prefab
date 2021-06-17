@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 7993473344854681704}
   - component: {fileID: 7993473344854681707}
   - component: {fileID: 4462070329975908462}
+  - component: {fileID: -9195338096123772128}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -129,7 +130,6 @@ MonoBehaviour:
   baseAttack: 0
   moveSpeed: 1
   sleeping: 0
-  specialAttack: 0
   players: []
   chaseRadius: 8
   attackRadius: 1.35
@@ -278,6 +278,7 @@ MonoBehaviour:
   - {fileID: 7993473344854681706}
   - {fileID: 7993473344854681705}
   - {fileID: 7993473344854681704}
+  - {fileID: -9195338096123772128}
   sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -294,4 +295,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currenthealth: 50
-  maxhealth: 500
+  maxhealth: 50
+--- !u!114 &-9195338096123772128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7993473344854681713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9207159082e27f4d87ba3102a9e8ad0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specialAttack: 0
+  countToSpecialAttack: 0

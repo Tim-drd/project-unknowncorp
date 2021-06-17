@@ -49,7 +49,7 @@ public class Knockback : MonoBehaviour
                 Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();
                 
                 if (enemy != null && enemy.GetComponent<Enemy>().currentState != EnemyState.knocked &&
-                    enemy.GetComponent<Boss>().specialAttack == false && enemy.GetComponent<Boss>().sleeping == false)
+                    enemy.GetComponent<PhotonBossView>().specialAttack == false && enemy.GetComponent<Boss>().sleeping == false)
                 {
                     enemy.constraints = RigidbodyConstraints2D.FreezeRotation;
                     enemy.GetComponent<Enemy>().currentState = EnemyState.knocked;

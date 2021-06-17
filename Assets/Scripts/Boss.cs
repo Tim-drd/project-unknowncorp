@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +8,6 @@ public class Boss : Enemy
 {
     public bool sleeping;
     private bool wakingUp;
-    private bool attacking;
-    public bool specialAttack;
 
     private EnemyHealtManager _healthManager;
 
@@ -29,6 +27,8 @@ public class Boss : Enemy
 
     private float knockedTimer;
     
+    private PhotonBossView bossPhoton;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -40,18 +40,13 @@ public class Boss : Enemy
         _animator = GetComponent<Animator>();
         sleeping = true;
         wakingUp = false;
-        specialAttack = false;
-        attacking = false;
         phase = 1;
         _healthManager = GetComponent<EnemyHealtManager>();
         knockedTimer = 0;
+        bossPhoton = GetComponent<PhotonBossView>();
 /*        AudioManager.instance.PlayClip(gluss_sounds[1], transform.position);*/
     }
-
-    private void OnTriggerStay(Collider other)
-    {
-    }
-
+    
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("PlayerClone"))
@@ -143,15 +138,15 @@ public class Boss : Enemy
     // Sinon, l'ennemi se déplace vers une position aléatoire dans le périmètre "initialWalkRadius" autour de son point d'apparition initial "homePosition"
     // La position aléatoire est modifiée toutes les 150 utilisations de CheckDistance
     void CheckDistance(GameObject target)
-    {
+    { 
         bool inAttackRange = (target.transform.position.x - transform.position.x) > -1.35
-                             && (target.transform.position.x - transform.position.x) < 1.35
-                             && (target.transform.position.y - transform.position.y) > -1.65
-                             && (target.transform.position.y - transform.position.y) < 0.9;
+                           && (target.transform.position.x - transform.position.x) < 1.35
+                           && (target.transform.position.y - transform.position.y) > -1.65
+                           && (target.transform.position.y - transform.position.y) < 0.9;
         
         float distance = Vector3.Distance(target.transform.position, transform.position);
         
-        if (!sleeping && !specialAttack)
+        if (!sleeping && !bossPhoton.specialAttack)
         {
             if (distance <= chaseRadius && currentState != EnemyState.knocked)
             {
@@ -270,9 +265,9 @@ public class Boss : Enemy
     {
         ChangeState(EnemyState.attack);
 
-        if (phase == 2 && Random.Range(0, 15) == 0)
+        if (phase == 2 && bossPhoton.countToSpecialAttack > 11)
         {
-            specialAttack = true;
+            bossPhoton.specialAttack = true;
             
             _animator.SetBool("specialAttack", true);
 
@@ -292,11 +287,13 @@ public class Boss : Enemy
             
             yield return new WaitForSeconds(1.2f);
 
-            specialAttack = false;
+            bossPhoton.countToSpecialAttack = 0;
+            
+            bossPhoton.specialAttack = false;
         }
-        else if (phase == 3 && Random.Range(0, 8) == 0)
+        else if (phase == 3 && bossPhoton.countToSpecialAttack > 5)
         {
-            specialAttack = true;
+            bossPhoton.specialAttack = true;
 
             _animator.SetBool("specialAttack", true);
 
@@ -315,8 +312,10 @@ public class Boss : Enemy
             }
             
             yield return new WaitForSeconds(1.2f);
+                
+            bossPhoton.countToSpecialAttack = 0;
             
-            specialAttack = false;
+            bossPhoton.specialAttack = false;
         }
         else
         {
@@ -333,10 +332,13 @@ public class Boss : Enemy
                 target.GetComponent<PlayerHealth>().DamagePlayer(.5f);
             
             yield return new WaitForSeconds(1.5f);
+            
+            bossPhoton.countToSpecialAttack++;
         }
         
         if (currentState != EnemyState.knocked)
             ChangeState(EnemyState.idle);
+    
     }
 
     /*void sound()
