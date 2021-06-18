@@ -2476,6 +2476,8 @@ MonoBehaviour:
   joinRoomInput: {fileID: 222680865}
   mainMenu: {fileID: 1444761120}
   multiMenu: {fileID: 1315487552}
+  level: 0
+  roomName: 
 --- !u!114 &545502309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5872,10 +5874,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 365636614}
   m_HandleRect: {fileID: 174385049}
   m_Direction: 0
-  m_MinValue: -70
-  m_MaxValue: 0
+  m_MinValue: -80
+  m_MaxValue: -10
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

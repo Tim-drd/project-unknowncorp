@@ -13,7 +13,7 @@ public class Teleportation : MonoBehaviour
     {
         if (other.CompareTag("PlayerClone") && !other.isTrigger)
         {
-            AudioManager.instance.PlayClip(son, position);
+            AudioManager.instance.PlayClip(son, other.transform.position);
             myPhotonView = other.GetComponent<PhotonView>();
             rb = other.GetComponent<Rigidbody2D>();
             rb.transform.position = position;
