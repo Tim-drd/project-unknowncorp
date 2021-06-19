@@ -29,7 +29,8 @@ public class DialogueManager : MonoBehaviour
     {
         PlayerMovement.instance.enabled = false;
         animator.SetBool("IsOpen",true);
-        dialogue.triggered_once = true;
+        if (quest.Obj != Quest.Objectives.PVP)
+            dialogue.triggered_once = true;
         q = quest;
         nameText.text = dialogue.name;
         sentences.Clear();

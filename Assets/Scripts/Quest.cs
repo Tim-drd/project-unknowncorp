@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,6 +42,10 @@ public class Quest : MonoBehaviour
 
     public static Quest instance;
 
+    private bool pvpStarted;
+    private float timeUntilPotion = 8;
+    private bool pvpEnded = false;
+    
     private void Awake()
     {
         if (instance != null)
@@ -57,7 +62,8 @@ public class Quest : MonoBehaviour
         QUEST2,
         QUEST3,
         QUEST4,
-        QUEST5
+        QUEST5,
+        PVP
     }
 
 
@@ -78,6 +84,12 @@ public class Quest : MonoBehaviour
         {
             q.bc.enabled = false;
         }
+        else if (q.Obj == Objectives.PVP)
+        {
+            player1.GetComponent<PhotonPlayerView>().pvpEnded = false;
+        }
+
+        pvpStarted = true;
 
         if (q.Obj == Objectives.QUEST5)
         {
@@ -266,21 +278,26 @@ public class Quest : MonoBehaviour
             {
                 TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
-                bool over = pnj2.GetComponent<Boss>().is_dead();
-                if (over) ;
+                bool over = !GameObject.FindWithTag("Boss");
+                Debug.Log(over);
+                if (over && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
                 {
                     endQuest();
+                    DialogueManager.instance.StartD(endQuestText, t);
                     GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
                     foreach (var player in players)
                     {
                         player.GetComponent<PlayerHealth>().checkpoint_number = 4;
                         player.GetComponent<PlayerHealth>().HealPlayer(10);
                     }
+                    PhotonNetwork.Instantiate("Spartacus", new Vector3(15, 146, 0), Quaternion.identity);
                     pnj3.SetActive(false);
                     pnj4.SetActive(true);
                     pnj5.SetActive(true);
                     //y faudra faire d'autre choses ici comme lancer des crédits etc;
                 }
+                if (over)
+                    display_counter.text = "Finished";
                 if (isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
                 { 
                     DialogueManager.instance.StartD(neutral, t); 
@@ -350,10 +367,88 @@ public class Quest : MonoBehaviour
                 }
                 return;
             }
+            case Objectives.PVP:
+            {
+                TypeQuest t = new TypeQuest();
+                t.Obj = Objectives.NONE;
+                
+                GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
+                pvpEnded = false;
+                foreach (var player in players)
+                {
+                    if (pvpEnded == false)
+                        pvpEnded = player.GetComponent<PhotonPlayerView>().pvpEnded;
+                }
+                
+                if (pvpStarted)
+                {
+                    foreach (var player in players)
+                    {
+                        player.GetComponent<PlayerHealth>().pvpStarted = true;
+                    }
+
+                    if (pvpEnded)
+                    {
+                        player1.transform.position = pnj.transform.position + new Vector3(-1 + Random.Range(0, 2), -1 + Random.Range(0, 2), 0);
+
+                        endQuest();
+                        DialogueManager.instance.StartD(endQuestText, t);
+                        foreach (var player in players)
+                        {
+                            player.GetComponent<PlayerHealth>().HealPlayer(10);
+                        }
+
+                        pvpStarted = false;
+                        StartCoroutine(ResetPVP());
+                    }
+                    else
+                    {
+                        if (player1.transform.position.x < 50 || player1.transform.position.y < 80)
+                        {
+                            //player1.transform.position = new Vector3(-347, 328, 0);
+                            player1.transform.position = new Vector3(78 + Random.Range(0, 4), 118 + Random.Range(0, 4), 0);
+                        }
+
+                        timeUntilPotion -= Time.deltaTime;
+                        if (timeUntilPotion < 0)
+                        {
+                            timeUntilPotion = Random.Range(6, 16);
+                            int random = Random.Range(0, 5);
+                            Vector3 position = new Vector3(80 - 10 + Random.Range(0, 20), 120 - 10 + Random.Range(0, 20), 0);
+                            if (random == 0)
+                                PhotonNetwork.Instantiate("Yellow Potion", position, Quaternion.identity);
+                            else if (random == 1)
+                                PhotonNetwork.Instantiate("Blue Potion", position, Quaternion.identity);
+                            else if (random == 2)
+                                PhotonNetwork.Instantiate("Green Potion", position, Quaternion.identity);
+                            else if (random == 3)
+                                PhotonNetwork.Instantiate("Red Potion", position, Quaternion.identity);
+                            else if (random == 4)
+                                PhotonNetwork.Instantiate("Purple Potion", position, Quaternion.identity);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var player in players)
+                    {
+                        player.GetComponent<PlayerHealth>().pvpStarted = false;
+                    }
+                }
+
+                return;
+            }
         }
     }
     
     
+    IEnumerator ResetPVP()
+    {
+        yield return new WaitForSeconds(1);
+        
+        player1.GetComponent<PhotonPlayerView>().pvpEnded = false;
+    }
+
     void LateUpdate()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
@@ -391,7 +486,7 @@ public class Quest : MonoBehaviour
             return false;
         }
     }
-    
+
     public void endQuest()
     {
         animator.SetBool("BeginQ", false);
@@ -402,7 +497,10 @@ public class Quest : MonoBehaviour
         counter4 = 0;
         counter5 = 0;
         counter6 = 0;
-        q.Obj = Objectives.NONE;
-        q.quest_over = true;
+        if (q.Obj != Objectives.PVP)
+        {
+            q.quest_over = true;
+            q.Obj = Objectives.NONE;
+        }
     }
 }

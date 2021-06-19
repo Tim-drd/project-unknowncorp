@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +29,8 @@ public class DialogueTrigger : MonoBehaviour
             which_player_trigger();
             if (close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact) && !dialogue.triggered_once)
             {
-                BeginDialogue();
+                if (quest.Obj != Quest.Objectives.PVP || GameObject.FindGameObjectsWithTag("PlayerClone").Length > 1)
+                    BeginDialogue();
             }
             else
             {

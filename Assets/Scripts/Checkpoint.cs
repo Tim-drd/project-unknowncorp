@@ -49,7 +49,7 @@ public class Checkpoint : MonoBehaviour
                 break;
         }
 
-        player.GetComponent<PlayerHealth>().health += 10;
+        player.GetComponent<PlayerHealth>().HealPlayer(10);
     }
 
     // Update is called once per frame
