@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -4106039624212227243}
   - component: {fileID: -2224186788864564517}
   m_Layer: 0
-  m_Name: Spartacus
+  m_Name: Maximus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
     spawners: {fileID: 0}
     spawners2: {fileID: 0}
     end_sentences:
-      name: Combat de gladiateurs
+      name: Maximus, le gladiateur
       sentences:
       - Bravo a vous, champions ! Je suis impressionne !
       - Revenez me voir si vous voulez une revanche.
@@ -144,6 +144,10 @@ MonoBehaviour:
     pnj: {fileID: 2922066530724757548}
     pnj2: {fileID: 0}
     pnj3: {fileID: 0}
+    pnj4: {fileID: 0}
+    pnj5: {fileID: 0}
+    pnj6: {fileID: 0}
+    pnj7: {fileID: 0}
     Obj: 6
     quest_over: 0
     bc: {fileID: 0}
