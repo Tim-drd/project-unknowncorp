@@ -109,8 +109,8 @@ MonoBehaviour:
   enemyName: Petros
   baseAttack: 5
   moveSpeed: 3
-  chaseRadius: 15
-  attackRadius: 3
+  chaseRadius: 8
+  attackRadius: 1
   homePosition: {x: 0, y: 0, z: 0}
   gluss_sounds:
   - {fileID: 8300000, guid: bf868e0ab063f234290ba893f77c66c1, type: 3}
