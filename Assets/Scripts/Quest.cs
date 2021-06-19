@@ -25,6 +25,10 @@ public class Quest : MonoBehaviour
     private GameObject pnj;
     private GameObject pnj2;
     private GameObject pnj3;
+    private GameObject pnj4;
+    private GameObject pnj5;
+    private GameObject pnj6;
+    private GameObject pnj7;
     public Transform player1;
     public Transform player2;
     public int numberOfPlayers;
@@ -74,6 +78,16 @@ public class Quest : MonoBehaviour
         {
             q.bc.enabled = false;
         }
+
+        if (q.Obj == Objectives.QUEST5)
+        {
+            pnj2.SetActive(true);
+            pnj3.SetActive(true);
+            pnj4.SetActive(true);
+            pnj5.SetActive(true);
+            pnj6.SetActive(true);
+            pnj7.SetActive(true);
+        }
         type = quest.Obj;
         if (type == Objectives.NONE)
             quest.quest_over = true;
@@ -88,6 +102,10 @@ public class Quest : MonoBehaviour
         pnj = quest.pnj;
         pnj2 = quest.pnj2;
         pnj3 = quest.pnj3;
+        pnj4 = quest.pnj4;
+        pnj5 = quest.pnj5;
+        pnj6 = quest.pnj6;
+        pnj7 = quest.pnj7;
     }
 
     // Update is called once per frame
@@ -258,6 +276,9 @@ public class Quest : MonoBehaviour
                         player.GetComponent<PlayerHealth>().checkpoint_number = 4;
                         player.GetComponent<PlayerHealth>().HealPlayer(10);
                     }
+                    pnj3.SetActive(false);
+                    pnj4.SetActive(true);
+                    pnj5.SetActive(true);
                     //y faudra faire d'autre choses ici comme lancer des crédits etc;
                 }
                 if (isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
@@ -267,9 +288,71 @@ public class Quest : MonoBehaviour
                 return;
             }
             case Objectives.QUEST5:
+            {
+                TypeQuest t = new TypeQuest();
+                t.Obj = Objectives.NONE;
+                counter = 0;
+                if (counter == 6 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    DialogueManager.instance.StartD(endQuestText, t);
+                    endQuest();
+                }
+                else
+                {
+                    if (counter < 6 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                    {
+                        DialogueManager.instance.StartD(neutral, t); 
+                    }
+
+                    if (counter == 6)
+                        display_counter.text = "Finished";
+                    else
+                    {
+                        display_counter.text = "Boules de cristal: " + counter + "/6";
+                    }
+                }
+
+                InteractAction i1 = pnj2.GetComponent<InteractAction>();
+                if (i1.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    Destroy(pnj2);
+                    counter++;
+                }
+                InteractAction i2 = pnj3.GetComponent<InteractAction>();
+                if (i2.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    Destroy(pnj3);
+                    counter++;
+                }
+                InteractAction i3 = pnj4.GetComponent<InteractAction>();
+                if (i3.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    Destroy(pnj4);
+                    counter++;
+                }
+                InteractAction i4 = pnj5.GetComponent<InteractAction>();
+                if (i4.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    Destroy(pnj5);
+                    counter++;
+                }
+                InteractAction i5 = pnj6.GetComponent<InteractAction>();
+                if (i5.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    Destroy(pnj6);
+                    counter++;
+                }
+                InteractAction i6 = pnj7.GetComponent<InteractAction>();
+                if (i6.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    Destroy(pnj7);
+                    counter++;
+                }
                 return;
+            }
         }
     }
+    
     
     void LateUpdate()
     {
