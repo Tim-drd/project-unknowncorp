@@ -37,22 +37,28 @@ public class Ducky : MonoBehaviour
 
     void move() //se déplace simplement aléatoirement (a une chance de ne pas bouger)
     {
-        if (_time % change_dir_time == 0)
+        if (Time.timeScale != 0)
         {
-            if (Random.Range(0, 2) == 0)
+            if (_time % change_dir_time == 0)
             {
-                
+                if (Random.Range(0, 2) == 0)
+                {
+
+                }
+                else
+                {
+                    _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2),
+                        Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
+                }
             }
-            else
-            {
-                _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2),
-                    Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
-            }
+
+            Vector3 temp = Vector3.MoveTowards(transform.position, homePosition + _random,
+                speed / 2 * Time.fixedDeltaTime);
+            rb.MovePosition(temp);
+            transform.position = Vector3.MoveTowards(transform.position, homePosition + _random,
+                speed / 2 * Time.fixedDeltaTime);
+            _time++;
         }
-        Vector3 temp = Vector3.MoveTowards(transform.position, homePosition + _random, speed / 2 * Time.fixedDeltaTime);
-        rb.MovePosition(temp);
-        transform.position = Vector3.MoveTowards(transform.position, homePosition + _random, speed / 2 * Time.fixedDeltaTime);
-        _time++;
     }
 
     void SetParam() //sert à paramétrer les animations
