@@ -70,7 +70,9 @@ public class PauseMenu : MonoBehaviour
     public void Main_menu_Button()
     {
         string roomName = photonButtons.photonbutton.roomName;
-        int level = LoadCheckpointSpawn.checkpointSpawn.checkpoint_number;
+        int level = PlayerHealth.playerHealth.checkpoint_number;
+
+        Debug.Log("la partie " + roomName + " a été sauvegardé au niveau " + level);
         PlayerPrefs.SetInt(roomName, level);
 
         DontDestroyOnLoadScene.instance.RemoveFromDontDestroyOnLoad();
