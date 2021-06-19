@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
@@ -20,6 +20,8 @@ public class PlayerHealth : MonoBehaviour
     public int checkpoint_number = 0;
 
     public PhotonView photonView;
+
+    public bool pvpStarted = false;
 
     private void Awake()
     {
@@ -94,7 +96,10 @@ public class PlayerHealth : MonoBehaviour
     {
         VisualEffects.fadeOut = true;
         Checkpoint.instance.spawnTo(checkpoint_number, this.gameObject);
-        health = 10;
-        hs.DrawHeart(10, maxHearts);
+        HealPlayer(10);
+        if (pvpStarted)
+        {
+            GetComponent<PhotonPlayerView>().pvpEnded = true;
+        }
     }
 }
