@@ -33,11 +33,10 @@ public class photonButtons : MonoBehaviourPunCallbacks
 
         if (createRoomInput.text.Length == 0)
             return;
-
+        roomName = createRoomInput.text;
         PhotonNetwork.JoinOrCreateRoom(createRoomInput.text, options, TypedLobby.Default);
         Debug.Log("onclickcreateroom bien appellé: " + createRoomInput.text);
         PlayerPrefs.SetInt(createRoomInput.text, 0);
-        roomName = createRoomInput.text;
 
     }
 
@@ -47,9 +46,9 @@ public class photonButtons : MonoBehaviourPunCallbacks
         RoomOptions options = new RoomOptions();
         options.MaxPlayers = 2;
 
+        roomName = joinRoomInput.text;
         PhotonNetwork.JoinOrCreateRoom(joinRoomInput.text, options, TypedLobby.Default);
         level = PlayerPrefs.GetInt(joinRoomInput.text,0);
-        roomName = joinRoomInput.text;
     }
 
     public override void OnJoinedRoom()
