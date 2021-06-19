@@ -79,7 +79,6 @@ MonoBehaviour:
   thrust: 3
   damage: 2
   pvpStarted: 0
-  attackingOtherPlayer: 0
 --- !u!1 &1260214555
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +156,6 @@ MonoBehaviour:
   thrust: 3
   damage: 2
   pvpStarted: 0
-  attackingOtherPlayer: 0
 --- !u!1 &1998863729
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +237,6 @@ MonoBehaviour:
   thrust: 3
   damage: 2
   pvpStarted: 0
-  attackingOtherPlayer: 0
 --- !u!1 &2063960337
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +316,6 @@ MonoBehaviour:
   thrust: 3
   damage: 2
   pvpStarted: 0
-  attackingOtherPlayer: 0
 --- !u!1 &247620960526670589
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +339,6 @@ GameObject:
   - component: {fileID: -2312067370442729974}
   - component: {fileID: -432328210320310866}
   - component: {fileID: -3417654362084316133}
-  - component: {fileID: -6158504843110001861}
   m_Layer: 0
   m_Name: Player
   m_TagString: PlayerClone
@@ -747,8 +742,6 @@ MonoBehaviour:
   checkpoint_number: 0
   photonView: {fileID: 1162052248021265140}
   pvpStarted: 0
-  pvpLoser: 0
-  pvpEnded: 0
 --- !u!114 &-3417654362084316133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,18 +755,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pvpEnded: 0
---- !u!114 &-6158504843110001861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 247620960526670589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecf3cc98dbb140639f0965cfe50737d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3647609124381497910
 GameObject:
   m_ObjectHideFlags: 0
