@@ -134,7 +134,6 @@ public class Quest : MonoBehaviour
                     t.Obj = Objectives.NONE;
                     if (counter4 >= 3 && counter6 >= 4 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact)) //conditions necessaires a la fin de la quete 1;
                     { //conditions necessaires à la fin de la quete 2;
-                        display_counter.text = "";
                         DialogueManager.instance.StartD(endQuestText, t);
                         endQuest();
                         q.bc2.enabled = false;
@@ -178,6 +177,7 @@ public class Quest : MonoBehaviour
                 }
             case Objectives.QUEST3:
             {
+                display_counter.text = "";
                 TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
                 if (spoken && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
@@ -282,6 +282,7 @@ public class Quest : MonoBehaviour
     public void endQuest()
     {
         animator.SetBool("BeginQ", false);
+        display_counter.text = "";
         counter = 0;
         counter2 = 0;
         counter3 = 0;

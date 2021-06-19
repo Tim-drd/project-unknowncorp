@@ -7,6 +7,8 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public AudioClip[] playlist;
+    public AudioClip end_music;
+    public GameObject boss;
     public AudioSource audiosource;
     private int MusicIndex = 0;
     public AudioMixerGroup soundEffectMixer;
@@ -52,9 +54,18 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!audiosource.isPlaying)
+        Boss b = boss.GetComponent<Boss>();
+        if (b.sleeping || b.is_dead()) 
         {
-            PlayNext();
+            if (!audiosource.isPlaying)
+            {
+                PlayNext();
+            }
+        }
+        else
+        {
+            audiosource.clip = end_music;
+            audiosource.Play();
         }
     }
 
