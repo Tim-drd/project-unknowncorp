@@ -43,7 +43,7 @@ public class Quest : MonoBehaviour
     public static Quest instance;
 
     private bool pvpStarted;
-    private float timeUntilPotion = 8;
+    private float timeUntilPotion = 15;
     private bool pvpEnded = false;
     
     private void Awake()
@@ -290,7 +290,7 @@ public class Quest : MonoBehaviour
                         player.GetComponent<PlayerHealth>().checkpoint_number = 4;
                         player.GetComponent<PlayerHealth>().HealPlayer(10);
                     }
-                    PhotonNetwork.Instantiate("Maximus", new Vector3(15, 146, 0), Quaternion.identity);
+                    PhotonNetwork.Instantiate("Maximus", new Vector3(32.46f, 131, 0), Quaternion.identity);
                     pnj3.SetActive(false);
                     pnj4.SetActive(true);
                     pnj5.SetActive(true);
@@ -403,18 +403,17 @@ public class Quest : MonoBehaviour
                     }
                     else
                     {
-                        if (player1.transform.position.x < 50 || player1.transform.position.y < 80)
+                        if (player1.transform.position.x > -250 || player1.transform.position.y < 300)
                         {
-                            //player1.transform.position = new Vector3(-347, 328, 0);
-                            player1.transform.position = new Vector3(78 + Random.Range(0, 4), 118 + Random.Range(0, 4), 0);
+                            player1.transform.position = new Vector3(-273 - Random.Range(0, 19), 331 + Random.Range(0, 14), 0);
                         }
 
                         timeUntilPotion -= Time.deltaTime;
                         if (timeUntilPotion < 0)
                         {
-                            timeUntilPotion = Random.Range(6, 16);
+                            timeUntilPotion = Random.Range(15, 30);
                             int random = Random.Range(0, 5);
-                            Vector3 position = new Vector3(80 - 10 + Random.Range(0, 20), 120 - 10 + Random.Range(0, 20), 0);
+                            Vector3 position = new Vector3(-273 - Random.Range(0, 19), 331 + Random.Range(0, 14), 0);
                             if (random == 0)
                                 PhotonNetwork.Instantiate("Yellow Potion", position, Quaternion.identity);
                             else if (random == 1)
