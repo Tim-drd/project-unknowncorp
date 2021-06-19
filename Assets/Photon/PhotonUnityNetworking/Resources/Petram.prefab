@@ -108,9 +108,9 @@ MonoBehaviour:
   health: 0
   enemyName: Petram
   baseAttack: 2
-  moveSpeed: 4
-  chaseRadius: 20
-  attackRadius: 3
+  moveSpeed: 2
+  chaseRadius: 15
+  attackRadius: 1
   homePosition: {x: 0, y: 0, z: 0}
   gluss_sounds:
   - {fileID: 8300000, guid: fc1f10b870ca9444d9a93945f34c8bd4, type: 3}

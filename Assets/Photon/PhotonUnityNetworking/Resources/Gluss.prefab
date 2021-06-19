@@ -251,7 +251,7 @@ MonoBehaviour:
   currentState: 0
   health: 0
   enemyName: Gluss
-  baseAttack: 2
+  baseAttack: 1.5
   moveSpeed: 2
   chaseRadius: 5
   attackRadius: 1.1
@@ -272,8 +272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2155b9080b423b943a1102264dfbbf46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currenthealth: 8
-  maxhealth: 8
+  currenthealth: 6
+  maxhealth: 6
 --- !u!114 &3778402781199967152
 MonoBehaviour:
   m_ObjectHideFlags: 0

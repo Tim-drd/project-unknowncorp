@@ -110,6 +110,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _animator.SetBool("attacking", true);
         currentState = PlayerState.attack;
+        audio_character.clip = character_sounds[1];
+        audio_character.Play();
         yield return new WaitForSeconds(.1f);
         _animator.SetBool("attacking", false);
         yield return new WaitForSeconds(.4f);
@@ -142,14 +144,6 @@ public class PlayerMovement : MonoBehaviour
             audio_character.clip = character_sounds[0]; //bruits de pas
             audio_character.Play();
         }
-        else
-        {
-            if (currentState == PlayerState.attack)
-            {
-                audio_character.clip = character_sounds[1];
-                audio_character.Play(); //bruit d'attaque
-            }
-        }
-            
+
     }
 }

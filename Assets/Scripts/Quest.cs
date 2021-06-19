@@ -26,6 +26,10 @@ public class Quest : MonoBehaviour
     private GameObject pnj;
     private GameObject pnj2;
     private GameObject pnj3;
+    private GameObject pnj4;
+    private GameObject pnj5;
+    private GameObject pnj6;
+    private GameObject pnj7;
     public Transform player1;
     public Transform player2;
     public int numberOfPlayers;
@@ -66,7 +70,15 @@ public class Quest : MonoBehaviour
     // Start is called before the first frame update
     public void StartQ(TypeQuest quest, Animator anim2)
     {
-        AudioManager.instance.PlayClip(quest_opening, transform.position);
+        if (numberOfPlayers > 0)
+        {
+            AudioManager.instance.PlayClip(quest_opening, player1.transform.position);
+        }
+        if (numberOfPlayers > 1)
+        {
+            AudioManager.instance.PlayClip(quest_opening, player2.transform.position);
+        }
+        
         q = quest;
         if (q.Obj == Objectives.QUEST2 || q.Obj == Objectives.QUEST3 || q.Obj == Objectives.QUEST4)
         {
@@ -78,6 +90,16 @@ public class Quest : MonoBehaviour
         }
 
         pvpStarted = true;
+
+        if (q.Obj == Objectives.QUEST5)
+        {
+            pnj2.SetActive(true);
+            pnj3.SetActive(true);
+            pnj4.SetActive(true);
+            pnj5.SetActive(true);
+            pnj6.SetActive(true);
+            pnj7.SetActive(true);
+        }
         type = quest.Obj;
         if (type == Objectives.NONE)
             quest.quest_over = true;
@@ -92,6 +114,10 @@ public class Quest : MonoBehaviour
         pnj = quest.pnj;
         pnj2 = quest.pnj2;
         pnj3 = quest.pnj3;
+        pnj4 = quest.pnj4;
+        pnj5 = quest.pnj5;
+        pnj6 = quest.pnj6;
+        pnj7 = quest.pnj7;
     }
 
     // Update is called once per frame
@@ -119,7 +145,15 @@ public class Quest : MonoBehaviour
                         player.GetComponent<Animator>().SetInteger("weaponIndex", 1);
                         player.GetComponent<PlayerHealth>().HealPlayer(10);
                     }
-                    AudioManager.instance.PlayClip(upgrade_trident, transform.position);
+                    if (numberOfPlayers > 0)
+                    {
+                        AudioManager.instance.PlayClip(upgrade_trident, player1.transform.position);
+                    }
+                    if (numberOfPlayers > 1)
+                    {
+                        AudioManager.instance.PlayClip(upgrade_trident, player2.transform.position);
+                    }
+                    
                 }
                 else
                 {
@@ -146,7 +180,6 @@ public class Quest : MonoBehaviour
                     t.Obj = Objectives.NONE;
                     if (counter4 >= 3 && counter6 >= 4 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact)) //conditions necessaires a la fin de la quete 1;
                     { //conditions necessaires à la fin de la quete 2;
-                        display_counter.text = "";
                         DialogueManager.instance.StartD(endQuestText, t);
                         endQuest();
                         q.bc2.enabled = false;
@@ -159,7 +192,14 @@ public class Quest : MonoBehaviour
                             player.GetComponent<Animator>().SetInteger("weaponIndex", 2);
                             player.GetComponent<PlayerHealth>().HealPlayer(10);
                         }
-                        AudioManager.instance.PlayClip(upgrade_trident, transform.position);
+                        if (numberOfPlayers > 0)
+                        {
+                            AudioManager.instance.PlayClip(upgrade_trident, player1.transform.position);
+                        }
+                        if (numberOfPlayers > 1)
+                        {
+                            AudioManager.instance.PlayClip(upgrade_trident, player2.transform.position);
+                        }
                     }
                     else
                     {
@@ -190,6 +230,7 @@ public class Quest : MonoBehaviour
                 }
             case Objectives.QUEST3:
             {
+                display_counter.text = "";
                 TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
                 if (spoken && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
@@ -204,7 +245,14 @@ public class Quest : MonoBehaviour
                         player.GetComponent<Animator>().SetInteger("weaponIndex", 3);
                         player.GetComponent<PlayerHealth>().HealPlayer(10);
                     }
-                    AudioManager.instance.PlayClip(upgrade_trident, transform.position); 
+                    if (numberOfPlayers > 0)
+                    {
+                        AudioManager.instance.PlayClip(upgrade_trident, player1.transform.position);
+                    }
+                    if (numberOfPlayers > 1)
+                    {
+                        AudioManager.instance.PlayClip(upgrade_trident, player2.transform.position);
+                    }
                 }
                 else
                 {
@@ -243,6 +291,9 @@ public class Quest : MonoBehaviour
                         player.GetComponent<PlayerHealth>().HealPlayer(10);
                     }
                     PhotonNetwork.Instantiate("Spartacus", new Vector3(15, 146, 0), Quaternion.identity);
+                    pnj3.SetActive(false);
+                    pnj4.SetActive(true);
+                    pnj5.SetActive(true);
                     //y faudra faire d'autre choses ici comme lancer des crédits etc;
                 }
                 if (over)
@@ -254,7 +305,68 @@ public class Quest : MonoBehaviour
                 return;
             }
             case Objectives.QUEST5:
+            {
+                TypeQuest t = new TypeQuest();
+                t.Obj = Objectives.NONE;
+                counter = 0;
+                if (counter == 6 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    DialogueManager.instance.StartD(endQuestText, t);
+                    endQuest();
+                }
+                else
+                {
+                    if (counter < 6 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                    {
+                        DialogueManager.instance.StartD(neutral, t); 
+                    }
+
+                    if (counter == 6)
+                        display_counter.text = "Finished";
+                    else
+                    {
+                        display_counter.text = "Boules de cristal: " + counter + "/6";
+                    }
+                }
+
+                InteractAction i1 = pnj2.GetComponent<InteractAction>();
+                if (i1.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    Destroy(pnj2);
+                    counter++;
+                }
+                InteractAction i2 = pnj3.GetComponent<InteractAction>();
+                if (i2.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    Destroy(pnj3);
+                    counter++;
+                }
+                InteractAction i3 = pnj4.GetComponent<InteractAction>();
+                if (i3.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    Destroy(pnj4);
+                    counter++;
+                }
+                InteractAction i4 = pnj5.GetComponent<InteractAction>();
+                if (i4.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    Destroy(pnj5);
+                    counter++;
+                }
+                InteractAction i5 = pnj6.GetComponent<InteractAction>();
+                if (i5.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    Destroy(pnj6);
+                    counter++;
+                }
+                InteractAction i6 = pnj7.GetComponent<InteractAction>();
+                if (i6.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                {
+                    Destroy(pnj7);
+                    counter++;
+                }
                 return;
+            }
             case Objectives.PVP:
             {
                 TypeQuest t = new TypeQuest();
@@ -329,6 +441,7 @@ public class Quest : MonoBehaviour
         }
     }
     
+    
     IEnumerator ResetPVP()
     {
         yield return new WaitForSeconds(1);
@@ -377,6 +490,7 @@ public class Quest : MonoBehaviour
     public void endQuest()
     {
         animator.SetBool("BeginQ", false);
+        display_counter.text = "";
         counter = 0;
         counter2 = 0;
         counter3 = 0;

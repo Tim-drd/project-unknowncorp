@@ -21,6 +21,14 @@ public class TypeQuest
     public GameObject pnj2;
 
     public GameObject pnj3;
+    
+    public GameObject pnj4;
+
+    public GameObject pnj5;
+
+    public GameObject pnj6;
+    
+    public GameObject pnj7;
 
     public Quest.Objectives Obj;
 
