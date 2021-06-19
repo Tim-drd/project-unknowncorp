@@ -290,7 +290,7 @@ public class Quest : MonoBehaviour
                         player.GetComponent<PlayerHealth>().checkpoint_number = 4;
                         player.GetComponent<PlayerHealth>().HealPlayer(10);
                     }
-                    PhotonNetwork.Instantiate("Spartacus", new Vector3(15, 146, 0), Quaternion.identity);
+                    PhotonNetwork.Instantiate("Maximus", new Vector3(15, 146, 0), Quaternion.identity);
                     pnj3.SetActive(false);
                     pnj4.SetActive(true);
                     pnj5.SetActive(true);
