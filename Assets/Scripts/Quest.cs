@@ -60,7 +60,15 @@ public class Quest : MonoBehaviour
     // Start is called before the first frame update
     public void StartQ(TypeQuest quest, Animator anim2)
     {
-        AudioManager.instance.PlayClip(quest_opening, transform.position);
+        if (numberOfPlayers > 0)
+        {
+            AudioManager.instance.PlayClip(quest_opening, player1.transform.position);
+        }
+        if (numberOfPlayers > 1)
+        {
+            AudioManager.instance.PlayClip(quest_opening, player2.transform.position);
+        }
+        
         q = quest;
         if (q.Obj == Objectives.QUEST2 || q.Obj == Objectives.QUEST3 || q.Obj == Objectives.QUEST4)
         {
@@ -107,7 +115,15 @@ public class Quest : MonoBehaviour
                         player.GetComponent<Animator>().SetInteger("weaponIndex", 1);
                         player.GetComponent<PlayerHealth>().HealPlayer(10);
                     }
-                    AudioManager.instance.PlayClip(upgrade_trident, transform.position);
+                    if (numberOfPlayers > 0)
+                    {
+                        AudioManager.instance.PlayClip(upgrade_trident, player1.transform.position);
+                    }
+                    if (numberOfPlayers > 1)
+                    {
+                        AudioManager.instance.PlayClip(upgrade_trident, player2.transform.position);
+                    }
+                    
                 }
                 else
                 {
@@ -146,7 +162,14 @@ public class Quest : MonoBehaviour
                             player.GetComponent<Animator>().SetInteger("weaponIndex", 2);
                             player.GetComponent<PlayerHealth>().HealPlayer(10);
                         }
-                        AudioManager.instance.PlayClip(upgrade_trident, transform.position);
+                        if (numberOfPlayers > 0)
+                        {
+                            AudioManager.instance.PlayClip(upgrade_trident, player1.transform.position);
+                        }
+                        if (numberOfPlayers > 1)
+                        {
+                            AudioManager.instance.PlayClip(upgrade_trident, player2.transform.position);
+                        }
                     }
                     else
                     {
@@ -192,7 +215,14 @@ public class Quest : MonoBehaviour
                         player.GetComponent<Animator>().SetInteger("weaponIndex", 3);
                         player.GetComponent<PlayerHealth>().HealPlayer(10);
                     }
-                    AudioManager.instance.PlayClip(upgrade_trident, transform.position); 
+                    if (numberOfPlayers > 0)
+                    {
+                        AudioManager.instance.PlayClip(upgrade_trident, player1.transform.position);
+                    }
+                    if (numberOfPlayers > 1)
+                    {
+                        AudioManager.instance.PlayClip(upgrade_trident, player2.transform.position);
+                    }
                 }
                 else
                 {

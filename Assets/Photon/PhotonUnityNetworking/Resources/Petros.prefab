@@ -108,7 +108,7 @@ MonoBehaviour:
   health: 0
   enemyName: Petros
   baseAttack: 5
-  moveSpeed: 3
+  moveSpeed: 1.5
   chaseRadius: 8
   attackRadius: 1
   homePosition: {x: 0, y: 0, z: 0}
