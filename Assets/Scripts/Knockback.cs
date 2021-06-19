@@ -30,7 +30,7 @@ public class Knockback : MonoBehaviour
         if (this.gameObject.CompareTag("MyWeapon"))
         {
             if ((other.gameObject.CompareTag("Gluss") || other.gameObject.CompareTag("Terrus") ||
-                 other.gameObject.CompareTag("Devorror"))) //enemy est le tag de la hitbox des armes
+                 other.gameObject.CompareTag("Devorror")|| other.gameObject.CompareTag("Petram")|| other.gameObject.CompareTag("Petros"))) //enemy est le tag de la hitbox des armes
             {
                 Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();
                 Collider2D player = this.GetComponent<Collider2D>();
