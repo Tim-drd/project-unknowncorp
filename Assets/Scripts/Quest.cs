@@ -87,9 +87,8 @@ public class Quest : MonoBehaviour
         else if (q.Obj == Objectives.PVP)
         {
             player1.GetComponent<PhotonPlayerView>().pvpEnded = false;
+            pvpStarted = true;
         }
-
-        pvpStarted = true;
 
         if (q.Obj == Objectives.QUEST5)
         {
