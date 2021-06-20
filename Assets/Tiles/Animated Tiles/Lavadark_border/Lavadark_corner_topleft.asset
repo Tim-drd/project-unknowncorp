@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
   m_Name: Lavadark_corner_topleft
   m_EditorClassIdentifier: 
-  m_AnimatedSprites: []
+  m_AnimatedSprites:
+  - {fileID: 4470642431031780631, guid: 00efb54f3b68cce4eae852fdff03b5af, type: 3}
+  - {fileID: 1792984545108060587, guid: 00efb54f3b68cce4eae852fdff03b5af, type: 3}
+  - {fileID: 5979269299264617193, guid: 00efb54f3b68cce4eae852fdff03b5af, type: 3}
+  - {fileID: 1792984545108060587, guid: 00efb54f3b68cce4eae852fdff03b5af, type: 3}
   m_MinSpeed: 1
   m_MaxSpeed: 1
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
-  m_TileColliderType: 0
+  m_TileColliderType: 2
