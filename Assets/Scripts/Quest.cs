@@ -84,21 +84,22 @@ public class Quest : MonoBehaviour
         {
             q.bc.enabled = false;
         }
+        if (q.Obj == Objectives.QUEST5) 
+        { 
+            pnj2.SetActive(true); 
+            pnj3.SetActive(true); 
+            pnj4.SetActive(true); 
+            pnj5.SetActive(true); 
+            pnj6.SetActive(true); 
+            pnj7.SetActive(true);
+        }
         else if (q.Obj == Objectives.PVP)
         {
             player1.GetComponent<PhotonPlayerView>().pvpEnded = false;
             pvpStarted = true;
         }
 
-        if (q.Obj == Objectives.QUEST5)
-        {
-            pnj2.SetActive(true);
-            pnj3.SetActive(true);
-            pnj4.SetActive(true);
-            pnj5.SetActive(true);
-            pnj6.SetActive(true);
-            pnj7.SetActive(true);
-        }
+        
         type = quest.Obj;
         if (type == Objectives.NONE)
             quest.quest_over = true;
@@ -279,10 +280,9 @@ public class Quest : MonoBehaviour
                 t.Obj = Objectives.NONE;
                 bool over = !GameObject.FindWithTag("Boss");
                 Debug.Log(over);
-                if (over && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
+                if (over)
                 {
                     endQuest();
-                    DialogueManager.instance.StartD(endQuestText, t);
                     GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
                     foreach (var player in players)
                     {
@@ -307,7 +307,6 @@ public class Quest : MonoBehaviour
             {
                 TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
-                counter = 0;
                 if (counter == 6 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
                 {
                     DialogueManager.instance.StartD(endQuestText, t);
