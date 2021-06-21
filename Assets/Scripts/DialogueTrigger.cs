@@ -27,7 +27,7 @@ public class DialogueTrigger : MonoBehaviour
         if (numberOfPlayers > 0)
         {
             which_player_trigger();
-            if (close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact) && !dialogue.triggered_once)
+            if (close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact) && !dialogue.triggered_once && !quest.quest_over)
             {
                 if (quest.Obj != Quest.Objectives.PVP || GameObject.FindGameObjectsWithTag("PlayerClone").Length > 1)
                     BeginDialogue();
@@ -83,5 +83,11 @@ public class DialogueTrigger : MonoBehaviour
     public void BeginDialogue()
     {
         DialogueManager.instance.StartD(dialogue, quest);
+    }
+
+
+    public void setQuestOver(TypeQuest tq)
+    {
+        tq.quest_over = true;
     }
 }
