@@ -38,6 +38,7 @@ public class Quest : MonoBehaviour
     private TypeQuest q;
     private bool spoken = false;
     private bool first = true;
+    private bool one_time = true;
     public bool quest_over = false;
 
     public static Quest instance;
@@ -280,8 +281,9 @@ public class Quest : MonoBehaviour
                 t.Obj = Objectives.NONE;
                 bool over = !GameObject.FindWithTag("Boss");
                 Debug.Log(over);
-                if (over)
+                if (over && one_time)
                 {
+                    one_time = false;
                     endQuest();
                     GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
                     foreach (var player in players)
@@ -295,8 +297,6 @@ public class Quest : MonoBehaviour
                     pnj5.SetActive(true);
                     //y faudra faire d'autre choses ici comme lancer des crédits etc;
                 }
-                if (over)
-                    display_counter.text = "Finished";
                 if (isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
                 { 
                     DialogueManager.instance.StartD(neutral, t); 
