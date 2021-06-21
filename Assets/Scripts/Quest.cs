@@ -370,7 +370,7 @@ public class Quest : MonoBehaviour
                         player.GetComponent<PlayerHealth>().pvpStarted = false;
                     }
                 }
-
+                animator.SetBool("BeginQ", false);
                 return;
             }
         }
