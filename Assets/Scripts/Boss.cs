@@ -80,6 +80,7 @@ public class Boss : Enemy
                     if (Vector3.Distance(transform.position, player.transform.position) < 4)
                     {
                         StartCoroutine(WakeUpCo());
+                        player.GetComponent<PlayerHealth>().HealPlayer(10);
                     }
                 }
             }
