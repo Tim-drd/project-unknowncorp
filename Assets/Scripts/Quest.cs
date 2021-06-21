@@ -40,6 +40,7 @@ public class Quest : MonoBehaviour
     private bool first = true;
     private bool one_time = true;
     public bool quest_over = false;
+    private int check = 0;
 
     public static Quest instance;
 
@@ -124,12 +125,18 @@ public class Quest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        check = PlayerHealth.playerHealth.checkpoint_number;
         switch (type)
         {
             case Objectives.NONE:
                 return;
             case Objectives.QUEST1: //quête de Roger, le marin; 
             {
+                if (check != 0)
+                { 
+                    return; 
+                }
+
                 TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
                 if (counter2 == 10 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact)
@@ -177,6 +184,10 @@ public class Quest : MonoBehaviour
             }
             case Objectives.QUEST2:
                 {
+                    if (check != 1)
+                    {
+                        return;
+                    }
                     TypeQuest t = new TypeQuest();
                     t.Obj = Objectives.NONE;
                     if (counter4 >= 3 && counter6 >= 4 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact)) //conditions necessaires a la fin de la quete 1;
@@ -231,7 +242,12 @@ public class Quest : MonoBehaviour
                 }
             case Objectives.QUEST3:
             {
-                display_counter.text = "";
+                    if (check != 2)
+                    {
+                        return;
+                    }
+
+                    display_counter.text = "";
                 TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
                 if (spoken && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
@@ -277,7 +293,11 @@ public class Quest : MonoBehaviour
             }
             case Objectives.QUEST4:
             {
-                TypeQuest t = new TypeQuest();
+                    if (check != 3)
+                    {
+                        return;
+                    }
+                    TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
                 bool over = !GameObject.FindWithTag("Boss");
                 Debug.Log(over);
