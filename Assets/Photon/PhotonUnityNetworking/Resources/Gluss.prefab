@@ -261,6 +261,7 @@ MonoBehaviour:
   initialWalkRadius: 10
   attack1: 0.5
   attack2: 0.5
+  attack3: 0
 --- !u!114 &741462937901735599
 MonoBehaviour:
   m_ObjectHideFlags: 0
