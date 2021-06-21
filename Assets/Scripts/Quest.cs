@@ -303,68 +303,6 @@ public class Quest : MonoBehaviour
                 }
                 return;
             }
-            case Objectives.QUEST5:
-            {
-                TypeQuest t = new TypeQuest();
-                t.Obj = Objectives.NONE;
-                if (counter == 6 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
-                {
-                    DialogueManager.instance.StartD(endQuestText, t);
-                    endQuest();
-                }
-                else
-                {
-                    if (counter < 6 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
-                    {
-                        DialogueManager.instance.StartD(neutral, t); 
-                    }
-
-                    if (counter == 6)
-                        display_counter.text = "Finished";
-                    else
-                    {
-                        display_counter.text = "Boules de cristal: " + counter + "/6";
-                    }
-                }
-
-                InteractAction i1 = pnj2.GetComponent<InteractAction>();
-                if (i1.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
-                {
-                    Destroy(pnj2);
-                    counter++;
-                }
-                InteractAction i2 = pnj3.GetComponent<InteractAction>();
-                if (i2.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
-                {
-                    Destroy(pnj3);
-                    counter++;
-                }
-                InteractAction i3 = pnj4.GetComponent<InteractAction>();
-                if (i3.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
-                {
-                    Destroy(pnj4);
-                    counter++;
-                }
-                InteractAction i4 = pnj5.GetComponent<InteractAction>();
-                if (i4.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
-                {
-                    Destroy(pnj5);
-                    counter++;
-                }
-                InteractAction i5 = pnj6.GetComponent<InteractAction>();
-                if (i5.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
-                {
-                    Destroy(pnj6);
-                    counter++;
-                }
-                InteractAction i6 = pnj7.GetComponent<InteractAction>();
-                if (i6.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
-                {
-                    Destroy(pnj7);
-                    counter++;
-                }
-                return;
-            }
             case Objectives.PVP:
             {
                 TypeQuest t = new TypeQuest();
