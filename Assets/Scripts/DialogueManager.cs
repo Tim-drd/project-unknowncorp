@@ -67,8 +67,14 @@ public class DialogueManager : MonoBehaviour
     {
         PlayerMovement.instance.enabled = true;
         animator.SetBool("IsOpen",false);
-        if (q.Obj != Quest.Objectives.NONE) 
+        if (q.Obj != Quest.Objectives.NONE)
+        {
             BeginQuest();
+        }
+        else
+        {
+            q.quest_over = true;
+        }
     }
     
     public void BeginQuest()

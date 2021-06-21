@@ -34,7 +34,7 @@ public class DialogueTrigger : MonoBehaviour
             }
             else
             {
-                if (quest.quest_over || dialogue.triggered_once)
+                if (quest.quest_over)
                 {
                     if (close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact) && finished)
                     {

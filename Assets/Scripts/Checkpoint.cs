@@ -38,8 +38,8 @@ public class Checkpoint : MonoBehaviour
                 player.transform.position = playerPosition;
                 break;
             case 3:
-                playerPosition.x = 9.874f; //village (chalet)
-                playerPosition.y = 154.96f;
+                playerPosition.x = 89.43f; //devant grotte
+                playerPosition.y = 67.1f;
                 player.transform.position = playerPosition;
                 break;
             case 4:
