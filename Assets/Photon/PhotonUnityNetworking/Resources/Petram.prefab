@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 7292817749985065689}
   - component: {fileID: 7292817749985065688}
   - component: {fileID: 7292817749985065687}
-  - component: {fileID: 7292817749985065686}
   m_Layer: 0
   m_Name: Petram
   m_TagString: Petram
@@ -116,6 +115,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fc1f10b870ca9444d9a93945f34c8bd4, type: 3}
   - {fileID: 8300000, guid: 13f8712f93d82de4a80a8c7bb2d8eb86, type: 3}
   initialWalkRadius: 25
+  attack1: 3
+  attack2: 1
+  attack3: 0
 --- !u!50 &7292817749985065682
 Rigidbody2D:
   serializedVersion: 4
@@ -274,17 +276,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currenthealth: 8
   maxhealth: 8
---- !u!114 &7292817749985065686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7292817749985065691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cdbdd3c205f66741aebe4651325e951, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTouching: {fileID: 0}
-  waitToHurt: 1

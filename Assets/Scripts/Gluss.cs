@@ -20,7 +20,11 @@ public class Gluss : Enemy
 
     private float knockedTimer;
     private GameObject[] players;
-    
+
+    public float attack1;
+    public float attack2;
+    public float attack3;
+
     /*void OnCollisionStay2D(Collision2D other) 
     { 
         if (other.gameObject.CompareTag("PlayerClone") && currentState != EnemyState.knocked) 
@@ -98,22 +102,24 @@ public class Gluss : Enemy
         {
             if (distance > attackRadius)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
-                Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, target.position,
+                    moveSpeed * Time.fixedDeltaTime);
+                Vector3 temp = Vector3.MoveTowards(transform.position, target.position,
+                    moveSpeed * Time.fixedDeltaTime);
                 rb.MovePosition(temp);
             }
+            else if (currentState != EnemyState.attack)
+            {
+                StartCoroutine(Attack(target.gameObject));
+            }
+
             Flip(target.position.x);
-            ChangeState(EnemyState.chase);
         }
         else if (currentState != EnemyState.knocked)
         {
             if (_time % 350 == 0)
             {
-                if (Random.Range(0, 2) == 0)
-                {
-                    
-                }
-                else
+                if (Random.Range(0, 2) != 0)
                 {
                     _random = new Vector3(Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2),
                         Random.Range(-initialWalkRadius / 2, initialWalkRadius / 2), 0);
@@ -127,6 +133,26 @@ public class Gluss : Enemy
             ChangeState(EnemyState.idle);
         }
         _time++;
+    }
+    
+    IEnumerator Attack(GameObject target)
+    {
+        ChangeState(EnemyState.attack);
+        
+        yield return new WaitForSeconds(0.1f);
+        
+        int damage = Random.Range(0, 100);
+        if (damage > 66)
+            target.GetComponent<PlayerHealth>().DamagePlayer(attack1);
+        else if (damage > 33)
+            target.GetComponent<PlayerHealth>().DamagePlayer(attack2);
+        else
+            target.GetComponent<PlayerHealth>().DamagePlayer(attack3);
+
+        yield return new WaitForSeconds(0.9f);
+        
+        if (currentState != EnemyState.knocked)
+            ChangeState(EnemyState.idle);
     }
 
     private void ChangeState(EnemyState newState)
