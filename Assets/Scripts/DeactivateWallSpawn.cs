@@ -17,6 +17,8 @@ public class DeactivateWallSpawn : MonoBehaviour
         if (checkpoint_number > 0)
         {
             walls[0].enabled = false;
+            TypeQuest tq = pnjs[0].GetComponent<DialogueTrigger>().quest;
+            pnjs[0].GetComponent<DialogueTrigger>().setQuestOver(tq);
         }
 
         if (checkpoint_number > 1)
@@ -24,6 +26,8 @@ public class DeactivateWallSpawn : MonoBehaviour
            
             walls[1].enabled = false;
             walls[2].enabled = false;
+            TypeQuest tq = pnjs[1].GetComponent<DialogueTrigger>().quest;
+            pnjs[1].GetComponent<DialogueTrigger>().setQuestOver(tq);
         }
         if (checkpoint_number > 2)
         {
@@ -32,10 +36,15 @@ public class DeactivateWallSpawn : MonoBehaviour
             pnjs[4].SetActive(true);
             walls[3].enabled = false;
             walls[4].enabled = false;
+
+            TypeQuest tq = pnjs[2].GetComponent<DialogueTrigger>().quest;
+            pnjs[2].GetComponent<DialogueTrigger>().setQuestOver(tq);
         }
         if (checkpoint_number > 3)
         {  
             walls[5].enabled = false;
+            TypeQuest tq = pnjs[3].GetComponent<DialogueTrigger>().quest;
+            pnjs[3].GetComponent<DialogueTrigger>().setQuestOver(tq);
         }
 
         GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");

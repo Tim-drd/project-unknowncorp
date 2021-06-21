@@ -6,6 +6,7 @@ public class Checkpoint : MonoBehaviour
 {
     public static Checkpoint instance;
 
+
     private void Awake()
     {
         if (instance != null)
@@ -16,6 +17,7 @@ public class Checkpoint : MonoBehaviour
 
         instance = this;
     }
+	
 
     public void spawnTo(int check_number, GameObject player)
     {

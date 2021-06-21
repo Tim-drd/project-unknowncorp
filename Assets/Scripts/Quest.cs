@@ -111,7 +111,6 @@ public class Quest : MonoBehaviour
         mobspawner = quest.spawners;
         mobspawner2 = quest.spawners2;
         neutral = quest.neutral_dialogue;
-        animator.SetBool("BeginQ", true);
         animator2 = anim2;
         pnj = quest.pnj;
         pnj2 = quest.pnj2;
@@ -134,9 +133,14 @@ public class Quest : MonoBehaviour
             {
                 if (check != 0)
                 { 
-                    return; 
+                    Debug.Log("check = " + check);
+                    break; 
+                    return;
+                    
                 }
 
+                
+                animator.SetBool("BeginQ", true);
                 TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
                 if (counter2 == 10 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact)
@@ -188,6 +192,8 @@ public class Quest : MonoBehaviour
                     {
                         return;
                     }
+
+                    animator.SetBool("BeginQ", true);
                     TypeQuest t = new TypeQuest();
                     t.Obj = Objectives.NONE;
                     if (counter4 >= 3 && counter6 >= 4 && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact)) //conditions necessaires a la fin de la quete 1;
@@ -247,7 +253,9 @@ public class Quest : MonoBehaviour
                         return;
                     }
 
-                    display_counter.text = "";
+
+                animator.SetBool("BeginQ", true);
+                display_counter.text = "";
                 TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
                 if (spoken && isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
@@ -297,7 +305,9 @@ public class Quest : MonoBehaviour
                     {
                         return;
                     }
-                    TypeQuest t = new TypeQuest();
+
+                animator.SetBool("BeginQ", true);
+                TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
                 bool over = !GameObject.FindWithTag("Boss");
                 Debug.Log(over);
