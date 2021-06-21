@@ -16,7 +16,6 @@ public class DeactivateWallSpawn : MonoBehaviour
         //permet de désactiver les différents murs en fonction de l'avancement de la partie.
         if (checkpoint_number > 0)
         {
-           
             walls[0].enabled = false;
         }
 
