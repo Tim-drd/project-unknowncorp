@@ -94,7 +94,8 @@ public class PlayerHealth : MonoBehaviour
 
     public void respawn()
     {
-        VisualEffects.fadeOut = true;
+        if (photonView.IsMine) 
+            VisualEffects.fadeOut = true;
         Checkpoint.instance.spawnTo(checkpoint_number, this.gameObject);
         HealPlayer(10);
         if (pvpStarted)
