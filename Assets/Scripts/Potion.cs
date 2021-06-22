@@ -11,19 +11,10 @@ public class Potion : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerClone"))
         {
-            if (other.GetComponent<PlayerHealth>().pvpStarted)
+            foreach (var player in GameObject.FindGameObjectsWithTag("PlayerClone"))
             {
-                other.GetComponent<PlayerHealth>().HealPlayer(healthPoints);
+                player.GetComponent<PlayerHealth>().HealPlayer(healthPoints);
             }
-            else
-            {
-
-                foreach (var player in GameObject.FindGameObjectsWithTag("PlayerClone"))
-                {
-                    player.GetComponent<PlayerHealth>().HealPlayer(healthPoints);
-                }
-            }
-            
             Destroy(gameObject);
         }
     }
