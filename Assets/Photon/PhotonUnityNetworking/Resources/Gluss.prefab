@@ -259,7 +259,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2c29226d94a62d9468a1c07bd65d8184, type: 3}
   - {fileID: 8300000, guid: 75c0ba046cb439b40bf4f7ac086be762, type: 3}
   initialWalkRadius: 10
-  attack1: 0.5
+  attack1: 1
   attack2: 0.5
   attack3: 0
 --- !u!114 &741462937901735599

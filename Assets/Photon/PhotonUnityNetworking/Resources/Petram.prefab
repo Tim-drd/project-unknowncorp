@@ -115,9 +115,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fc1f10b870ca9444d9a93945f34c8bd4, type: 3}
   - {fileID: 8300000, guid: 13f8712f93d82de4a80a8c7bb2d8eb86, type: 3}
   initialWalkRadius: 25
-  attack1: 3
-  attack2: 1
-  attack3: 0
+  attack1: 2
+  attack2: 1.5
+  attack3: 1
 --- !u!50 &7292817749985065682
 Rigidbody2D:
   serializedVersion: 4
