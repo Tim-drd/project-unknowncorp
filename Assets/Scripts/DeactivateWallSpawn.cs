@@ -71,6 +71,16 @@ public class DeactivateWallSpawn : MonoBehaviour
                     player.GetComponent<Animator>().SetInteger("weaponIndex", 3);
                 }
                 break;
+            case 4:
+                foreach (var player in players)
+                {
+                    player.GetComponent<Animator>().SetInteger("weaponIndex", 1);
+                    player.GetComponent<Animator>().SetInteger("weaponIndex", 2);
+                    player.GetComponent<Animator>().SetInteger("weaponIndex", 3);
+                    player.GetComponent<Animator>().SetInteger("weaponIndex", 4);
+                }
+                break;
+
             default:
                 break;
         }
