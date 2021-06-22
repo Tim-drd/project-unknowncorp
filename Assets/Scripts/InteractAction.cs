@@ -29,7 +29,7 @@ public class InteractAction : MonoBehaviour
         if (numberOfPlayers > 0)
         {
             which_player_trigger();
-            if (close_enough)
+            if (close_enough && this.gameObject.activeSelf)
             {
                 one_second = true;
                 interactUI.enabled = true;

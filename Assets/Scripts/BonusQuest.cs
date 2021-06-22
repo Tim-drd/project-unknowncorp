@@ -17,7 +17,8 @@ public class BonusQuest : MonoBehaviour
     public Transform player1;
     public Transform player2;
     public int numberOfPlayers;
-    
+    public Text interactUI;
+
     public GameObject pnj;
     public GameObject obj1;
     public GameObject obj2;
@@ -30,6 +31,7 @@ public class BonusQuest : MonoBehaviour
     public bool first = true;
     public bool has_talked = false;
     public bool endGame = false;
+    public bool once = true;
     
     // Start is called before the first frame update
     void Start()
@@ -56,12 +58,17 @@ public class BonusQuest : MonoBehaviour
             if (!first)
             {
                 animator.SetBool("BeginQ", true);
-                obj1.SetActive(true);
-                obj2.SetActive(true);
-                obj3.SetActive(true);
-                obj4.SetActive(true);
-                obj5.SetActive(true);
-                obj6.SetActive(true);
+                if (once)
+                {
+                    obj1.SetActive(true);
+                    obj2.SetActive(true);
+                    obj3.SetActive(true);
+                    obj4.SetActive(true);
+                    obj5.SetActive(true);
+                    obj6.SetActive(true);
+                    once = false;
+                }
+
                 if (counter == 6)
                 {
                     display_counter.text = "Finished";
@@ -80,42 +87,54 @@ public class BonusQuest : MonoBehaviour
                     InteractAction i1 = obj1.GetComponent<InteractAction>();
                     if (i1.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
                     {
-                        Destroy(obj1);
+                        obj1.SetActive(false);
+                        interactUI.enabled = false;
+                        i1.close_enough = false;
                         counter++;
                     }
 
                     InteractAction i2 = obj2.GetComponent<InteractAction>();
                     if (i2.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
                     {
-                        Destroy(obj2);
+                        obj2.SetActive(false);
+                        interactUI.enabled = false;
+                        i2.close_enough = false;
                         counter++;
                     }
 
                     InteractAction i3 = obj3.GetComponent<InteractAction>();
                     if (i3.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
                     {
-                        Destroy(obj3);
+                        obj3.SetActive(false);
+                        interactUI.enabled = false;
+                        i3.close_enough =false;
                         counter++;
                     }
 
                     InteractAction i4 = obj4.GetComponent<InteractAction>();
                     if (i4.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
                     {
-                        Destroy(obj4);
+                        obj4.SetActive(false);
+                        interactUI.enabled = false;
+                        i4.close_enough =false;
                         counter++;
                     }
 
                     InteractAction i5 = obj5.GetComponent<InteractAction>();
                     if (i5.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
                     {
-                        Destroy(obj5);
+                        obj5.SetActive(false);
+                        interactUI.enabled = false;
+                        i5.close_enough =false;
                         counter++;
                     }
 
                     InteractAction i6 = obj6.GetComponent<InteractAction>();
                     if (i6.close_enough && KeyBindingManager.GetKeyDown(KeyAction.interact))
                     {
-                        Destroy(obj6);
+                        obj6.SetActive(false);
+                        interactUI.enabled = false;
+                        i6.close_enough =false;
                         counter++;
                     }
                     display_counter.text = "Fish Balls: " + counter + " / 6";
