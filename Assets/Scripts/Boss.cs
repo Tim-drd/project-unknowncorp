@@ -102,6 +102,11 @@ public class Boss : Enemy
             /*sound();*/
         }
 
+        if (_healthManager.currenthealth <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+    
         if (_healthManager.currenthealth < (int) (0.66f * _healthManager.maxhealth))
         {
             if (_healthManager.currenthealth > (int) (0.33f * _healthManager.maxhealth))
