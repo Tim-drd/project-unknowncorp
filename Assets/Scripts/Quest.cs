@@ -74,7 +74,7 @@ public class Quest : MonoBehaviour
     // Start is called before the first frame update
     public void StartQ(TypeQuest quest, Animator anim2)
     {
-        
+        one_time = true;
         if (numberOfPlayers > 0 && !stop_spam)
         {
             AudioManager.instance.PlayClip(quest_opening, player1.transform.position);
@@ -318,6 +318,7 @@ public class Quest : MonoBehaviour
                 Debug.Log(over);
                 if (over && one_time)
                 {
+                    animator.SetBool("BeginQ", false);
                     one_time = false;
                     endQuest();
                     GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerClone");
