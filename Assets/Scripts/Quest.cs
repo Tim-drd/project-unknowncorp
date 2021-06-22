@@ -448,6 +448,8 @@ public class Quest : MonoBehaviour
         counter4 = 0;
         counter5 = 0;
         counter6 = 0;
+        stop_spam = false;
+        stop_spam2 = false;
         if (q.Obj != Objectives.PVP)
         {
             q.quest_over = true;
