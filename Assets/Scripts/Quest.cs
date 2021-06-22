@@ -314,7 +314,7 @@ public class Quest : MonoBehaviour
                 animator.SetBool("BeginQ", true);
                 TypeQuest t = new TypeQuest();
                 t.Obj = Objectives.NONE;
-                bool over = !GameObject.FindWithTag("Boss");
+                bool over = pnj2.GetComponent<EnemyHealtManager>().currenthealth <= 0;
                 Debug.Log(over);
                 if (over && one_time)
                 {

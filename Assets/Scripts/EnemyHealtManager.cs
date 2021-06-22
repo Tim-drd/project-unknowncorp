@@ -35,7 +35,10 @@ public class EnemyHealtManager : MonoBehaviour
             if (GetComponent<PhotonView>().IsMine)
             {
                 GeneratePotion(transform.position);
-                PhotonNetwork.Destroy(gameObject);
+                if (this.CompareTag("Boss"))
+                    this.gameObject.SetActive(false);
+                else
+                    PhotonNetwork.Destroy(gameObject);
             }
         }
     }
