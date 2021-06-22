@@ -25,8 +25,8 @@ public class Checkpoint : MonoBehaviour
         switch (check_number)
         {
             case 0:
-                playerPosition.x = 30f;//-0.534f; //plage;
-                playerPosition.y = 120f;//0.502f;
+                playerPosition.x = -0.534f; //plage;
+                playerPosition.y = 0.502f;
                 player.transform.position = playerPosition;
                 break;
             case 1:
