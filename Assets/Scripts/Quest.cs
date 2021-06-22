@@ -306,10 +306,10 @@ public class Quest : MonoBehaviour
             }
             case Objectives.QUEST4:
             {
-                    if (check != 3)
-                    {
-                        return;
-                    }
+                if (check != 3)
+                {
+                    return;
+                }
 
                 animator.SetBool("BeginQ", true);
                 TypeQuest t = new TypeQuest();
@@ -330,7 +330,6 @@ public class Quest : MonoBehaviour
                     pnj3.SetActive(false);
                     pnj4.SetActive(true);
                     pnj5.SetActive(true);
-                    //y faudra faire d'autre choses ici comme lancer des crédits etc;
                 }
                 if (isTalking(pnj.transform) && KeyBindingManager.GetKeyDown(KeyAction.interact))
                 { 
@@ -377,24 +376,6 @@ public class Quest : MonoBehaviour
                         if (player1.transform.position.x > -250 || player1.transform.position.y < 300)
                         {
                             player1.transform.position = new Vector3(-273 - Random.Range(0, 19), 331 + Random.Range(0, 14), 0);
-                        }
-
-                        timeUntilPotion -= Time.deltaTime;
-                        if (timeUntilPotion < 0)
-                        {
-                            timeUntilPotion = Random.Range(15, 30);
-                            int random = Random.Range(0, 5);
-                            Vector3 position = new Vector3(-273 - Random.Range(0, 19), 331 + Random.Range(0, 14), 0);
-                            if (random == 0)
-                                PhotonNetwork.Instantiate("Yellow Potion", position, Quaternion.identity);
-                            else if (random == 1)
-                                PhotonNetwork.Instantiate("Blue Potion", position, Quaternion.identity);
-                            else if (random == 2)
-                                PhotonNetwork.Instantiate("Green Potion", position, Quaternion.identity);
-                            else if (random == 3)
-                                PhotonNetwork.Instantiate("Red Potion", position, Quaternion.identity);
-                            else if (random == 4)
-                                PhotonNetwork.Instantiate("Purple Potion", position, Quaternion.identity);
                         }
                     }
                 }
