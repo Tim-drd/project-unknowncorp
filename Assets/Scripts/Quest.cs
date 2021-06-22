@@ -39,7 +39,9 @@ public class Quest : MonoBehaviour
     private bool spoken = false;
     private bool first = true;
     private bool one_time = true;
-    public bool quest_over = false;
+    private bool quest_over = false;
+    private bool stop_spam = false;
+    private bool stop_spam2 = false;
     private int check = 0;
 
     public static Quest instance;
@@ -72,13 +74,16 @@ public class Quest : MonoBehaviour
     // Start is called before the first frame update
     public void StartQ(TypeQuest quest, Animator anim2)
     {
-        if (numberOfPlayers > 0)
+        
+        if (numberOfPlayers > 0 && !stop_spam)
         {
             AudioManager.instance.PlayClip(quest_opening, player1.transform.position);
+            stop_spam = true;
         }
-        if (numberOfPlayers > 1)
+        if (numberOfPlayers > 1 && !stop_spam2)
         {
             AudioManager.instance.PlayClip(quest_opening, player2.transform.position);
+            stop_spam2 = true;
         }
         
         q = quest;

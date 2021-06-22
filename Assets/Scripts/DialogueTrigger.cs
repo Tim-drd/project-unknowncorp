@@ -62,16 +62,18 @@ public class DialogueTrigger : MonoBehaviour
         }
     }
 
-    public void which_player_trigger()
+    public Transform which_player_trigger()
     {
         if (numberOfPlayers == 1 || Vector3.Distance(player1.position, Pos) <=
             Vector3.Distance(player2.position, Pos))
         {
             OnTriggerKey(player1);
+            return player1;
         }
         else
         { 
             OnTriggerKey(player2);
+            return player2;
         }
     }
     
