@@ -30,6 +30,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
+        PhotonNetwork.Instantiate("Maximus", new Vector3(0, 0, 0), Quaternion.identity); 
+
         if (SceneManager.GetActiveScene().name == "GameScene" && photonView.IsMine)
         {
             transform.GetChild(0).gameObject.SetActive(true);
