@@ -1,7 +1,52 @@
 fileFormatVersion: 2
 guid: ce90a1dd9a29bfb449c7a6dc1b1f22f8
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 5698017828174702254
+    second: fireplace_0
+  - first:
+      213: 3555795224932194294
+    second: fireplace_1
+  - first:
+      213: 2692201480731268342
+    second: fireplace_2
+  - first:
+      213: 2497313390202381326
+    second: fireplace_3
+  - first:
+      213: -5130110956873843884
+    second: fireplace_4
+  - first:
+      213: -8485822813022745045
+    second: fireplace_5
+  - first:
+      213: 8965171369056544103
+    second: fireplace_6
+  - first:
+      213: 5879710767371932333
+    second: fireplace_7
+  - first:
+      213: 1892349469243698225
+    second: fireplace_8
+  - first:
+      213: -4346544365704419778
+    second: fireplace_9
+  - first:
+      213: -6304793336463531874
+    second: fireplace_10
+  - first:
+      213: -2465195626218149513
+    second: fireplace_11
+  - first:
+      213: -2187792586255243058
+    second: fireplace_12
+  - first:
+      213: 9072536320944293026
+    second: fireplace_13
+  - first:
+      213: -5642592711712354447
+    second: fireplace_14
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -31,7 +76,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -40,12 +85,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -64,7 +109,19 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -73,7 +130,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: fireplace_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 71
+        width: 16
+        height: 9
+      alignment: 9
+      pivot: {x: 0, y: -0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea6223c760d631f40800000000000000
+      internalID: 5698017828174702254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireplace_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 51
+        width: 16
+        height: 9
+      alignment: 9
+      pivot: {x: 0, y: -0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e04e6db0c4d38a220800000000000000
+      internalID: 2497313390202381326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireplace_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 31
+        width: 16
+        height: 9
+      alignment: 9
+      pivot: {x: 0, y: -0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7652e135cdfaa6c70800000000000000
+      internalID: 8965171369056544103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireplace_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 11
+        width: 16
+        height: 9
+      alignment: 9
+      pivot: {x: 0, y: -0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3666b9ade8fda3c0800000000000000
+      internalID: -4346544365704419778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
